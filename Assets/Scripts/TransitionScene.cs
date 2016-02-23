@@ -14,11 +14,11 @@ public class TransitionScene : MonoBehaviour {
 	}
 
 	public void loadDemoMode() {
-		Application.LoadLevel ("DemoMode");
+		Application.LoadLevel ("demo");
 	}
 
 	public void loadPracticeMode() {
-		Application.LoadLevel ("PracticeMode");
+		Application.LoadLevel ("practice");
 	}
 
 
