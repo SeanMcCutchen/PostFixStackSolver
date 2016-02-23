@@ -10,13 +10,20 @@ public class PostFixEval : MonoBehaviour {
 	string problem2 = "[2*(6/2)+(3^2)]";
 	Stack<char> main = new Stack<char>();
 	Stack<char> trash = new Stack<char>();
+	int [] priorities = new int[100];
 	string numbers = "0123456789";
 	string expressions = "+-/*^()[]";
 	int x = 0;
+<<<<<<< HEAD
 
 	Text txt;
 	Text Value;
 
+=======
+	char [] prob;
+	bool which = false;
+	
+>>>>>>> ebd11bdb159f4c63bb6c275a0c6a0dbe4d4de0c0
 	int countop,countcp,countobr, countcbr;
 	// Use this for initialization
 	void Start () {
@@ -50,30 +57,68 @@ public class PostFixEval : MonoBehaviour {
 	}
 
 	public void stepThrough (){
-		Debug.Log (x + "x");
-		Debug.Log (countop + "countop");
-		Debug.Log (countcp + "countcp");
-		Debug.Log (countobr + "countobr");
-		Debug.Log (countcbr + "countcbr");
-		char [] prob1 = problem1.ToCharArray ();
 
-		Debug.Log (prob1.Length + "length");
-
-	
-		if(x<prob1.Length)
-		{
-			if(numbers.Contains(prob1[x]+""))
-			   trash.Push(prob1[x]);
-			else if(expressions.Contains(prob1[x]+""))
-				main.Push(prob1[x]);
-			                            
-
+		if(which==false)
+		load1 ();
+		else
+		load2 ();
+	}
+	public void load1 (){
+		prob = problem1.ToCharArray ();
+		if (x < prob.Length) {
+			if (numbers.Contains (prob[x] + ""))
+				trash.Push (prob[x]);
+			else if (expressions.Contains(prob [x] + ""))
+				main.Push (prob [x]);
+			
+			
 		}
-		if ((x == prob1.Length - 1)&&((countop!=countcp)||(countobr!=countcbr))) {
-			Debug.Log ("Invalid entry");
+		if (x == prob.Length - 1) {
+			
+			if ((countop != countcp) || (countobr != countcbr)) {
+				Debug.Log ("Invalid entry");
+			}
+			else{
+				Debug.Log ("Works");
+			}
+		}
+		if (x == prob.Length) {		
+			switchproblem();
+		}
+			
+		x++;
+	}
+	public void load2 (){
+
+		if (x < prob.Length) {
+		
+			if (numbers.Contains (prob [x] + ""))
+				trash.Push (prob [x]);
+			else if (expressions.Contains (prob [x] + ""))
+				main.Push (prob [x]);
+			
+			
+		}
+		if (x == prob.Length - 1) {
+			
+			if ((countop != countcp) || (countobr != countcbr)) {
+				Debug.Log ("Invalid entry");
+			} else {
+				Debug.Log ("Works");
+			}
+
 		}
 		x++;
 	}
-
-
+	void switchproblem(){
+		x = 0;
+		trash.Clear ();
+		main.Clear ();
+		prob = problem2.ToCharArray ();
+		countop = problem2.Split ('(').Length - 1;
+		countcp = problem2.Split (')').Length - 1;
+		countobr = problem2.Split ('[').Length - 1;
+		countcbr = problem2.Split (']').Length - 1;
+		which = true;
+	}
 }
