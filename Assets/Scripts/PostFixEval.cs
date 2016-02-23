@@ -14,16 +14,15 @@ public class PostFixEval : MonoBehaviour {
 	string numbers = "0123456789";
 	string expressions = "+-/*^()[]";
 	int x = 0;
-<<<<<<< HEAD
+
 
 	Text txt;
 	Text Value;
 
-=======
+
 	char [] prob;
 	bool which = false;
 	
->>>>>>> ebd11bdb159f4c63bb6c275a0c6a0dbe4d4de0c0
 	int countop,countcp,countobr, countcbr;
 	// Use this for initialization
 	void Start () {
@@ -33,7 +32,7 @@ public class PostFixEval : MonoBehaviour {
 		 countcbr = problem1.Split(']').Length - 1;
 
 		txt = gameObject.GetComponent<Text>();
-		txt.text="Expression: " + problem2;
+		txt.text= "Expression2: " + problem2;
 
 		//value = gameObject.GetComponent<Text>();
 		//value.text="Expression: ";
@@ -45,7 +44,6 @@ public class PostFixEval : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		txt.text="Expression : " + problem2;
-
 		Value.text = "Value to consider: " + Value;
 	}
 
