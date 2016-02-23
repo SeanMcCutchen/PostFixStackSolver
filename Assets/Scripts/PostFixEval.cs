@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using System;
+using System.Text;
 
 public class PostFixEval : MonoBehaviour {
 	string problem1 = "[(2+4)+3*(4/2)";
@@ -10,7 +13,9 @@ public class PostFixEval : MonoBehaviour {
 	string numbers = "0123456789";
 	string expressions = "+-/*^()[]";
 	int x = 0;
-	
+
+	Text txt;
+
 	int countop,countcp,countobr, countcbr;
 	// Use this for initialization
 	void Start () {
@@ -18,11 +23,17 @@ public class PostFixEval : MonoBehaviour {
 		 countcp = problem1.Split(')').Length - 1;
 		countobr = problem1.Split('[').Length - 1;
 		 countcbr = problem1.Split(']').Length - 1;
+
+		txt = gameObject.GetComponent<Text>();
+		txt.text="Expression: " + problem2;
+		
+		//stack = new MyStack();
+		//inputField = GameObject.Find ("Canvas").GetComponentInChildren<InputField> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		txt.text="Expression : " + problem2;
 	}
 	public void stepThrough (){
 		Debug.Log (x + "x");
