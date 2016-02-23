@@ -1044,7 +1044,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1264370313}
-        m_MethodName: loadDemoMode
+        m_MethodName: loadPracticeMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1154,7 +1154,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Practice Mode
+  m_Text: Demo Mode
 --- !u!222 &1415357576
 CanvasRenderer:
   m_ObjectHideFlags: 0
