@@ -15,6 +15,7 @@ public class PostFixEval : MonoBehaviour {
 	int x = 0;
 
 	Text txt;
+	Text Value;
 
 	int countop,countcp,countobr, countcbr;
 	// Use this for initialization
@@ -26,6 +27,9 @@ public class PostFixEval : MonoBehaviour {
 
 		txt = gameObject.GetComponent<Text>();
 		txt.text="Expression: " + problem2;
+
+		//value = gameObject.GetComponent<Text>();
+		//value.text="Expression: ";
 		
 		//stack = new MyStack();
 		//inputField = GameObject.Find ("Canvas").GetComponentInChildren<InputField> ();
@@ -34,7 +38,17 @@ public class PostFixEval : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		txt.text="Expression : " + problem2;
+
+		Value.text = "Value to consider: " + Value;
 	}
+
+	public void OnClicked(Button button)
+	{
+		int counter = 0;
+		Value.text = "Value to consider: " + problem1[counter];
+		counter += 1;
+	}
+
 	public void stepThrough (){
 		Debug.Log (x + "x");
 		Debug.Log (countop + "countop");
