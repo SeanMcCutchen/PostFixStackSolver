@@ -5,59 +5,41 @@ using UnityEngine.UI;
 using System;
 using System.Text;
 
-public class PostFixEval : MonoBehaviour {
-	string problem1 = "[(2+4)+3*(4/2)";
-	string problem2 = "[2*(6/2)+(3^2)]";
+public class DemoMode : MonoBehaviour {
+
+	string problem1,problem2;
 	Stack<char> main = new Stack<char>();
 	Stack<char> trash = new Stack<char>();
-	int [] priorities = new int[100];
 	string numbers = "0123456789";
 	string expressions = "+-/*^()[]";
 	int x = 0;
-<<<<<<< HEAD
-
-	Text txt;
-	Text Value;
-
-=======
+	public Text txt;
 	char [] prob;
-	bool which = false;
-	
->>>>>>> ebd11bdb159f4c63bb6c275a0c6a0dbe4d4de0c0
+	bool which;
 	int countop,countcp,countobr, countcbr;
 	// Use this for initialization
 	void Start () {
+		 problem1 = "[(2+4)+3*(4/2)";
+	    problem2 = "[2*(6/2)+(3^2)]";
+		which = false;
 		countop = problem1.Split('(').Length - 1;
 		 countcp = problem1.Split(')').Length - 1;
 		countobr = problem1.Split('[').Length - 1;
 		 countcbr = problem1.Split(']').Length - 1;
 
-		txt = gameObject.GetComponent<Text>();
-		txt.text="Expression: " + problem2;
+		txt.text = "Expression: " + problem1;
+	
 
-		//value = gameObject.GetComponent<Text>();
-		//value.text="Expression: ";
-		
-		//stack = new MyStack();
-		//inputField = GameObject.Find ("Canvas").GetComponentInChildren<InputField> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		txt.text="Expression : " + problem2;
+	
 
-		Value.text = "Value to consider: " + Value;
+
 	}
-
-	public void OnClicked(Button button)
-	{
-		int counter = 0;
-		Value.text = "Value to consider: " + problem1[counter];
-		counter += 1;
-	}
-
+	
 	public void stepThrough (){
-
 		if(which==false)
 		load1 ();
 		else
