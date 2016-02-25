@@ -14,6 +14,7 @@ public class DemoMode : MonoBehaviour {
 	string expressions = "+-/*^()[]";
 	int x = 0;
 	public Text txt;
+	public Text value;
 	char [] prob;
 	bool which;
 	int countop,countcp,countobr, countcbr;
@@ -26,9 +27,10 @@ public class DemoMode : MonoBehaviour {
 		 countcp = problem1.Split(')').Length - 1;
 		countobr = problem1.Split('[').Length - 1;
 		 countcbr = problem1.Split(']').Length - 1;
-		Debug.Log("Txt: " + txt);
+
+		prob = problem1.ToCharArray ();
 		txt.text = "Expression: " + problem1;
-	
+		value.text = "Current value: " +prob[0];
 
 	}
 	
@@ -46,13 +48,17 @@ public class DemoMode : MonoBehaviour {
 		load2 ();
 	}
 	public void load1 (){
-		prob = problem1.ToCharArray ();
+
 		if (x < prob.Length) {
-			if (numbers.Contains (prob[x] + ""))
-				trash.Push (prob[x]);
-			else if (expressions.Contains(prob [x] + ""))
-				main.Push (prob [x]);
+			value.text = "Current value: " +prob[x];
+			if (numbers.Contains (prob[x] + "")){
 			
+
+
+			}
+			else if (expressions.Contains(prob [x] + "")){
+				main.Push (prob [x]);
+			}
 			
 		}
 		if (x == prob.Length - 1) {
@@ -73,12 +79,17 @@ public class DemoMode : MonoBehaviour {
 	public void load2 (){
 
 		if (x < prob.Length) {
-		
+			value.text ="Current value: "+ prob[x];
 			if (numbers.Contains (prob [x] + ""))
+			{
+
 				trash.Push (prob [x]);
+			}
 			else if (expressions.Contains (prob [x] + ""))
+			{
+
 				main.Push (prob [x]);
-			
+			}
 			
 		}
 		if (x == prob.Length - 1) {
