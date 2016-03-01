@@ -47,7 +47,7 @@ public class DemoMode : MonoBehaviour {
 				rects[i] = temp;
 			}
 			rects.Add (new Rect (100, 50, 100, 50));
-			Debug.Log ("adding rect");
+			//Debug.Log ("adding rect");
 			
 			
 		} else if (rects.Count > main.Count ) {
@@ -57,7 +57,7 @@ public class DemoMode : MonoBehaviour {
 				rects[i] = temp;
 			}
 			rects.RemoveAt(rects.Count-1);
-			Debug.Log ("removing rect");
+			//Debug.Log ("removing rect");
 		}
 		
 		else if (garbage.Count < trash.Count ) {
@@ -67,8 +67,8 @@ public class DemoMode : MonoBehaviour {
 				temp.y += 60;
 				garbage[i] = temp;
 			}
-			garbage.Add (new Rect (200, 50, 100, 50));
-			Debug.Log ("adding rect");
+			garbage.Add (new Rect (250, 50, 100, 50));
+			//Debug.Log ("adding rect");
 			
 			
 		} else if (garbage.Count > trash.Count) {
@@ -78,7 +78,7 @@ public class DemoMode : MonoBehaviour {
 				garbage[i] = temp;
 			}
 			garbage.RemoveAt(garbage.Count-1);
-			Debug.Log ("removing rect");
+			//Debug.Log ("removing rect");
 		}
 
 	}
@@ -86,12 +86,12 @@ public class DemoMode : MonoBehaviour {
 	void OnGUI () {
 		if (main.Count > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
-				GUI.Box (rects [i], main.Pop ()+"");
-			}
+				GUI.Box (rects [i], main.Peek ()+"");
+			}		
 		}
 		else if (trash.Count > 0) {
-			for (int i = 0; i < garbage.Count; ++i) {
-				GUI.Box (rects[i], trash.Pop ()+"");
+			for (int x = 0; x < garbage.Count; ++x) {
+				GUI.Box (rects[x], trash.Peek ()+"");
 			}
 		}
 		
@@ -108,9 +108,8 @@ public class DemoMode : MonoBehaviour {
 		if (x < prob.Length) {
 			value.text = "Current value: " +prob[x];
 			if (numbers.Contains (prob[x] + "")){
-			
+				Debug.Log(prob[x]);
 				trash.Push (prob [x]);
-
 			}
 			else if (expressions.Contains(prob [x] + "")){
 				main.Push (prob [x]);
