@@ -53,7 +53,7 @@ public class DemoMode : MonoBehaviour {
 			value.text = "Current value: " +prob[x];
 			if (numbers.Contains (prob[x] + "")){
 			
-
+				trash.Push (prob [x]);
 
 			}
 			else if (expressions.Contains(prob [x] + "")){
