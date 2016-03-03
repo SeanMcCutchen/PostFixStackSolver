@@ -25,6 +25,18 @@ public class TransitionScene : MonoBehaviour {
 	public void loadMainMenu() {
 		Application.LoadLevel ("mainmenu");
 	}
+
+	public void loadBracket() {
+		Application.LoadLevel ("BracketDemo");
+	}
+
+	public void loadEasy() {
+		Application.LoadLevel ("EasyDemo");
+	}
+
+	public void loadHard() {
+		Application.LoadLevel ("HardDemo");
+	}
 	/*
 	public void loadOptions() {
 		Application.LoadLevel ("Options");
