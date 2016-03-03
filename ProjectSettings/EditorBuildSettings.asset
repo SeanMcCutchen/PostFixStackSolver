@@ -19,3 +19,7 @@ EditorBuildSettings:
     path: Assets/Scenes/mainmenu.unity
   - enabled: 1
     path: Assets/Scenes/Demos.unity
+  - enabled: 1
+    path: Assets/Scenes/HardDemo.unity
+  - enabled: 1
+    path: Assets/Scenes/EasyDemo.unity
