@@ -86,7 +86,20 @@ public class DemoMode : MonoBehaviour {
 	}
 	
 	void OnGUI () {
-		if (m.size () > 0) {
+
+		if (m.size () > 0 && t.size () > 0) {
+			for (int i = 0; i < rects.Count; ++i) {
+				GUI.contentColor = Color.green;
+				GUI.Box (rects [i], m.getAt (i)+"");
+			}		
+			for (int x = 0; x < garbage.Count; ++x) {
+				GUI.contentColor = Color.red;
+				GUI.Box (garbage[x], t.getAt (x)+"");
+			}
+
+		}
+
+		else if (m.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
 				GUI.Box (rects [i], m.getAt (i)+"");
