@@ -6,10 +6,12 @@ using System;
 using System.Text;
 
 public class DemoMode : MonoBehaviour {
-
+	
 	static string problem1,problem2;
-	Stack<char> main = new Stack<char>();
-	Stack<char> trash = new Stack<char>();
+	MyStack m = new MyStack ();
+	MyStack t = new MyStack ();
+	//Stack<char> main = new Stack<char>();
+	//Stack<char> trash = new Stack<char>();
 	List<Rect> rects = new List<Rect>();
 	List<Rect> garbage = new List<Rect>();
 	string numbers = "0123456789";
@@ -26,20 +28,20 @@ public class DemoMode : MonoBehaviour {
 		problem2 = "[2*(6/2)+(3^2)]";
 		which = false;
 		countop = problem1.Split('(').Length - 1;
-		 countcp = problem1.Split(')').Length - 1;
+		countcp = problem1.Split(')').Length - 1;
 		countobr = problem1.Split('[').Length - 1;
-		 countcbr = problem1.Split(']').Length - 1;
-
+		countcbr = problem1.Split(']').Length - 1;
+		
 		prob = problem1.ToCharArray ();
 		txt.text = "Expression: " + problem1;
 		value.text = "Current value: " +prob[0];
-
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		// Rectangle needs to be added
-		if (rects.Count < main.Count ) {
+		if (rects.Count < m.size () ) {
 			// Update other rectangles
 			for (int i = 0; i < rects.Count; ++i) {
 				Rect temp = rects[i];
@@ -50,7 +52,7 @@ public class DemoMode : MonoBehaviour {
 			//Debug.Log ("adding rect");
 			
 			
-		} else if (rects.Count > main.Count ) {
+		} else if (rects.Count > m.size () ) {
 			for (int i = 0; i < rects.Count; ++i) {
 				Rect temp = rects[i];
 				temp.y -= 60;
@@ -60,7 +62,7 @@ public class DemoMode : MonoBehaviour {
 			//Debug.Log ("removing rect");
 		}
 		
-		else if (garbage.Count < trash.Count ) {
+		else if (garbage.Count < t.size () ) {
 			// Update other rectangles
 			for (int i = 0; i < garbage.Count; ++i) {
 				Rect temp = garbage[i];
@@ -71,7 +73,7 @@ public class DemoMode : MonoBehaviour {
 			//Debug.Log ("adding rect");
 			
 			
-		} else if (garbage.Count > trash.Count) {
+		} else if (garbage.Count > t.size ()) {
 			for (int i = 0; i < garbage.Count; ++i) {
 				Rect temp = garbage[i];
 				temp.y -= 60;
@@ -80,39 +82,39 @@ public class DemoMode : MonoBehaviour {
 			garbage.RemoveAt(garbage.Count-1);
 			//Debug.Log ("removing rect");
 		}
-
+		
 	}
-
+	
 	void OnGUI () {
-		if (main.Count > 0) {
+		if (m.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
-				GUI.Box (rects [i], main.Peek ()+"");
+				GUI.Box (rects [i], m.getAt (i)+"");
 			}		
 		}
-		else if (trash.Count > 0) {
+		else if (t.size () > 0) {
 			for (int x = 0; x < garbage.Count; ++x) {
-				GUI.Box (rects[x], trash.Peek ()+"");
+				GUI.Box (garbage[x], t.getAt (x)+"");
 			}
 		}
 		
 	}
-
+	
 	public void stepThrough (){
 		if(which==false)
-		load1 ();
+			load1 ();
 		else
-		load2 ();
+			load2 ();
 	}
 	public void load1 (){
-
+		
 		if (x < prob.Length) {
 			value.text = "Current value: " +prob[x];
 			if (numbers.Contains (prob[x] + "")){
 				Debug.Log(prob[x]);
-				trash.Push (prob [x]);
+				t.push (prob [x].ToString ());
 			}
 			else if (expressions.Contains(prob [x] + "")){
-				main.Push (prob [x]);
+				m.push (prob [x].ToString ());
 			}
 			
 		}
@@ -128,22 +130,22 @@ public class DemoMode : MonoBehaviour {
 		if (x == prob.Length) {		
 			switchproblem();
 		}
-			
+		
 		x++;
 	}
 	public void load2 (){
-
+		
 		if (x < prob.Length) {
 			value.text ="Current value: "+ prob[x];
 			if (numbers.Contains (prob [x] + ""))
 			{
-
-				trash.Push (prob [x]);
+				
+				t.push (prob [x].ToString ());
 			}
 			else if (expressions.Contains (prob [x] + ""))
 			{
-
-				main.Push (prob [x]);
+				
+				m.push (prob [x].ToString ());
 			}
 			
 		}
@@ -154,14 +156,14 @@ public class DemoMode : MonoBehaviour {
 			} else {
 				Debug.Log ("Works");
 			}
-
+			
 		}
 		x++;
 	}
 	void switchproblem(){
 		x = 0;
-		trash.Clear ();
-		main.Clear ();
+		t = new MyStack ();
+		m = new MyStack ();
 		prob = problem2.ToCharArray ();
 		countop = problem2.Split ('(').Length - 1;
 		countcp = problem2.Split (')').Length - 1;
@@ -171,3 +173,4 @@ public class DemoMode : MonoBehaviour {
 		which = true;
 	}
 }
+
