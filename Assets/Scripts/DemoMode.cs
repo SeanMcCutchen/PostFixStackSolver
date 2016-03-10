@@ -27,20 +27,28 @@ public class DemoMode : MonoBehaviour {
 	int countop,countcp,countobr, countcbr;
 	// Use this for initialization
 	void Start () {
+<<<<<<< HEAD
+		problem2 = "[(2+4)+3*(4/2)";
+		problem1 = "[2*(6/2)+(3^2)]";
+=======
 		problem1 = "[(2+4)+3*(4/2)";
 		problem2 = "[2*(6/2)+(3^2)]";
 		problem3 = "[1+(2^2^2)/6]";
+<<<<<<< HEAD
 		problem4 = "[8-(3+1)]";
 
+=======
+>>>>>>> cb6e35ee3a078d7e0f178fc517b51c3415fa89da
+>>>>>>> d17cc00ebcdce50cd6d1cc5b5bf8923f7d1e8239
 		which = false;
 /*		countop = problem1.Split('(').Length - 1;
 		countcp = problem1.Split(')').Length - 1;
 		countobr = problem1.Split('[').Length - 1;
 		countcbr = problem1.Split(']').Length - 1;
 		
-		prob = problem1.ToCharArray ();
+		prob = problem1.ToCharArray ();*/
 		txt.text = "Expression: " + problem1;
-		value.text = "Current value: " +prob[0];*/
+		value.text = "Current value: " +prob[0];
 		
 	}
 	
@@ -119,13 +127,17 @@ public class DemoMode : MonoBehaviour {
 		}
 		
 	}
-	/*problem1 = "[(2+4)+3*(4/2)";
-	problem2 = "[2*(6/2)+(3^2)]";*/
+	/*
+	problem1 = "[2*(6/2)+(3^2)]";*/
 	public void bracketDemo(){
 		switch (x)
 		{
+		case (0):
+			m.push ("[");
+			helper.text = "Pushing the scope opener";
+			x++;
+			break;
 		case (1):
-
 			break;
 		case (2):
 			break;
@@ -135,7 +147,23 @@ public class DemoMode : MonoBehaviour {
 			break;
 		case (5):
 			break;
+		case (6):
+			break;
+		case (7):
+			break;
+		case (8):
+			break;
+		case (9):
+			break;
+		case (10):
+			break;
+		case (11):
+			break;
+
 		}
+
+
+
 		
 	}
 	
