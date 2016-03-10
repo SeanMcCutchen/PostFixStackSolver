@@ -17,8 +17,11 @@ public class DemoMode : MonoBehaviour {
 	string numbers = "0123456789";
 	string expressions = "+-/*^()[]";
 	int x = 0;
+	int y = 0;
+	int z = 0;
 	public Text txt;
 	public Text value;
+	public Text helper;
 	char [] prob;
 	bool which;
 	int countop,countcp,countobr, countcbr;
@@ -27,14 +30,14 @@ public class DemoMode : MonoBehaviour {
 		problem1 = "[(2+4)+3*(4/2)";
 		problem2 = "[2*(6/2)+(3^2)]";
 		which = false;
-		countop = problem1.Split('(').Length - 1;
+/*		countop = problem1.Split('(').Length - 1;
 		countcp = problem1.Split(')').Length - 1;
 		countobr = problem1.Split('[').Length - 1;
 		countcbr = problem1.Split(']').Length - 1;
 		
 		prob = problem1.ToCharArray ();
 		txt.text = "Expression: " + problem1;
-		value.text = "Current value: " +prob[0];
+		value.text = "Current value: " +prob[0];*/
 		
 	}
 	
@@ -113,9 +116,31 @@ public class DemoMode : MonoBehaviour {
 		}
 		
 	}
+	/*problem1 = "[(2+4)+3*(4/2)";
+	problem2 = "[2*(6/2)+(3^2)]";*/
+	public void bracketDemo(){
+		switch (x)
+		{
+		case (1):
+
+			break;
+		case (2):
+			break;
+		case (3):
+			break;
+		case (4):
+			break;
+		case (5):
+			break;
+		}
+		
+	}
 	
-	public void stepThrough (){
-		if(which==false)
+	
+
+
+	/*public void stepThrough (){
+	/	if(which==false)
 			load1 ();
 		else
 			load2 ();
@@ -186,6 +211,6 @@ public class DemoMode : MonoBehaviour {
 		countcbr = problem2.Split (']').Length - 1;
 		txt.text = "Expression: " + problem2;
 		which = true;
-	}
+	}*/
 }
 
