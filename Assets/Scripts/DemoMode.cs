@@ -33,39 +33,24 @@ public class DemoMode : MonoBehaviour {
 		problem2 = "[2*(6/2)+(3^2)]";
 		problem3 = "[1+(2^2^2)/6]";
 		problem4 = "[8-(3+1)]";
-<<<<<<< HEAD
-		
-		
-		which = false;
-		/*		countop = problem1.Split('(').Length - 1;
-=======
 
 
 		which = false;
 /*		countop = problem1.Split('(').Length - 1;
->>>>>>> 37dad3a47953ae2918a376409386803a69acc5a0
 		countcp = problem1.Split(')').Length - 1;
 		countobr = problem1.Split('[').Length - 1;
 		countcbr = problem1.Split(']').Length - 1;
 		*/
 		prob = problem1.ToCharArray ();
 		txt.text = "Expression: " + problem1;
-<<<<<<< HEAD
-		
-=======
 
->>>>>>> 37dad3a47953ae2918a376409386803a69acc5a0
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (x < prob.Length)
-<<<<<<< HEAD
-			value.text = "Current value: " +prob[x];
-=======
 		value.text = "Current value: " +prob[x];
->>>>>>> 37dad3a47953ae2918a376409386803a69acc5a0
 		// Rectangle needs to be added
 		if (rects.Count < m.size () ) {
 			// Update other rectangles
@@ -112,7 +97,7 @@ public class DemoMode : MonoBehaviour {
 	}
 	
 	void OnGUI () {
-		
+
 		if (m.size () > 0 && t.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
@@ -122,9 +107,9 @@ public class DemoMode : MonoBehaviour {
 				GUI.contentColor = Color.red;
 				GUI.Box (garbage[x], t.getAt (x)+"");
 			}
-			
+
 		}
-		
+
 		else if (m.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
@@ -246,121 +231,9 @@ public class DemoMode : MonoBehaviour {
 		
 	}
 	
-<<<<<<< HEAD
-	public void bracketDemo(){
-		switch (x)
-		{
-		case (0):
-			m.push ("[");
-			helper.text = "Pushing a scope opener";
-			x++;
-			break;
-		case (1):
-			t.push ("2");
-			helper.text = "Number, discarding";
-			x++;
-			break;
-		case (2):
-			t.push ("*");
-			helper.text = "Operator, discarding";
-			x++;
-			break;
-		case (3):
-			m.push ("(");
-			helper.text = "Pushing a scope opener";
-			x++;
-			break;
-		case (4):
-			t.push ("6");
-			helper.text = "Number, discarding";
-			x++;
-			break;
-		case (5):
-			t.push ("/");
-			helper.text = "Operator, discarding";
-			x++;
-			break;
-		case (6):
-			t.push ("2");
-			helper.text = "Number, discarding";
-			x++;
-			break;
-		case (7):
-			m.push (")");
-			helper.text = "Pushing a scope closer";
-			helper.text = "Popping the stack twice";
-			m.pop ();
-			m.pop ();
-			helper.text = "Found opener and closer, valid";
-			x++;
-			break;
-			
-			
-		case (8):
-			t.push ("+");
-			helper.text = "Operator, discarding";
-			x++;
-			break;
-		case (9):
-			m.push ("(");
-			helper.text = "Pushing a scope opener";
-			x++;
-			break;
-		case (10):
-			t.push ("3");
-			helper.text = "Number, discarding";
-			x++;
-			break;
-		case (11):
-			t.push ("^");
-			helper.text = "Operator, discarding";
-			x++;
-			break;
-		case (12):
-			t.push ("2");
-			helper.text = "Number, discarding";
-			x++;
-			break;
-		case (13):
-			m.push (")");
-			helper.text = "Pushing a scope closer";
-			helper.text = "Popping the stack twice";
-			m.pop ();
-			m.pop ();
-			helper.text = "Found opener and closer, valid";
-			x++;
-			break;
-		case (14):
-			m.push ("]");
-			helper.text = "Pushing a scope closer";
-			helper.text = "Popping the stack twice";
-			m.pop ();
-			m.pop ();
-			helper.text = "Found opener and closer, valid";
-			x++;
-			break;
-		case (15):
-			helper.text = "Valid expression";
-			t = new MyStack();
-			break;
-		default:
-			break;
-			
-		}
-		
-		
-		
-		
-	}
-	
-	
-	
-	
-=======
 	
 
 
->>>>>>> 37dad3a47953ae2918a376409386803a69acc5a0
 	/*public void stepThrough (){
 	/	if(which==false)
 			load1 ();
@@ -435,4 +308,3 @@ public class DemoMode : MonoBehaviour {
 		which = true;
 	}*/
 }
-
