@@ -27,28 +27,28 @@ public class DemoMode : MonoBehaviour {
 	int countop,countcp,countobr, countcbr;
 	// Use this for initialization
 	void Start () {
-<<<<<<< HEAD
 		problem2 = "[(2+4)+3*(4/2)";
 		problem1 = "[2*(6/2)+(3^2)]";
-=======
 		problem1 = "[(2+4)+3*(4/2)";
 		problem2 = "[2*(6/2)+(3^2)]";
 		problem3 = "[1+(2^2^2)/6]";
->>>>>>> cb6e35ee3a078d7e0f178fc517b51c3415fa89da
+
 		which = false;
 /*		countop = problem1.Split('(').Length - 1;
 		countcp = problem1.Split(')').Length - 1;
 		countobr = problem1.Split('[').Length - 1;
 		countcbr = problem1.Split(']').Length - 1;
-		
-		prob = problem1.ToCharArray ();*/
+		*/
+		prob = problem1.ToCharArray ();
 		txt.text = "Expression: " + problem1;
-		value.text = "Current value: " +prob[0];
+
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (x < prob.Length)
+		value.text = "Current value: " +prob[x];
 		// Rectangle needs to be added
 		if (rects.Count < m.size () ) {
 			// Update other rectangles
@@ -122,37 +122,104 @@ public class DemoMode : MonoBehaviour {
 		}
 		
 	}
-	/*
-	problem1 = "[2*(6/2)+(3^2)]";*/
+
 	public void bracketDemo(){
 		switch (x)
 		{
 		case (0):
 			m.push ("[");
-			helper.text = "Pushing the scope opener";
+			helper.text = "Pushing a scope opener";
 			x++;
 			break;
 		case (1):
+			t.push ("2");
+			helper.text = "Number, discarding";
+			x++;
 			break;
 		case (2):
+			t.push ("*");
+			helper.text = "Operator, discarding";
+			x++;
 			break;
 		case (3):
+			m.push ("(");
+			helper.text = "Pushing a scope opener";
+			x++;
 			break;
 		case (4):
+			t.push ("6");
+			helper.text = "Number, discarding";
+			x++;
 			break;
 		case (5):
+			t.push ("/");
+			helper.text = "Operator, discarding";
+			x++;
 			break;
 		case (6):
+			t.push ("2");
+			helper.text = "Number, discarding";
+			x++;
 			break;
 		case (7):
+			m.push (")");
+			helper.text = "Pushing a scope closer";
+			helper.text = "Popping the stack twice";
+			m.pop ();
+			m.pop ();
+			helper.text = "Found opener and closer, valid";
+			x++;
 			break;
+
+
 		case (8):
+			t.push ("+");
+			helper.text = "Operator, discarding";
+			x++;
 			break;
 		case (9):
+			m.push ("(");
+			helper.text = "Pushing a scope opener";
+			x++;
 			break;
 		case (10):
+			t.push ("3");
+			helper.text = "Number, discarding";
+			x++;
 			break;
 		case (11):
+			t.push ("^");
+			helper.text = "Operator, discarding";
+			x++;
+			break;
+		case (12):
+			t.push ("2");
+			helper.text = "Number, discarding";
+			x++;
+			break;
+		case (13):
+			m.push (")");
+			helper.text = "Pushing a scope closer";
+			helper.text = "Popping the stack twice";
+			m.pop ();
+			m.pop ();
+			helper.text = "Found opener and closer, valid";
+			x++;
+			break;
+		case (14):
+			m.push ("]");
+			helper.text = "Pushing a scope closer";
+			helper.text = "Popping the stack twice";
+			m.pop ();
+			m.pop ();
+			helper.text = "Found opener and closer, valid";
+			x++;
+			break;
+		case (15):
+			helper.text = "Valid expression";
+			t = new MyStack();
+			break;
+		default:
 			break;
 
 		}
