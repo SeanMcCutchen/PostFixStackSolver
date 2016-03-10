@@ -7,7 +7,7 @@ using System.Text;
 
 public class DemoMode : MonoBehaviour {
 	
-	static string problem1,problem2;
+	static string problem1,problem2, problem3;
 	MyStack m = new MyStack ();
 	MyStack t = new MyStack ();
 	//Stack<char> main = new Stack<char>();
@@ -27,8 +27,14 @@ public class DemoMode : MonoBehaviour {
 	int countop,countcp,countobr, countcbr;
 	// Use this for initialization
 	void Start () {
+<<<<<<< HEAD
 		problem2 = "[(2+4)+3*(4/2)";
 		problem1 = "[2*(6/2)+(3^2)]";
+=======
+		problem1 = "[(2+4)+3*(4/2)";
+		problem2 = "[2*(6/2)+(3^2)]";
+		problem3 = "[1+(2^2^2)/6]";
+>>>>>>> cb6e35ee3a078d7e0f178fc517b51c3415fa89da
 		which = false;
 /*		countop = problem1.Split('(').Length - 1;
 		countcp = problem1.Split(')').Length - 1;
