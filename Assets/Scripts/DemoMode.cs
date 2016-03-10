@@ -48,7 +48,7 @@ public class DemoMode : MonoBehaviour {
 				temp.y += 60;
 				rects[i] = temp;
 			}
-			rects.Add (new Rect (100, 50, 100, 50));
+			rects.Add (new Rect (100, 70, 100, 50));
 			//Debug.Log ("adding rect");
 			
 			
@@ -69,7 +69,7 @@ public class DemoMode : MonoBehaviour {
 				temp.y += 60;
 				garbage[i] = temp;
 			}
-			garbage.Add (new Rect (250, 50, 100, 50));
+			garbage.Add (new Rect (850, 70, 100, 50));
 			//Debug.Log ("adding rect");
 			
 			
