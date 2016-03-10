@@ -7,7 +7,7 @@ using System.Text;
 
 public class DemoMode : MonoBehaviour {
 	
-	static string problem1,problem2;
+	static string problem1,problem2, problem3 ,problem4;
 	MyStack m = new MyStack ();
 	MyStack t = new MyStack ();
 	//Stack<char> main = new Stack<char>();
@@ -17,29 +17,40 @@ public class DemoMode : MonoBehaviour {
 	string numbers = "0123456789";
 	string expressions = "+-/*^()[]";
 	int x = 0;
+	int y = 0;
+	int z = 0;
 	public Text txt;
 	public Text value;
+	public Text helper;
 	char [] prob;
 	bool which;
 	int countop,countcp,countobr, countcbr;
 	// Use this for initialization
 	void Start () {
+		problem2 = "[(2+4)+3*(4/2)";
+		problem1 = "[2*(6/2)+(3^2)]";
 		problem1 = "[(2+4)+3*(4/2)";
 		problem2 = "[2*(6/2)+(3^2)]";
+		problem3 = "[1+(2^2^2)/6]";
+		problem4 = "[8-(3+1)]";
+		
+		
 		which = false;
-		countop = problem1.Split('(').Length - 1;
+		/*		countop = problem1.Split('(').Length - 1;
 		countcp = problem1.Split(')').Length - 1;
 		countobr = problem1.Split('[').Length - 1;
 		countcbr = problem1.Split(']').Length - 1;
-		
+		*/
 		prob = problem1.ToCharArray ();
 		txt.text = "Expression: " + problem1;
-		value.text = "Current value: " +prob[0];
+		
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (x < prob.Length)
+			value.text = "Current value: " +prob[x];
 		// Rectangle needs to be added
 		if (rects.Count < m.size () ) {
 			// Update other rectangles
@@ -48,7 +59,7 @@ public class DemoMode : MonoBehaviour {
 				temp.y += 60;
 				rects[i] = temp;
 			}
-			rects.Add (new Rect (100, 50, 100, 50));
+			rects.Add (new Rect (100, 70, 100, 50));
 			//Debug.Log ("adding rect");
 			
 			
@@ -69,7 +80,7 @@ public class DemoMode : MonoBehaviour {
 				temp.y += 60;
 				garbage[i] = temp;
 			}
-			garbage.Add (new Rect (250, 50, 100, 50));
+			garbage.Add (new Rect (850, 70, 100, 50));
 			//Debug.Log ("adding rect");
 			
 			
@@ -86,7 +97,7 @@ public class DemoMode : MonoBehaviour {
 	}
 	
 	void OnGUI () {
-
+		
 		if (m.size () > 0 && t.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
@@ -96,9 +107,9 @@ public class DemoMode : MonoBehaviour {
 				GUI.contentColor = Color.red;
 				GUI.Box (garbage[x], t.getAt (x)+"");
 			}
-
+			
 		}
-
+		
 		else if (m.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
@@ -114,8 +125,117 @@ public class DemoMode : MonoBehaviour {
 		
 	}
 	
-	public void stepThrough (){
-		if(which==false)
+	public void bracketDemo(){
+		switch (x)
+		{
+		case (0):
+			m.push ("[");
+			helper.text = "Pushing a scope opener";
+			x++;
+			break;
+		case (1):
+			t.push ("2");
+			helper.text = "Number, discarding";
+			x++;
+			break;
+		case (2):
+			t.push ("*");
+			helper.text = "Operator, discarding";
+			x++;
+			break;
+		case (3):
+			m.push ("(");
+			helper.text = "Pushing a scope opener";
+			x++;
+			break;
+		case (4):
+			t.push ("6");
+			helper.text = "Number, discarding";
+			x++;
+			break;
+		case (5):
+			t.push ("/");
+			helper.text = "Operator, discarding";
+			x++;
+			break;
+		case (6):
+			t.push ("2");
+			helper.text = "Number, discarding";
+			x++;
+			break;
+		case (7):
+			m.push (")");
+			helper.text = "Pushing a scope closer";
+			helper.text = "Popping the stack twice";
+			m.pop ();
+			m.pop ();
+			helper.text = "Found opener and closer, valid";
+			x++;
+			break;
+			
+			
+		case (8):
+			t.push ("+");
+			helper.text = "Operator, discarding";
+			x++;
+			break;
+		case (9):
+			m.push ("(");
+			helper.text = "Pushing a scope opener";
+			x++;
+			break;
+		case (10):
+			t.push ("3");
+			helper.text = "Number, discarding";
+			x++;
+			break;
+		case (11):
+			t.push ("^");
+			helper.text = "Operator, discarding";
+			x++;
+			break;
+		case (12):
+			t.push ("2");
+			helper.text = "Number, discarding";
+			x++;
+			break;
+		case (13):
+			m.push (")");
+			helper.text = "Pushing a scope closer";
+			helper.text = "Popping the stack twice";
+			m.pop ();
+			m.pop ();
+			helper.text = "Found opener and closer, valid";
+			x++;
+			break;
+		case (14):
+			m.push ("]");
+			helper.text = "Pushing a scope closer";
+			helper.text = "Popping the stack twice";
+			m.pop ();
+			m.pop ();
+			helper.text = "Found opener and closer, valid";
+			x++;
+			break;
+		case (15):
+			helper.text = "Valid expression";
+			t = new MyStack();
+			break;
+		default:
+			break;
+			
+		}
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	/*public void stepThrough (){
+	/	if(which==false)
 			load1 ();
 		else
 			load2 ();
@@ -186,6 +306,6 @@ public class DemoMode : MonoBehaviour {
 		countcbr = problem2.Split (']').Length - 1;
 		txt.text = "Expression: " + problem2;
 		which = true;
-	}
+	}*/
 }
 
