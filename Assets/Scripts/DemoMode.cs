@@ -30,6 +30,8 @@ public class DemoMode : MonoBehaviour {
 		problem1 = "[(2+4)+3*(4/2)";
 		problem2 = "[2*(6/2)+(3^2)]";
 		problem3 = "[1+(2^2^2)/6]";
+		problem4 = "[8-(3+1)]";
+
 		which = false;
 /*		countop = problem1.Split('(').Length - 1;
 		countcp = problem1.Split(')').Length - 1;
