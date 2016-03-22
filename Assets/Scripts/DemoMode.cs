@@ -22,15 +22,20 @@ public class DemoMode : MonoBehaviour {
 	public Text txt;
 	public Text value;
 	public Text helper;
+
+	public Text txtEasy;
+	public Text valueEasy;
+	public Text helperEasy;
+
 	char [] prob;
+	char [] prob2;
 	bool which;
 	int countop,countcp,countobr, countcbr;
 	// Use this for initialization
 	void Start () {
-		problem2 = "[(2+4)+3*(4/2)";
+		
 		problem1 = "[2*(6/2)+(3^2)]";
-		problem1 = "[(2+4)+3*(4/2)";
-		problem2 = "[2*(6/2)+(3^2)]";
+		problem2 = "[(2+4)+3*(4/2)";
 		problem3 = "[1+(2^2^2)/6]";
 		problem4 = "[8-(3+1)]";
 
@@ -44,9 +49,13 @@ public class DemoMode : MonoBehaviour {
 		prob = problem1.ToCharArray ();
 		txt.text = "Expression: " + problem1;
 
+		prob2 = problem2.ToCharArray ();
+		txtEasy.text = "Expression: " + problem2;
+	
+
 		
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (x < prob.Length)
