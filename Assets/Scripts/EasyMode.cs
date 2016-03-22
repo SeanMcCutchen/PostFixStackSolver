@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using System;
 using System.Text;
 
-public class DemoMode : MonoBehaviour {
-	
+public class EasyMode : MonoBehaviour {
+
 	static string problem1,problem2, problem3 ,problem4;
 	MyStack m = new MyStack ();
 	MyStack t = new MyStack ();
@@ -19,9 +19,6 @@ public class DemoMode : MonoBehaviour {
 	int x = 0;
 	int y = 0;
 	int z = 0;
-	public Text txt;
-	public Text value;
-	public Text helper;
 
 	public Text txtEasy;
 	public Text valueEasy;
@@ -33,7 +30,7 @@ public class DemoMode : MonoBehaviour {
 	int countop,countcp,countobr, countcbr;
 	// Use this for initialization
 	void Start () {
-		
+
 		problem1 = "[2*(6/2)+(3^2)]";
 		problem2 = "[(2+4)+3*(4/2)";
 		problem3 = "[1+(2^2^2)/6]";
@@ -41,25 +38,22 @@ public class DemoMode : MonoBehaviour {
 
 
 		which = false;
-/*		countop = problem1.Split('(').Length - 1;
+		/*		countop = problem1.Split('(').Length - 1;
 		countcp = problem1.Split(')').Length - 1;
 		countobr = problem1.Split('[').Length - 1;
 		countcbr = problem1.Split(']').Length - 1;
 		*/
-		prob = problem1.ToCharArray ();
-		txt.text = "Expression: " + problem1;
 
 		prob2 = problem2.ToCharArray ();
 		txtEasy.text = "Expression: " + problem2;
-	
 
-		
+
+
 	}
 
 	// Update is called once per frame
 	void Update () {
 		if (x < prob.Length)
-		value.text = "Current value: " +prob[x];
 		valueEasy.text = "Current value: " +prob[x];
 		// Rectangle needs to be added
 		if (rects.Count < m.size () ) {
@@ -71,8 +65,8 @@ public class DemoMode : MonoBehaviour {
 			}
 			rects.Add (new Rect (100, 70, 100, 50));
 			//Debug.Log ("adding rect");
-			
-			
+
+
 		} else if (rects.Count > m.size () ) {
 			for (int i = 0; i < rects.Count; ++i) {
 				Rect temp = rects[i];
@@ -82,7 +76,7 @@ public class DemoMode : MonoBehaviour {
 			rects.RemoveAt(rects.Count-1);
 			//Debug.Log ("removing rect");
 		}
-		
+
 		else if (garbage.Count < t.size () ) {
 			// Update other rectangles
 			for (int i = 0; i < garbage.Count; ++i) {
@@ -92,8 +86,8 @@ public class DemoMode : MonoBehaviour {
 			}
 			garbage.Add (new Rect (850, 70, 100, 50));
 			//Debug.Log ("adding rect");
-			
-			
+
+
 		} else if (garbage.Count > t.size ()) {
 			for (int i = 0; i < garbage.Count; ++i) {
 				Rect temp = garbage[i];
@@ -103,9 +97,9 @@ public class DemoMode : MonoBehaviour {
 			garbage.RemoveAt(garbage.Count-1);
 			//Debug.Log ("removing rect");
 		}
-		
+
 	}
-	
+
 	void OnGUI () {
 
 		if (m.size () > 0 && t.size () > 0) {
@@ -132,7 +126,7 @@ public class DemoMode : MonoBehaviour {
 				GUI.Box (garbage[x], t.getAt (x)+"");
 			}
 		}
-		
+
 	}
 
 	public void bracketDemo(){
@@ -238,10 +232,10 @@ public class DemoMode : MonoBehaviour {
 
 
 
-		
+
 	}
-	
-	
+
+
 
 
 	/*public void stepThrough (){
