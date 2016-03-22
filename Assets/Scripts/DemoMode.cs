@@ -27,8 +27,13 @@ public class DemoMode : MonoBehaviour {
 	public Text valueEasy;
 	public Text helperEasy;
 
+	public Text txtHard;
+	public Text valueHard;
+	public Text helperHard;
+
 	char [] prob;
 	char [] prob2;
+	char [] prob3;
 	bool which;
 	int countop,countcp,countobr, countcbr;
 	// Use this for initialization
@@ -51,6 +56,9 @@ public class DemoMode : MonoBehaviour {
 
 		prob2 = problem2.ToCharArray ();
 		txtEasy.text = "Expression: " + problem2;
+
+	//	prob3 = problem3.ToCharArray ();
+	//txtHard.text = "Expression: " + problem3;
 	
 
 		
@@ -60,7 +68,11 @@ public class DemoMode : MonoBehaviour {
 	void Update () {
 		if (x < prob.Length)
 		value.text = "Current value: " +prob[x];
+<<<<<<< HEAD
 		valueEasy.text = "Current value: " +prob[x];
+=======
+		//valueHard.text = "Current value: " + prob [x];
+>>>>>>> fc1ec81f40c285569284c3c6fd3634a1166aa95d
 		// Rectangle needs to be added
 		if (rects.Count < m.size () ) {
 			// Update other rectangles
