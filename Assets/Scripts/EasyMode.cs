@@ -24,7 +24,6 @@ public class EasyMode : MonoBehaviour {
 	public Text valueEasy;
 	public Text helperEasy;
 
-	char [] prob;
 	char [] prob2;
 	bool which;
 	int countop,countcp,countobr, countcbr;
@@ -53,8 +52,8 @@ public class EasyMode : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (x < prob.Length)
-		valueEasy.text = "Current value: " +prob[x];
+		if (x < prob2.Length)
+		valueEasy.text = "Current value: " +prob2[x];
 		// Rectangle needs to be added
 		if (rects.Count < m.size () ) {
 			// Update other rectangles
@@ -129,7 +128,7 @@ public class EasyMode : MonoBehaviour {
 
 	}
 
-	public void bracketDemo(){
+	/*public void bracketDemo(){
 		switch (x)
 		{
 		case (0):
@@ -229,11 +228,7 @@ public class EasyMode : MonoBehaviour {
 			break;
 
 		}
-
-
-
-
-	}
+	}*/
 
 
 
