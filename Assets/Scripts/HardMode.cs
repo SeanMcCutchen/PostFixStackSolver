@@ -144,93 +144,79 @@ public class HardMode : MonoBehaviour {
 			helperHard.text = "Number, adding to postfix string: 1";
 			x++;
 			break;
-			/*
+
 		case (2):
-			t.push ("*");
-			helper.text = "Operator, discarding";
+			m.push ("+");
+			helperHard.text = "Operator, pushing to stack";
 			x++;
 			break;
 		case (3):
 			m.push ("(");
-			helper.text = "Pushing a scope opener";
+			helperHard.text = "Pushing a scope opener";
 			x++;
 			break;
 		case (4):
-			t.push ("6");
-			helper.text = "Number, discarding";
+			//m.push ("2");
+			helperHard.text = "Number, adding to postfix string: 1 2";
 			x++;
 			break;
 		case (5):
-			t.push ("/");
-			helper.text = "Operator, discarding";
+			m.push ("^");
+			helperHard.text = "Operator, pushing to stack";
 			x++;
 			break;
 		case (6):
-			t.push ("2");
-			helper.text = "Number, discarding";
+			//m.push ("2");
+			helperHard.text = "Number, adding to postfix string: 1 2 2";
 			x++;
 			break;
 		case (7):
-			m.push (")");
-			helper.text = "Pushing a scope closer";
-			helper.text = "Popping the stack twice";
+			//m.push ("^");
+			helperHard.text = "Operator same as top of stack, pop stack: 1 2 2 ^";
 			m.pop ();
-			m.pop ();
-			helper.text = "Found opener and closer, valid";
 			x++;
 			break;
-			
-			
+
 		case (8):
-			t.push ("+");
-			helper.text = "Operator, discarding";
+		//	t.push ("2");
+			helperHard.text = "Operator, adding to postfix string: 1 2 2 ^ 2";
 			x++;
 			break;
 		case (9):
-			m.push ("(");
-			helper.text = "Pushing a scope opener";
+			m.push (")");
+			helperHard.text = "Pushing a scope opener";
+			helperHard.text = "Popping the stack twice";
+			m.pop ();
+			m.pop ();
+			helperHard.text = "Adding operator to postfix string: 1 2 2 ^ 2 ^";
 			x++;
 			break;
 		case (10):
-			t.push ("3");
-			helper.text = "Number, discarding";
+			m.push ("/");
+			helperHard.text = "Operator, pushing to stack";
 			x++;
 			break;
 		case (11):
-			t.push ("^");
-			helper.text = "Operator, discarding";
+			//m.push ("6");
+			helperHard.text = "Number, adding to postfix string: 1 2 2 ^ 2 ^ 6";
 			x++;
 			break;
 		case (12):
-			t.push ("2");
-			helper.text = "Number, discarding";
+			m.push ("]");
+			helperHard.text = "Pushing a scope closer";
+			helperHard.text = "Popping the rest of the stack";
+			m.pop ();
+			m.pop ();
+			m.pop ();
 			x++;
 			break;
 		case (13):
-			m.push (")");
-			helper.text = "Pushing a scope closer";
-			helper.text = "Popping the stack twice";
-			m.pop ();
-			m.pop ();
-			helper.text = "Found opener and closer, valid";
-			x++;
-			break;
-		case (14):
-			m.push ("]");
-			helper.text = "Pushing a scope closer";
-			helper.text = "Popping the stack twice";
-			m.pop ();
-			m.pop ();
-			helper.text = "Found opener and closer, valid";
-			x++;
-			break;
-		case (15):
-			helper.text = "Valid expression";
+			helperHard.text = "Valid expression, final postfix string: 1 2 2 ^ 2 ^ 6 / +";
 			t = new MyStack();
 			break;
 		default:
 			break;
-			*/
+
 			
 		}
 
