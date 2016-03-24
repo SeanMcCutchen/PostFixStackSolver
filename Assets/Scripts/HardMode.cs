@@ -130,20 +130,21 @@ public class HardMode : MonoBehaviour {
 		}
 		
 	}
-	/*
+
 	public void bracketDemo(){
 		switch (x)
 		{
 		case (0):
 			m.push ("[");
-			helper.text = "Pushing a scope opener";
+			helperHard.text = "Pushing a scope opener";
 			x++;
 			break;
 		case (1):
-			t.push ("2");
-			helper.text = "Number, discarding";
+			//t.push ("2");
+			helperHard.text = "Number, adding to postfix string: 1";
 			x++;
 			break;
+			/*
 		case (2):
 			t.push ("*");
 			helper.text = "Operator, discarding";
@@ -229,6 +230,7 @@ public class HardMode : MonoBehaviour {
 			break;
 		default:
 			break;
+			*/
 			
 		}
 
@@ -236,7 +238,7 @@ public class HardMode : MonoBehaviour {
 		
 		
 	}
-	*/
+
 	
 	
 	
