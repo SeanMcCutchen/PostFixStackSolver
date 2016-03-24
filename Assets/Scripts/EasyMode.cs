@@ -43,11 +43,8 @@ public class EasyMode : MonoBehaviour {
 		countcbr = problem1.Split(']').Length - 1;
 		*/
 
-		prob2 = problem2.ToCharArray ();
-		txtEasy.text = "Expression: " + problem2;
-
-
-
+		prob2 = problem4.ToCharArray ();
+		txtEasy.text = "Expression: " + problem4;
 	}
 
 	// Update is called once per frame
@@ -126,6 +123,66 @@ public class EasyMode : MonoBehaviour {
 			}
 		}
 
+	}
+
+	//[8-(3+1)]
+
+	public void easyDemo(){
+		switch (x) {
+		case (0):
+			m.push ("[");
+			helperEasy.text = "Pushing a scope opener";
+			x++;
+			break;
+		case (1):
+			t.push ("8");
+			helperEasy.text = "Number, discarding";
+			x++;
+			break;
+		case (2):
+			t.push ("-");
+			helperEasy.text = "Operator, discarding";
+			x++;
+			break;
+		case (3):
+			m.push ("(");
+			helperEasy.text = "Pushing a scope opener";
+			x++;
+			break;
+		case (4):
+			t.push ("3");
+			helperEasy.text = "Number, discarding";
+			x++;
+			break;
+		case (5):
+			t.push ("+");
+			helperEasy.text = "Operator, discarding";
+			x++;
+			break;
+		case (6):
+			t.push ("1");
+			helperEasy.text = "Number, discarding";
+			x++;
+			break;
+		case (7):
+			m.push (")");
+			helperEasy.text = "Pushing a scope closer";
+			helperEasy.text = "Popping the stack twice";
+			m.pop ();
+			m.pop ();
+			helperEasy.text = "Found opener and closer, valid";
+			x++;
+			break;
+		case (8):
+			m.push ("]");
+			helperEasy.text = "Pushing a scope closer";
+			helperEasy.text = "Popping the stack twice";
+			m.pop ();
+			m.pop ();
+			helperEasy.text = "Found opener and closer, valid | This is the postfix expression: 8 3 1 + -";
+			x++;
+			break;
+		}
 	}
 
 	/*public void bracketDemo(){
