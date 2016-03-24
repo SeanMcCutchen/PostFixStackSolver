@@ -22,6 +22,7 @@ public class HardMode : MonoBehaviour {
 	public Text txtHard;
 	public Text valueHard;
 	public Text helperHard;
+	public Text postfixString;
 	
 	char [] prob3;
 	
@@ -142,6 +143,7 @@ public class HardMode : MonoBehaviour {
 		case (1):
 			//t.push ("2");
 			helperHard.text = "Number, adding to postfix string: 1";
+			postfixString.text= "Postfix: 1";
 			x++;
 			break;
 
@@ -158,6 +160,7 @@ public class HardMode : MonoBehaviour {
 		case (4):
 			//m.push ("2");
 			helperHard.text = "Number, adding to postfix string: 1 2";
+			postfixString.text = "Postfix: 1 2";
 			x++;
 			break;
 		case (5):
@@ -168,11 +171,13 @@ public class HardMode : MonoBehaviour {
 		case (6):
 			//m.push ("2");
 			helperHard.text = "Number, adding to postfix string: 1 2 2";
+			postfixString.text= "Postfix: 1 2 2";
 			x++;
 			break;
 		case (7):
 			//m.push ("^");
 			helperHard.text = "Operator same as top of stack, pop stack: 1 2 2 ^";
+			postfixString.text = "Postfix: 1 2 2 ^";
 			m.pop ();
 			x++;
 			break;
@@ -180,6 +185,7 @@ public class HardMode : MonoBehaviour {
 		case (8):
 		//	t.push ("2");
 			helperHard.text = "Operator, adding to postfix string: 1 2 2 ^ 2";
+			postfixString.text= "Postfix: 1 2 2 ^ 2";
 			x++;
 			break;
 		case (9):
@@ -189,6 +195,7 @@ public class HardMode : MonoBehaviour {
 			m.pop ();
 			m.pop ();
 			helperHard.text = "Adding operator to postfix string: 1 2 2 ^ 2 ^";
+			postfixString.text = "Postfix: 1 2 2 ^ 2 ^";
 			x++;
 			break;
 		case (10):
@@ -199,6 +206,7 @@ public class HardMode : MonoBehaviour {
 		case (11):
 			//m.push ("6");
 			helperHard.text = "Number, adding to postfix string: 1 2 2 ^ 2 ^ 6";
+			postfixString.text = "Postfix: 1 2 2 ^ 2 ^ 6";
 			x++;
 			break;
 		case (12):
@@ -212,6 +220,7 @@ public class HardMode : MonoBehaviour {
 			break;
 		case (13):
 			helperHard.text = "Valid expression, final postfix string: 1 2 2 ^ 2 ^ 6 / +";
+			postfixString.text = "Postfix: 1 2 2 ^ 2 ^ 6 / +";
 			t = new MyStack();
 			break;
 		default:
