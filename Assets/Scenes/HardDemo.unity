@@ -506,10 +506,10 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Trash
+  m_Text: 
 --- !u!222 &831596879
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1119,8 +1119,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: stepThrough
+      - m_Target: {fileID: 1778619969}
+        m_MethodName: bracketDemo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1189,18 +1189,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1778619968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca30b49c15e9f7d48888a1a5f23c346d, type: 3}
+  m_Script: {fileID: 11500000, guid: 3bdc070652dbd2d4d9a50eb9a0c08bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  txt: {fileID: 0}
-  value: {fileID: 0}
-  helper: {fileID: 0}
-  txtEasy: {fileID: 0}
-  valueEasy: {fileID: 0}
-  helperEasy: {fileID: 0}
   txtHard: {fileID: 1412223809}
   valueHard: {fileID: 1312329489}
   helperHard: {fileID: 860203241}
+  postfixString: {fileID: 831596878}
 --- !u!4 &1778619970
 Transform:
   m_ObjectHideFlags: 0
