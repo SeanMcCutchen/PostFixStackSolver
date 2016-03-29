@@ -23,6 +23,9 @@ public class EasyMode : MonoBehaviour {
 	public Text txtEasy;
 	public Text valueEasy;
 	public Text helperEasy;
+	public Text postFix;
+	public Button nButton;
+	public Text buttonText;
 
 	char [] prob2;
 	bool which;
@@ -180,7 +183,59 @@ public class EasyMode : MonoBehaviour {
 			m.pop ();
 			m.pop ();
 			helperEasy.text = "Found opener and closer, valid | This is the postfix expression: 8 3 1 + -";
+			t = new MyStack();
 			x++;
+			break;
+		case (9):
+			helperEasy.text = "Time to evaluate our expression";
+			m = new MyStack ();
+			buttonText.text = "Evaluate";
+			postFix.text = "Postfix expression: 8 3 1 + -";
+			x++;
+			break;
+		case (10): 
+			helperEasy.text = "Operand, pushing to stack. Remaining expression: 3 1 + -";
+			valueEasy.text = "Current Value: 8";
+			buttonText.text = "Next Step";
+			m.push("8");
+			x++; 
+			break;
+		case (11):
+			helperEasy.text = "Operand, pushing to stack. Remaining expression: 1 + -";
+			valueEasy.text = "Current Value: 3";
+			m.push("3");
+			x++;
+			break;
+		case(12):
+			helperEasy.text = "Operand, pushing to stack. Remaining expression: + -";
+			valueEasy.text = "Current Value: 1";
+			m.push("1");
+			x++;
+			break;
+		case (13):
+			helperEasy.text = "Operator, popping stack twice. Remaining expression: -";
+			valueEasy.text = "Current Value: +";
+			m.pop();
+			m.pop();
+			x++;
+			break;
+		case (14):
+			helperEasy.text = "Applying operation: 3 + 1 = 4. Pushing 4 to stack. Remaining expression: -";
+			m.push("4");
+			x++;
+			break;
+		case (15):
+			helperEasy.text = "Operator, popping stack twice.";
+			valueEasy.text= "Current Value: - ";
+			m.pop();
+			m.pop();
+			x++;
+			break;
+		case (16):
+			helperEasy.text = "Applying operation: 8 - 4 = 4. We have an answer!";
+			nButton.gameObject.SetActive(false);
+			break;
+		default:
 			break;
 		}
 	}
