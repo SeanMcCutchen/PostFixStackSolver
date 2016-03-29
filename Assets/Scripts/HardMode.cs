@@ -23,6 +23,8 @@ public class HardMode : MonoBehaviour {
 	public Text valueHard;
 	public Text helperHard;
 	public Text postfixString;
+	public Text nextButton;
+	public Button nButton;
 	
 	char [] prob3;
 	
@@ -33,7 +35,7 @@ public class HardMode : MonoBehaviour {
 		
 		problem1 = "[2*(6/2)+(3^2)]";
 		problem2 = "[(2+4)+3*(4/2)";
-		problem3 = "[1+(2^2^2)/6]";
+		problem3 = "[1+(2^2^2)/4]";
 		problem4 = "[8-(3+1)]";
 		
 		
@@ -205,8 +207,8 @@ public class HardMode : MonoBehaviour {
 			break;
 		case (11):
 			//m.push ("6");
-			helperHard.text = "Number, adding to postfix string: 1 2 2 ^ 2 ^ 6";
-			postfixString.text = "Postfix: 1 2 2 ^ 2 ^ 6";
+			helperHard.text = "Number, adding to postfix string: 1 2 2 ^ 2 ^ 4";
+			postfixString.text = "Postfix: 1 2 2 ^ 2 ^ 4";
 			x++;
 			break;
 		case (12):
@@ -219,10 +221,96 @@ public class HardMode : MonoBehaviour {
 			x++;
 			break;
 		case (13):
-			helperHard.text = "Valid expression, final postfix string: 1 2 2 ^ 2 ^ 6 / +";
-			postfixString.text = "Postfix: 1 2 2 ^ 2 ^ 6 / +";
+			helperHard.text = "Valid expression, final postfix string: 1 2 2 ^ 2 ^ 4 / +";
+			postfixString.text = "Postfix: 1 2 2 ^ 2 ^ 4 / +";
 			t = new MyStack();
+			x++;
 			break;
+		case (14):
+			nextButton.text = "Evaluate";
+			helperHard.text = "Let's now evaluate our postfix expression";
+			m = new MyStack();
+			x++;
+			break;
+		case (15):
+			nextButton.text = "Next Step";
+			valueHard.text = "Current value: 1";
+			helperHard.text = "Operand, pushing to stack. Remaining expression: 2 2 ^ 2 ^ 4 / +";
+			m.push("1");
+			x++;
+			break;
+		case (16):
+			helperHard.text = "Operand, pushing to stack. Remaining expression: 2 ^ 2 ^ 4 / +";
+			valueHard.text = "Current value: 2";
+			m.push("2");
+			x++;
+			break;
+		case (17):
+			helperHard.text = "Operand, pushing to stack. Remaining expression: ^ 2 ^ 4 / +";
+			m.push("2");
+			x++;
+			break;
+		case (18):
+			helperHard.text = "Operator, popping stack twice.";
+			valueHard.text = "Current value: ^";
+			m.pop();
+			m.pop();
+			x++;
+			break;
+		case (19):
+			helperHard.text = "Applying operation: 2 ^ 2 = 4. Pushing 4 to stack. Remaining expression: 2 ^ 4 / +";
+			m.push("4");
+			x++;
+			break;
+		case (20):
+			helperHard.text = "Operand, pushing to stack. Remaining expression: ^ 4 / +";
+			valueHard.text = "Current value: 2";
+			m.push("2");
+			x++;
+			break;
+		case (21):
+			helperHard.text = "Operator, popping stack twice.";
+			valueHard.text = "Current value: ^";
+			m.pop();
+			m.pop();
+			x++;
+			break;
+		case (22):
+			helperHard.text = "Applying operation: 4 ^ 2 = 16. Pushing 16 to stack. Remaining expression: 4 / +";
+			m.push("16");
+			x++;
+			break;
+		case (23):
+			helperHard.text = "Operand, pushing to stack. Remaining expression: / +";
+			valueHard.text = "Current value: 4";
+			m.push("4");
+			x++;
+			break;
+		case (24):
+			helperHard.text = "Operator, popping stack twice.";
+			valueHard.text = "Current value: /";
+			m.pop();
+			m.pop();
+			x++;
+			break;
+		case (25):
+			helperHard.text = "Applying operation: 16 / 4 = 4. Pushing 4 to stack. Remaining expression: +";
+			m.push("4");
+			x++;
+			break;
+		case (26):
+			helperHard.text = "Operator, popping stack twice.";
+			valueHard.text = "Current value: +";
+			m.pop();
+			m.pop();
+			x++;
+			break;
+		case (27):
+			helperHard.text = "Applying operation: 1 + 4 = 5. Houston, we have an answer!";
+			nButton.gameObject.SetActive(false);
+			break;
+
+
 		default:
 			break;
 

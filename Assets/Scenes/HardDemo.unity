@@ -586,7 +586,7 @@ RectTransform:
   m_RootOrder: 8
   m_AnchorMin: {x: 0.48375782, y: 0.34500003}
   m_AnchorMax: {x: 0.48375782, y: 0.34500003}
-  m_AnchoredPosition: {x: -4.1138916, y: 0}
+  m_AnchoredPosition: {x: -121, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!115 &944901855
@@ -688,7 +688,7 @@ GameObject:
   - 222: {fileID: 1386455969}
   - 114: {fileID: 1386455968}
   m_Layer: 5
-  m_Name: Text
+  m_Name: nextText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1196,6 +1196,8 @@ MonoBehaviour:
   valueHard: {fileID: 1312329489}
   helperHard: {fileID: 860203241}
   postfixString: {fileID: 831596878}
+  nextButton: {fileID: 1386455968}
+  nButton: {fileID: 1760522063}
 --- !u!4 &1778619970
 Transform:
   m_ObjectHideFlags: 0
