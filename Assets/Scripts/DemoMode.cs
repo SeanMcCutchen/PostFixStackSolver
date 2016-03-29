@@ -22,6 +22,7 @@ public class DemoMode : MonoBehaviour {
 	public Text txt;
 	public Text value;
 	public Text helper;
+	public Button btn;
 
 	char [] prob;
 
@@ -226,6 +227,7 @@ public class DemoMode : MonoBehaviour {
 		case (15):
 			helper.text = "Valid expression";
 			t = new MyStack();
+			btn.gameObject.SetActive(false);
 			break;
 		default:
 			break;
