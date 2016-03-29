@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System;
 using System.Text;
 
-public class DemoMode : MonoBehaviour {
+public class HardMode : MonoBehaviour {
 	
 	static string problem1,problem2, problem3 ,problem4;
 	MyStack m = new MyStack ();
@@ -19,12 +19,13 @@ public class DemoMode : MonoBehaviour {
 	int x = 0;
 	int y = 0;
 	int z = 0;
-	public Text txt;
-	public Text value;
-	public Text helper;
-
-	char [] prob;
-
+	public Text txtHard;
+	public Text valueHard;
+	public Text helperHard;
+	public Text postfixString;
+	
+	char [] prob3;
+	
 	bool which;
 	int countop,countcp,countobr, countcbr;
 	// Use this for initialization
@@ -34,29 +35,29 @@ public class DemoMode : MonoBehaviour {
 		problem2 = "[(2+4)+3*(4/2)";
 		problem3 = "[1+(2^2^2)/6]";
 		problem4 = "[8-(3+1)]";
-
-
+		
+		
 		which = false;
-/*		countop = problem1.Split('(').Length - 1;
+		/*		countop = problem1.Split('(').Length - 1;
 		countcp = problem1.Split(')').Length - 1;
 		countobr = problem1.Split('[').Length - 1;
 		countcbr = problem1.Split(']').Length - 1;
 		*/
-		prob = problem1.ToCharArray ();
-		txt.text = "Expression: " + problem1;
-
-	//	prob3 = problem3.ToCharArray ();
-	//txtHard.text = "Expression: " + problem3;
-	
-
+		//prob = problem1.ToCharArray ();
+		//txt.text = "Expression: " + problem1;
+		
+		prob3 = problem3.ToCharArray ();
+		txtHard.text = "Expression: " + problem3;
+		
+		
 		
 	}
-
+	
 	// Update is called once per frame
 	void Update () {
-		if (x < prob.Length)
-		value.text = "Current value: " +prob[x];
-		//valueHard.text = "Current value: " + prob [x];
+		if (x < prob3.Length)
+			//value.text = "Current value: " +prob[x];
+		valueHard.text = "Current value: " + prob3 [x];
 		// Rectangle needs to be added
 		if (rects.Count < m.size () ) {
 			// Update other rectangles
@@ -103,7 +104,7 @@ public class DemoMode : MonoBehaviour {
 	}
 	
 	void OnGUI () {
-
+		
 		if (m.size () > 0 && t.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
@@ -113,9 +114,9 @@ public class DemoMode : MonoBehaviour {
 				GUI.contentColor = Color.red;
 				GUI.Box (garbage[x], t.getAt (x)+"");
 			}
-
+			
 		}
-
+		
 		else if (m.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
@@ -136,110 +137,106 @@ public class DemoMode : MonoBehaviour {
 		{
 		case (0):
 			m.push ("[");
-			helper.text = "Pushing a scope opener";
+			helperHard.text = "Pushing a scope opener";
 			x++;
 			break;
 		case (1):
-			t.push ("2");
-			helper.text = "Number, discarding";
+			//t.push ("2");
+			helperHard.text = "Number, adding to postfix string: 1";
+			postfixString.text= "Postfix: 1";
 			x++;
 			break;
+
 		case (2):
-			t.push ("*");
-			helper.text = "Operator, discarding";
+			m.push ("+");
+			helperHard.text = "Operator, pushing to stack";
 			x++;
 			break;
 		case (3):
 			m.push ("(");
-			helper.text = "Pushing a scope opener";
+			helperHard.text = "Pushing a scope opener";
 			x++;
 			break;
 		case (4):
-			t.push ("6");
-			helper.text = "Number, discarding";
+			//m.push ("2");
+			helperHard.text = "Number, adding to postfix string: 1 2";
+			postfixString.text = "Postfix: 1 2";
 			x++;
 			break;
 		case (5):
-			t.push ("/");
-			helper.text = "Operator, discarding";
+			m.push ("^");
+			helperHard.text = "Operator, pushing to stack";
 			x++;
 			break;
 		case (6):
-			t.push ("2");
-			helper.text = "Number, discarding";
+			//m.push ("2");
+			helperHard.text = "Number, adding to postfix string: 1 2 2";
+			postfixString.text= "Postfix: 1 2 2";
 			x++;
 			break;
 		case (7):
-			m.push (")");
-			helper.text = "Pushing a scope closer";
-			helper.text = "Popping the stack twice";
+			//m.push ("^");
+			helperHard.text = "Operator same as top of stack, pop stack: 1 2 2 ^";
+			postfixString.text = "Postfix: 1 2 2 ^";
 			m.pop ();
-			m.pop ();
-			helper.text = "Found opener and closer, valid";
 			x++;
 			break;
 
-
 		case (8):
-			t.push ("+");
-			helper.text = "Operator, discarding";
+		//	t.push ("2");
+			helperHard.text = "Operator, adding to postfix string: 1 2 2 ^ 2";
+			postfixString.text= "Postfix: 1 2 2 ^ 2";
 			x++;
 			break;
 		case (9):
-			m.push ("(");
-			helper.text = "Pushing a scope opener";
+			m.push (")");
+			helperHard.text = "Pushing a scope opener";
+			helperHard.text = "Popping the stack twice";
+			m.pop ();
+			m.pop ();
+			helperHard.text = "Adding operator to postfix string: 1 2 2 ^ 2 ^";
+			postfixString.text = "Postfix: 1 2 2 ^ 2 ^";
 			x++;
 			break;
 		case (10):
-			t.push ("3");
-			helper.text = "Number, discarding";
+			m.push ("/");
+			helperHard.text = "Operator, pushing to stack";
 			x++;
 			break;
 		case (11):
-			t.push ("^");
-			helper.text = "Operator, discarding";
+			//m.push ("6");
+			helperHard.text = "Number, adding to postfix string: 1 2 2 ^ 2 ^ 6";
+			postfixString.text = "Postfix: 1 2 2 ^ 2 ^ 6";
 			x++;
 			break;
 		case (12):
-			t.push ("2");
-			helper.text = "Number, discarding";
+			m.push ("]");
+			helperHard.text = "Pushing a scope closer";
+			helperHard.text = "Popping the rest of the stack";
+			m.pop ();
+			m.pop ();
+			m.pop ();
 			x++;
 			break;
 		case (13):
-			m.push (")");
-			helper.text = "Pushing a scope closer";
-			helper.text = "Popping the stack twice";
-			m.pop ();
-			m.pop ();
-			helper.text = "Found opener and closer, valid";
-			x++;
-			break;
-		case (14):
-			m.push ("]");
-			helper.text = "Pushing a scope closer";
-			helper.text = "Popping the stack twice";
-			m.pop ();
-			m.pop ();
-			helper.text = "Found opener and closer, valid";
-			x++;
-			break;
-		case (15):
-			helper.text = "Valid expression";
+			helperHard.text = "Valid expression, final postfix string: 1 2 2 ^ 2 ^ 6 / +";
+			postfixString.text = "Postfix: 1 2 2 ^ 2 ^ 6 / +";
 			t = new MyStack();
 			break;
 		default:
 			break;
 
+			
 		}
 
-
-
+		
+		
 		
 	}
+
 	
 	
-
-
+	
 	/*public void stepThrough (){
 	/	if(which==false)
 			load1 ();

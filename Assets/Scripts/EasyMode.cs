@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using System;
 using System.Text;
 
-public class DemoMode : MonoBehaviour {
-	
+public class EasyMode : MonoBehaviour {
+
 	static string problem1,problem2, problem3 ,problem4;
 	MyStack m = new MyStack ();
 	MyStack t = new MyStack ();
@@ -19,17 +19,17 @@ public class DemoMode : MonoBehaviour {
 	int x = 0;
 	int y = 0;
 	int z = 0;
-	public Text txt;
-	public Text value;
-	public Text helper;
 
-	char [] prob;
+	public Text txtEasy;
+	public Text valueEasy;
+	public Text helperEasy;
 
+	char [] prob2;
 	bool which;
 	int countop,countcp,countobr, countcbr;
 	// Use this for initialization
 	void Start () {
-		
+
 		problem1 = "[2*(6/2)+(3^2)]";
 		problem2 = "[(2+4)+3*(4/2)";
 		problem3 = "[1+(2^2^2)/6]";
@@ -37,26 +37,20 @@ public class DemoMode : MonoBehaviour {
 
 
 		which = false;
-/*		countop = problem1.Split('(').Length - 1;
+		/*		countop = problem1.Split('(').Length - 1;
 		countcp = problem1.Split(')').Length - 1;
 		countobr = problem1.Split('[').Length - 1;
 		countcbr = problem1.Split(']').Length - 1;
 		*/
-		prob = problem1.ToCharArray ();
-		txt.text = "Expression: " + problem1;
 
-	//	prob3 = problem3.ToCharArray ();
-	//txtHard.text = "Expression: " + problem3;
-	
-
-		
+		prob2 = problem4.ToCharArray ();
+		txtEasy.text = "Expression: " + problem4;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (x < prob.Length)
-		value.text = "Current value: " +prob[x];
-		//valueHard.text = "Current value: " + prob [x];
+		if (x < prob2.Length)
+		valueEasy.text = "Current value: " +prob2[x];
 		// Rectangle needs to be added
 		if (rects.Count < m.size () ) {
 			// Update other rectangles
@@ -67,8 +61,8 @@ public class DemoMode : MonoBehaviour {
 			}
 			rects.Add (new Rect (100, 70, 100, 50));
 			//Debug.Log ("adding rect");
-			
-			
+
+
 		} else if (rects.Count > m.size () ) {
 			for (int i = 0; i < rects.Count; ++i) {
 				Rect temp = rects[i];
@@ -78,7 +72,7 @@ public class DemoMode : MonoBehaviour {
 			rects.RemoveAt(rects.Count-1);
 			//Debug.Log ("removing rect");
 		}
-		
+
 		else if (garbage.Count < t.size () ) {
 			// Update other rectangles
 			for (int i = 0; i < garbage.Count; ++i) {
@@ -88,8 +82,8 @@ public class DemoMode : MonoBehaviour {
 			}
 			garbage.Add (new Rect (850, 70, 100, 50));
 			//Debug.Log ("adding rect");
-			
-			
+
+
 		} else if (garbage.Count > t.size ()) {
 			for (int i = 0; i < garbage.Count; ++i) {
 				Rect temp = garbage[i];
@@ -99,9 +93,9 @@ public class DemoMode : MonoBehaviour {
 			garbage.RemoveAt(garbage.Count-1);
 			//Debug.Log ("removing rect");
 		}
-		
+
 	}
-	
+
 	void OnGUI () {
 
 		if (m.size () > 0 && t.size () > 0) {
@@ -128,10 +122,70 @@ public class DemoMode : MonoBehaviour {
 				GUI.Box (garbage[x], t.getAt (x)+"");
 			}
 		}
-		
+
 	}
 
-	public void bracketDemo(){
+	//[8-(3+1)]
+
+	public void easyDemo(){
+		switch (x) {
+		case (0):
+			m.push ("[");
+			helperEasy.text = "Pushing a scope opener";
+			x++;
+			break;
+		case (1):
+			t.push ("8");
+			helperEasy.text = "Number, discarding";
+			x++;
+			break;
+		case (2):
+			t.push ("-");
+			helperEasy.text = "Operator, discarding";
+			x++;
+			break;
+		case (3):
+			m.push ("(");
+			helperEasy.text = "Pushing a scope opener";
+			x++;
+			break;
+		case (4):
+			t.push ("3");
+			helperEasy.text = "Number, discarding";
+			x++;
+			break;
+		case (5):
+			t.push ("+");
+			helperEasy.text = "Operator, discarding";
+			x++;
+			break;
+		case (6):
+			t.push ("1");
+			helperEasy.text = "Number, discarding";
+			x++;
+			break;
+		case (7):
+			m.push (")");
+			helperEasy.text = "Pushing a scope closer";
+			helperEasy.text = "Popping the stack twice";
+			m.pop ();
+			m.pop ();
+			helperEasy.text = "Found opener and closer, valid";
+			x++;
+			break;
+		case (8):
+			m.push ("]");
+			helperEasy.text = "Pushing a scope closer";
+			helperEasy.text = "Popping the stack twice";
+			m.pop ();
+			m.pop ();
+			helperEasy.text = "Found opener and closer, valid | This is the postfix expression: 8 3 1 + -";
+			x++;
+			break;
+		}
+	}
+
+	/*public void bracketDemo(){
 		switch (x)
 		{
 		case (0):
@@ -231,13 +285,9 @@ public class DemoMode : MonoBehaviour {
 			break;
 
 		}
+	}*/
 
 
-
-		
-	}
-	
-	
 
 
 	/*public void stepThrough (){
