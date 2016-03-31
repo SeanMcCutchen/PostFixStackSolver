@@ -27,7 +27,7 @@ public class TransitionScene : MonoBehaviour {
 	}
 
 	public void loadBracket() {
-		Application.LoadLevel ("BracketDemo");
+		Application.LoadLevel ("bracket");
 	}
 
 	public void loadEasy() {
