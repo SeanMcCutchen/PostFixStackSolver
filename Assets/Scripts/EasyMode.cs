@@ -189,6 +189,7 @@ public class EasyMode : MonoBehaviour {
 		case (9):
 			helperEasy.text = "Time to evaluate our expression";
 			m = new MyStack ();
+			t = new MyStack ();
 			buttonText.text = "Evaluate";
 			postFix.text = "Postfix expression: 8 3 1 + -";
 			x++;
