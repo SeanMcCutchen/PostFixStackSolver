@@ -19,11 +19,15 @@ public class HardMode : MonoBehaviour {
 	int x = 0;
 	int y = 0;
 	int z = 0;
+	int ispnum = -1;
+	int icpnum = 0;
 	public Text txtHard;
 	public Text valueHard;
 	public Text helperHard;
 	public Text postfixString;
 	public Text nextButton;
+	public Text isp;
+	public Text icp;
 	public Button nButton;
 	
 	char [] prob3;
@@ -57,6 +61,8 @@ public class HardMode : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		isp.text = "In Stack Priority : " + ispnum;
+		icp.text = "Incoming Priority : " + icpnum;
 		if (x < prob3.Length)
 			//value.text = "Current value: " +prob[x];
 		valueHard.text = "Current value: " + prob3 [x];
@@ -138,24 +144,30 @@ public class HardMode : MonoBehaviour {
 		switch (x)
 		{
 		case (0):
+			icpnum=7;
 			m.push ("[");
 			helperHard.text = "Pushing a scope opener";
 			x++;
 			break;
 		case (1):
 			//t.push ("2");
+			ispnum=0;
 			helperHard.text = "Number, adding to postfix string: 1";
 			postfixString.text= "Postfix: 1";
 			x++;
 			break;
 
 		case (2):
+
 			m.push ("+");
+			icpnum=1;
 			helperHard.text = "Operator, pushing to stack";
 			x++;
 			break;
 		case (3):
+			ispnum=2;
 			m.push ("(");
+			icpnum=7;
 			helperHard.text = "Pushing a scope opener";
 			x++;
 			break;
@@ -166,7 +178,9 @@ public class HardMode : MonoBehaviour {
 			x++;
 			break;
 		case (5):
+			ispnum=0;
 			m.push ("^");
+			icpnum=6;
 			helperHard.text = "Operator, pushing to stack";
 			x++;
 			break;
@@ -177,7 +191,9 @@ public class HardMode : MonoBehaviour {
 			x++;
 			break;
 		case (7):
+			ispnum=5;
 			//m.push ("^");
+			icpnum=6;
 			helperHard.text = "Operator same as top of stack, pop stack: 1 2 2 ^";
 			postfixString.text = "Postfix: 1 2 2 ^";
 			m.pop ();
@@ -191,8 +207,9 @@ public class HardMode : MonoBehaviour {
 			x++;
 			break;
 		case (9):
+
 			m.push (")");
-			helperHard.text = "Pushing a scope opener";
+			helperHard.text = "Pushing a scope closer";
 			helperHard.text = "Popping the stack twice";
 			m.pop ();
 			m.pop ();
@@ -201,11 +218,14 @@ public class HardMode : MonoBehaviour {
 			x++;
 			break;
 		case (10):
+
 			m.push ("/");
+			icpnum=3;
 			helperHard.text = "Operator, pushing to stack";
 			x++;
 			break;
 		case (11):
+			ispnum=4;
 			//m.push ("6");
 			helperHard.text = "Number, adding to postfix string: 1 2 2 ^ 2 ^ 4";
 			postfixString.text = "Postfix: 1 2 2 ^ 2 ^ 4";
@@ -213,6 +233,7 @@ public class HardMode : MonoBehaviour {
 			break;
 		case (12):
 			m.push ("]");
+
 			helperHard.text = "Pushing a scope closer";
 			helperHard.text = "Popping the rest of the stack";
 			m.pop ();
@@ -221,6 +242,8 @@ public class HardMode : MonoBehaviour {
 			x++;
 			break;
 		case (13):
+			icp.text="";
+			isp.text="";
 			helperHard.text = "Valid expression, final postfix string: 1 2 2 ^ 2 ^ 4 / +";
 			postfixString.text = "Postfix: 1 2 2 ^ 2 ^ 4 / +";
 			t = new MyStack();
