@@ -1453,6 +1453,9 @@ MonoBehaviour:
   txtEasy: {fileID: 1835490864}
   valueEasy: {fileID: 54738686}
   helperEasy: {fileID: 1604694941}
+  postFix: {fileID: 1896753179}
+  nButton: {fileID: 33594594}
+  buttonText: {fileID: 2068725353}
 --- !u!4 &2055165887
 Transform:
   m_ObjectHideFlags: 0
