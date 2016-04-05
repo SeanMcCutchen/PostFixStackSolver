@@ -66,62 +66,43 @@ public class HardMode : MonoBehaviour {
 		icp.text = "Incoming Priority : " + icpnum;
 		if (x < prob3.Length)
 			//value.text = "Current value: " +prob[x];
-		valueHard.text = "Current value: " + prob3 [x];
+			valueHard.text = "Current value: " + prob3 [x];
 		// Rectangle needs to be added
 		if (rects.Count < m.size () ) {
 			// Update other rectangles
 			for (int i = 0; i < rects.Count; ++i) {
 				Rect temp = rects[i];
-				temp.y += 60;
+				temp.y += 90;
 				rects[i] = temp;
 			}
-			rects.Add (new Rect (100, 70, 100, 50));
+			rects.Add (new Rect (125, 100, 150, 75));
 			//Debug.Log ("adding rect");
 			
 			
 		} else if (rects.Count > m.size () ) {
 			for (int i = 0; i < rects.Count; ++i) {
 				Rect temp = rects[i];
-				temp.y -= 60;
+				temp.y -= 90;
 				rects[i] = temp;
 			}
 			rects.RemoveAt(rects.Count-1);
 			//Debug.Log ("removing rect");
 		}
 		
-		else if (garbage.Count < t.size () ) {
-			// Update other rectangles
-			for (int i = 0; i < garbage.Count; ++i) {
-				Rect temp = garbage[i];
-				temp.y += 60;
-				garbage[i] = temp;
-			}
-			garbage.Add (new Rect (850, 70, 100, 50));
-			//Debug.Log ("adding rect");
-			
-			
-		} else if (garbage.Count > t.size ()) {
-			for (int i = 0; i < garbage.Count; ++i) {
-				Rect temp = garbage[i];
-				temp.y -= 60;
-				garbage[i] = temp;
-			}
-			garbage.RemoveAt(garbage.Count-1);
-			//Debug.Log ("removing rect");
-		}
 		
 	}
 	
 	void OnGUI () {
-		
+		GUIStyle style = new GUIStyle (GUI.skin.button);
+		style.fontSize = 24;
 		if (m.size () > 0 && t.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
-				GUI.Box (rects [i], m.getAt (i)+"");
+				GUI.Box (rects [i], m.getAt (i)+"",style);
 			}		
 			for (int x = 0; x < garbage.Count; ++x) {
 				GUI.contentColor = Color.red;
-				GUI.Box (garbage[x], t.getAt (x)+"");
+				GUI.Box (garbage[x], t.getAt (x)+"",style);
 			}
 			
 		}
@@ -129,16 +110,17 @@ public class HardMode : MonoBehaviour {
 		else if (m.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
-				GUI.Box (rects [i], m.getAt (i)+"");
+				GUI.Box (rects [i], m.getAt (i)+"",style);
 			}		
 		}
 		else if (t.size () > 0) {
 			for (int x = 0; x < garbage.Count; ++x) {
 				GUI.contentColor = Color.red;
-				GUI.Box (garbage[x], t.getAt (x)+"");
+				GUI.Box (garbage[x], t.getAt (x)+"",style);
 			}
 		}
 		
+	
 	}
 
 	public void bracketDemo(){
@@ -358,79 +340,4 @@ public class HardMode : MonoBehaviour {
 	}
 
 	
-	
-	
-	/*public void stepThrough (){
-	/	if(which==false)
-			load1 ();
-		else
-			load2 ();
-	}
-	public void load1 (){
-		
-		if (x < prob.Length) {
-			value.text = "Current value: " +prob[x];
-			if (numbers.Contains (prob[x] + "")){
-				Debug.Log(prob[x]);
-				t.push (prob [x].ToString ());
-			}
-			else if (expressions.Contains(prob [x] + "")){
-				m.push (prob [x].ToString ());
-			}
-			
-		}
-		if (x == prob.Length - 1) {
-			
-			if ((countop != countcp) || (countobr != countcbr)) {
-				Debug.Log ("Invalid entry");
-			}
-			else{
-				Debug.Log ("Works");
-			}
-		}
-		if (x == prob.Length) {		
-			switchproblem();
-		}
-		
-		x++;
-	}
-	public void load2 (){
-		
-		if (x < prob.Length) {
-			value.text ="Current value: "+ prob[x];
-			if (numbers.Contains (prob [x] + ""))
-			{
-				
-				t.push (prob [x].ToString ());
-			}
-			else if (expressions.Contains (prob [x] + ""))
-			{
-				
-				m.push (prob [x].ToString ());
-			}
-			
-		}
-		if (x == prob.Length - 1) {
-			
-			if ((countop != countcp) || (countobr != countcbr)) {
-				Debug.Log ("Invalid entry");
-			} else {
-				Debug.Log ("Works");
-			}
-			
-		}
-		x++;
-	}
-	void switchproblem(){
-		x = 0;
-		t = new MyStack ();
-		m = new MyStack ();
-		prob = problem2.ToCharArray ();
-		countop = problem2.Split ('(').Length - 1;
-		countcp = problem2.Split (')').Length - 1;
-		countobr = problem2.Split ('[').Length - 1;
-		countcbr = problem2.Split (']').Length - 1;
-		txt.text = "Expression: " + problem2;
-		which = true;
-	}*/
 }
