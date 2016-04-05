@@ -29,7 +29,8 @@ public class HardMode : MonoBehaviour {
 	public Text isp;
 	public Text icp;
 	public Button nButton;
-	
+	public Text hint;
+
 	char [] prob3;
 	
 	bool which;
@@ -147,6 +148,7 @@ public class HardMode : MonoBehaviour {
 			icpnum=7;
 			m.push ("[");
 			helperHard.text = "Pushing a scope opener";
+			hint.text = "Hint: Always push scope openers";
 			x++;
 			break;
 		case (1):
@@ -154,6 +156,7 @@ public class HardMode : MonoBehaviour {
 			ispnum=0;
 			helperHard.text = "Number, adding to postfix string: 1";
 			postfixString.text= "Postfix: 1";
+			hint.text = "Hint: Always append operands to postfix string";
 			x++;
 			break;
 
@@ -162,6 +165,7 @@ public class HardMode : MonoBehaviour {
 			m.push ("+");
 			icpnum=1;
 			helperHard.text = "Operator, pushing to stack";
+			hint.text = "Hint: Incoming priority greater than instack priority";
 			x++;
 			break;
 		case (3):
@@ -169,12 +173,14 @@ public class HardMode : MonoBehaviour {
 			m.push ("(");
 			icpnum=7;
 			helperHard.text = "Pushing a scope opener";
+			hint.text = "Hint: Always push scope openers";
 			x++;
 			break;
 		case (4):
 			//m.push ("2");
-			helperHard.text = "Number, adding to postfix string: 1 2";
+			helperHard.text = "Operand, adding to postfix string: 1 2";
 			postfixString.text = "Postfix: 1 2";
+			hint.text = "Hint: Always append operands to postfix string";
 			x++;
 			break;
 		case (5):
@@ -182,21 +188,23 @@ public class HardMode : MonoBehaviour {
 			m.push ("^");
 			icpnum=6;
 			helperHard.text = "Operator, pushing to stack";
+			hint.text = "Hint: Incoming priority greater than instack priority";
 			x++;
 			break;
 		case (6):
 			//m.push ("2");
 			helperHard.text = "Number, adding to postfix string: 1 2 2";
 			postfixString.text= "Postfix: 1 2 2";
+			hint.text = "Hint: Always append operands to postfix string";
 			x++;
 			break;
 		case (7):
 			ispnum=5;
-			//m.push ("^");
+			m.push ("^");
 			icpnum=6;
 			helperHard.text = "Operator same as top of stack, pop stack: 1 2 2 ^";
 			postfixString.text = "Postfix: 1 2 2 ^";
-			m.pop ();
+			//m.pop ();
 			x++;
 			break;
 
