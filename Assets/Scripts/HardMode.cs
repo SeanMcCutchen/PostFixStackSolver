@@ -40,7 +40,7 @@ public class HardMode : MonoBehaviour {
 		
 		problem1 = "[2*(6/2)+(3^2)]";
 		problem2 = "[(2+4)+3*(4/2)";
-		problem3 = "[1+(2^2^2)/4]";
+		problem3 = "[ 1 + ( 2 ^ 3 ^ 2 ) / 4 ]";
 		problem4 = "[8-(3+1)]";
 		
 		
@@ -193,8 +193,8 @@ public class HardMode : MonoBehaviour {
 			break;
 		case (6):
 			//m.push ("2");
-			helperHard.text = "Number, adding to postfix string: 1 2 2";
-			postfixString.text= "Postfix: 1 2 2";
+			helperHard.text = "Number, adding to postfix string: 1 2 3";
+			postfixString.text= "Postfix: 1 2 3";
 			hint.text = "Hint: Always append operands to postfix string";
 			x++;
 			break;
@@ -202,16 +202,17 @@ public class HardMode : MonoBehaviour {
 			ispnum=5;
 			m.push ("^");
 			icpnum=6;
-			helperHard.text = "Operator same as top of stack, pop stack: 1 2 2 ^";
-			postfixString.text = "Postfix: 1 2 2 ^";
+			helperHard.text = "Operator, pushing to stack";
+			postfixString.text = "Postfix: 1 2 3";
+			hint.text = "Hint: Incoming priority greater than instack priority";
 			//m.pop ();
 			x++;
 			break;
 
 		case (8):
 		//	t.push ("2");
-			helperHard.text = "Operator, adding to postfix string: 1 2 2 ^ 2";
-			postfixString.text= "Postfix: 1 2 2 ^ 2";
+			helperHard.text = "Operand, adding to postfix string: 1 2 3 2";
+			postfixString.text= "Postfix: 1 2 3 2";
 			x++;
 			break;
 		case (9):
@@ -221,8 +222,9 @@ public class HardMode : MonoBehaviour {
 			helperHard.text = "Popping the stack twice";
 			m.pop ();
 			m.pop ();
-			helperHard.text = "Adding operator to postfix string: 1 2 2 ^ 2 ^";
-			postfixString.text = "Postfix: 1 2 2 ^ 2 ^";
+			helperHard.text = "Adding operator to postfix string: 1 2 3 2 ^ ^";
+			postfixString.text = "Postfix: 1 2 3 2 ^ ^";
+			hint.text = "Pop stack until you find matching brackets, append stack elements to postfix string";
 			x++;
 			break;
 		case (10):
@@ -230,20 +232,22 @@ public class HardMode : MonoBehaviour {
 			m.push ("/");
 			icpnum=3;
 			helperHard.text = "Operator, pushing to stack";
+			hint.text = "Hint: Incoming priority greater than instack priority";
 			x++;
 			break;
 		case (11):
 			ispnum=4;
 			//m.push ("6");
-			helperHard.text = "Number, adding to postfix string: 1 2 2 ^ 2 ^ 4";
+			helperHard.text = "Operand, adding to postfix string: 1 2 3 2 ^ ^ 4";
 			postfixString.text = "Postfix: 1 2 2 ^ 2 ^ 4";
+			hint.text = "Hint: Always append operands to postfix string";
 			x++;
 			break;
 		case (12):
 			m.push ("]");
-
 			helperHard.text = "Pushing a scope closer";
 			helperHard.text = "Popping the rest of the stack";
+			hint.text = "Pop stack until you find matching brackets, append stack elements to postfix string";
 			m.pop ();
 			m.pop ();
 			m.pop ();
@@ -252,8 +256,8 @@ public class HardMode : MonoBehaviour {
 		case (13):
 			icp.text="";
 			isp.text="";
-			helperHard.text = "Valid expression, final postfix string: 1 2 2 ^ 2 ^ 4 / +";
-			postfixString.text = "Postfix: 1 2 2 ^ 2 ^ 4 / +";
+			helperHard.text = "Valid expression, final postfix string: 1 2 3 2 ^ ^ 4 / +";
+			postfixString.text = "Postfix: 1 2 3 2 ^ ^ 4 / +";
 			t = new MyStack();
 			x++;
 			break;
