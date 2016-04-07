@@ -60,6 +60,7 @@ public class HardMode : MonoBehaviour {
 		} else {
 			isp.text = "";
 			icp.text = "";
+			postfixString.text = "";
 		}
 
 		// Rectangle needs to be added
