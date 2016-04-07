@@ -45,17 +45,6 @@ public class HardMode : MonoBehaviour {
 		problem2 = "[(2+4)+3*(4/2)";
 		problem3 = "[ 1 + ( 2 ^ 3 ^ 2 ) / 4 ]";
 		problem4 = "[8-(3+1)]";
-		
-		
-		which = false;
-		/*		countop = problem1.Split('(').Length - 1;
-		countcp = problem1.Split(')').Length - 1;
-		countobr = problem1.Split('[').Length - 1;
-		countcbr = problem1.Split(']').Length - 1;
-		*/
-		//prob = problem1.ToCharArray ();
-		//txt.text = "Expression: " + problem1;
-		
 		prob3 = problem3.ToCharArray ();
 		txtHard.text = "Infix Expression: " + problem3;
 		
@@ -72,9 +61,7 @@ public class HardMode : MonoBehaviour {
 			isp.text = "";
 			icp.text = "";
 		}
-		if (x < prob3.Length)
-			//value.text = "Current value: " +prob[x];
-		//	valueHard.text = "Current value: " + prob3 [x];
+
 		// Rectangle needs to be added
 		if (rects.Count < m.size () ) {
 			// Update other rectangles
@@ -334,9 +321,9 @@ public class HardMode : MonoBehaviour {
 			x++;
 			break;
 		case (24):
-			m = new MyStack();
-			m.push ("1");
 			helperHard.text = "Operator, popping stack twice.";
+			m.pop ();
+			m.pop();
 			valueHard.text = "Current value: /";
 			hint.text = "When evaluating, operators cause the stack to pop twice. Put the first element on the right of the expression, the second on the left";
 			x++;
@@ -354,7 +341,9 @@ public class HardMode : MonoBehaviour {
 			x++;
 			break;
 		case (27):
+
 			helperHard.text = "Applying operation: 128 + 1 = 129. Houston, we have an answer!";
+			m.push ("129");
 			hint.text = "";
 			nButton.gameObject.SetActive(false);
 			break;
