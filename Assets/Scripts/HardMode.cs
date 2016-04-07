@@ -30,6 +30,7 @@ public class HardMode : MonoBehaviour {
 	public Text icp;
 	public Button nButton;
 	public Text hint;
+	public Text exprDisplay;
 
 	char [] prob3;
 	
@@ -54,7 +55,7 @@ public class HardMode : MonoBehaviour {
 		//txt.text = "Expression: " + problem1;
 		
 		prob3 = problem3.ToCharArray ();
-		txtHard.text = "Expression: " + problem3;
+		txtHard.text = "Infix Expression: " + problem3;
 		
 		
 		
@@ -209,12 +210,13 @@ public class HardMode : MonoBehaviour {
 		case (9):
 
 			m.push (")");
-			helperHard.text = "Pushing a scope closer";
-			helperHard.text = "Popping the stack twice";
+			helperHard.text = "Pushing a scope closer, popping the stack until matching scope opener is found";
+			m.pop ();
+			m.pop ();
 			m.pop ();
 			m.pop ();
 			valueHard.text = "Current value: ) ";
-			helperHard.text = "Adding operator to postfix string: 1 2 3 2 ^ ^";
+			helperHard.text = "Adding operators to postfix string: 1 2 3 2 ^ ^";
 			postfixString.text = "Postfix: 1 2 3 2 ^ ^";
 			hint.text = "Pop stack until you find matching brackets, append stack elements to postfix string";
 			x++;
@@ -232,7 +234,7 @@ public class HardMode : MonoBehaviour {
 			ispnum=4;
 			//m.push ("6");
 			helperHard.text = "Operand, adding to postfix string: 1 2 3 2 ^ ^ 4";
-			postfixString.text = "Postfix: 1 2 2 ^ 2 ^ 4";
+			postfixString.text = "Postfix: 1 2 3 2 ^ ^ 4";
 			valueHard.text = "Current value: 4 ";
 			hint.text = "Hint: Always append operands to postfix string";
 			x++;
@@ -240,9 +242,10 @@ public class HardMode : MonoBehaviour {
 		case (12):
 			m.push ("]");
 			helperHard.text = "Pushing a scope closer";
-			helperHard.text = "Popping the rest of the stack";
+			helperHard.text = "Popping the rest of the stack, appending operands to postfix string";
 			valueHard.text = "Current value: ] ";
 			hint.text = "Pop stack until you find matching brackets, append stack elements to postfix string";
+			m.pop ();
 			m.pop ();
 			m.pop ();
 			m.pop ();
@@ -265,6 +268,7 @@ public class HardMode : MonoBehaviour {
 			break;
 		case (15):
 			nextButton.text = "Next Step";
+			exprDisplay.text = "Postfix Expression: 1 2 3 2 ^ ^ 4 / +";
 			valueHard.text = "Current value: 1";
 			helperHard.text = "Operand, pushing to stack. Remaining expression: 2 3 2 ^ ^ 4 / +";
 			hint.text = "When evaluating, always push operands to stack";
