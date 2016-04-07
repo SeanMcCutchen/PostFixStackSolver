@@ -21,6 +21,7 @@ public class HardMode : MonoBehaviour {
 	int z = 0;
 	int ispnum = -1;
 	int icpnum = 0;
+	bool evaluate;
 	public Text txtHard;
 	public Text valueHard;
 	public Text helperHard;
@@ -38,7 +39,8 @@ public class HardMode : MonoBehaviour {
 	int countop,countcp,countobr, countcbr;
 	// Use this for initialization
 	void Start () {
-		
+
+		evaluate = true;
 		problem1 = "[2*(6/2)+(3^2)]";
 		problem2 = "[(2+4)+3*(4/2)";
 		problem3 = "[ 1 + ( 2 ^ 3 ^ 2 ) / 4 ]";
@@ -63,8 +65,13 @@ public class HardMode : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		isp.text = "In Stack Priority : " + ispnum;
-		icp.text = "Incoming Priority : " + icpnum;
+		if (evaluate) {
+			isp.text = "In Stack Priority : " + ispnum;
+			icp.text = "Incoming Priority : " + icpnum;
+		} else {
+			isp.text = "";
+			icp.text = "";
+		}
 		if (x < prob3.Length)
 			//value.text = "Current value: " +prob[x];
 		//	valueHard.text = "Current value: " + prob3 [x];
@@ -263,6 +270,7 @@ public class HardMode : MonoBehaviour {
 		case (14):
 			nextButton.text = "Evaluate";
 			helperHard.text = "Let's now evaluate our postfix expression";
+			evaluate = false;
 			m = new MyStack();
 			x++;
 			break;
