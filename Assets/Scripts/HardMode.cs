@@ -263,6 +263,7 @@ public class HardMode : MonoBehaviour {
 			isp.text="";
 			helperHard.text = "Valid expression, final postfix string: 1 2 3 2 ^ ^ 4 / +";
 			postfixString.text = "Postfix: 1 2 3 2 ^ ^ 4 / +";
+			valueHard.text = "";
 			hint.text = "";
 			t = new MyStack();
 			x++;
@@ -333,11 +334,11 @@ public class HardMode : MonoBehaviour {
 			x++;
 			break;
 		case (24):
+			m = new MyStack();
+			m.push ("1");
 			helperHard.text = "Operator, popping stack twice.";
 			valueHard.text = "Current value: /";
 			hint.text = "When evaluating, operators cause the stack to pop twice. Put the first element on the right of the expression, the second on the left";
-			m.pop();
-			m.pop();
 			x++;
 			break;
 		case (25):
@@ -353,7 +354,7 @@ public class HardMode : MonoBehaviour {
 			x++;
 			break;
 		case (27):
-			helperHard.text = "Applying operation: 128 + 4 = 132. Houston, we have an answer!";
+			helperHard.text = "Applying operation: 128 + 1 = 129. Houston, we have an answer!";
 			hint.text = "";
 			nButton.gameObject.SetActive(false);
 			break;
