@@ -240,6 +240,7 @@ public class HardMode : MonoBehaviour {
 			isp.text="";
 			helperHard.text = "Valid expression, final postfix string: 1 2 3 2 ^ ^ 4 / +";
 			postfixString.text = "Postfix: 1 2 3 2 ^ ^ 4 / +";
+			hint.text = "";
 			t = new MyStack();
 			x++;
 			break;
@@ -252,67 +253,71 @@ public class HardMode : MonoBehaviour {
 		case (15):
 			nextButton.text = "Next Step";
 			valueHard.text = "Current value: 1";
-			helperHard.text = "Operand, pushing to stack. Remaining expression: 2 2 ^ 2 ^ 4 / +";
+			helperHard.text = "Operand, pushing to stack. Remaining expression: 2 3 2 ^ ^ 4 / +";
+			hint.text = "When evaluating, always push operands to stack";
 			m.push("1");
 			x++;
 			break;
 		case (16):
-			helperHard.text = "Operand, pushing to stack. Remaining expression: 2 ^ 2 ^ 4 / +";
+			helperHard.text = "Operand, pushing to stack. Remaining expression: 3 2 ^ ^ 4 / +";
 			valueHard.text = "Current value: 2";
 			m.push("2");
 			x++;
 			break;
 		case (17):
-			helperHard.text = "Operand, pushing to stack. Remaining expression: ^ 2 ^ 4 / +";
-			m.push("2");
+			helperHard.text = "Operand, pushing to stack. Remaining expression: 2 ^ ^ 4 / +";
+			valueHard.text = "Current value: 3";
+			m.push("3");
 			x++;
 			break;
 		case (18):
-			helperHard.text = "Operator, popping stack twice.";
-			valueHard.text = "Current value: ^";
-			m.pop();
-			m.pop();
+			helperHard.text = "Operand, pushing to stack. Remaining expression: ^ ^ 4 / +";
+			valueHard.text = "Current value: 2";
+			m.push ("2");
 			x++;
 			break;
 		case (19):
-			helperHard.text = "Applying operation: 2 ^ 2 = 4. Pushing 4 to stack. Remaining expression: 2 ^ 4 / +";
-			m.push("4");
+			helperHard.text = "Operator, popping stack twice";
+			valueHard.text = "Current value: ^";
+			hint.text = "When evaluating, operators cause the stack to pop twice. Put the first element on the right of the expression, the second on the left";
+			m.pop ();
+			m.pop ();
 			x++;
 			break;
 		case (20):
-			helperHard.text = "Operand, pushing to stack. Remaining expression: ^ 4 / +";
-			valueHard.text = "Current value: 2";
-			m.push("2");
+			helperHard.text = "Applying operation: 3 ^ 2 = 9. Pushing 9 to stack. Remaining expression: ^ 4 / +";
+			m.push("9");
 			x++;
 			break;
 		case (21):
 			helperHard.text = "Operator, popping stack twice.";
-			valueHard.text = "Current value: ^";
 			m.pop();
 			m.pop();
 			x++;
 			break;
 		case (22):
-			helperHard.text = "Applying operation: 4 ^ 2 = 16. Pushing 16 to stack. Remaining expression: 4 / +";
-			m.push("16");
+			helperHard.text = "Applying operation: 2 ^ 9 = 512. Pushing 512 to stack. Remaining expression: 4 / +";
+			m.push("512");
 			x++;
 			break;
 		case (23):
 			helperHard.text = "Operand, pushing to stack. Remaining expression: / +";
 			valueHard.text = "Current value: 4";
+			hint.text = "When evaluating, always push operands to stack";
 			m.push("4");
 			x++;
 			break;
 		case (24):
 			helperHard.text = "Operator, popping stack twice.";
 			valueHard.text = "Current value: /";
+			hint.text = "When evaluating, operators cause the stack to pop twice. Put the first element on the right of the expression, the second on the left";
 			m.pop();
 			m.pop();
 			x++;
 			break;
 		case (25):
-			helperHard.text = "Applying operation: 16 / 4 = 4. Pushing 4 to stack. Remaining expression: +";
-			m.push("4");
+			helperHard.text = "Applying operation: 512 / 4 = 128. Pushing 128 to stack. Remaining expression: +";
+			m.push("128");
 			x++;
 			break;
 		case (26):
@@ -323,7 +328,8 @@ public class HardMode : MonoBehaviour {
 			x++;
 			break;
 		case (27):
-			helperHard.text = "Applying operation: 1 + 4 = 5. Houston, we have an answer!";
+			helperHard.text = "Applying operation: 128 + 4 = 132. Houston, we have an answer!";
+			hint.text = "";
 			nButton.gameObject.SetActive(false);
 			break;
 
