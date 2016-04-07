@@ -66,7 +66,7 @@ public class HardMode : MonoBehaviour {
 		icp.text = "Incoming Priority : " + icpnum;
 		if (x < prob3.Length)
 			//value.text = "Current value: " +prob[x];
-			valueHard.text = "Current value: " + prob3 [x];
+		//	valueHard.text = "Current value: " + prob3 [x];
 		// Rectangle needs to be added
 		if (rects.Count < m.size () ) {
 			// Update other rectangles
@@ -130,6 +130,7 @@ public class HardMode : MonoBehaviour {
 			icpnum=7;
 			m.push ("[");
 			helperHard.text = "Pushing a scope opener";
+			valueHard.text = "Current value: [ ";
 			hint.text = "Hint: Always push scope openers";
 			x++;
 			break;
@@ -138,6 +139,7 @@ public class HardMode : MonoBehaviour {
 			ispnum=0;
 			helperHard.text = "Number, adding to postfix string: 1";
 			postfixString.text= "Postfix: 1";
+			valueHard.text = "Current value: 1 ";
 			hint.text = "Hint: Always append operands to postfix string";
 			x++;
 			break;
@@ -147,6 +149,7 @@ public class HardMode : MonoBehaviour {
 			m.push ("+");
 			icpnum=1;
 			helperHard.text = "Operator, pushing to stack";
+			valueHard.text = "Current value: + ";
 			hint.text = "Hint: Incoming priority greater than instack priority";
 			x++;
 			break;
@@ -155,6 +158,7 @@ public class HardMode : MonoBehaviour {
 			m.push ("(");
 			icpnum=7;
 			helperHard.text = "Pushing a scope opener";
+			valueHard.text = "Current value: ( ";
 			hint.text = "Hint: Always push scope openers";
 			x++;
 			break;
@@ -162,6 +166,7 @@ public class HardMode : MonoBehaviour {
 			//m.push ("2");
 			helperHard.text = "Operand, adding to postfix string: 1 2";
 			postfixString.text = "Postfix: 1 2";
+			valueHard.text = "Current value: 2 ";
 			hint.text = "Hint: Always append operands to postfix string";
 			x++;
 			break;
@@ -170,6 +175,7 @@ public class HardMode : MonoBehaviour {
 			m.push ("^");
 			icpnum=6;
 			helperHard.text = "Operator, pushing to stack";
+			valueHard.text = "Current value: ^ ";
 			hint.text = "Hint: Incoming priority greater than instack priority";
 			x++;
 			break;
@@ -177,6 +183,7 @@ public class HardMode : MonoBehaviour {
 			//m.push ("2");
 			helperHard.text = "Number, adding to postfix string: 1 2 3";
 			postfixString.text= "Postfix: 1 2 3";
+			valueHard.text = "Current value: 3 ";
 			hint.text = "Hint: Always append operands to postfix string";
 			x++;
 			break;
@@ -186,6 +193,7 @@ public class HardMode : MonoBehaviour {
 			icpnum=6;
 			helperHard.text = "Operator, pushing to stack";
 			postfixString.text = "Postfix: 1 2 3";
+			valueHard.text = "Current value: ^ ";
 			hint.text = "Hint: Incoming priority greater than instack priority";
 			//m.pop ();
 			x++;
@@ -195,6 +203,7 @@ public class HardMode : MonoBehaviour {
 		//	t.push ("2");
 			helperHard.text = "Operand, adding to postfix string: 1 2 3 2";
 			postfixString.text= "Postfix: 1 2 3 2";
+			valueHard.text = "Current value: 2 ";
 			x++;
 			break;
 		case (9):
@@ -204,6 +213,7 @@ public class HardMode : MonoBehaviour {
 			helperHard.text = "Popping the stack twice";
 			m.pop ();
 			m.pop ();
+			valueHard.text = "Current value: ) ";
 			helperHard.text = "Adding operator to postfix string: 1 2 3 2 ^ ^";
 			postfixString.text = "Postfix: 1 2 3 2 ^ ^";
 			hint.text = "Pop stack until you find matching brackets, append stack elements to postfix string";
@@ -214,6 +224,7 @@ public class HardMode : MonoBehaviour {
 			m.push ("/");
 			icpnum=3;
 			helperHard.text = "Operator, pushing to stack";
+			valueHard.text = "Current value: / ";
 			hint.text = "Hint: Incoming priority greater than instack priority";
 			x++;
 			break;
@@ -222,6 +233,7 @@ public class HardMode : MonoBehaviour {
 			//m.push ("6");
 			helperHard.text = "Operand, adding to postfix string: 1 2 3 2 ^ ^ 4";
 			postfixString.text = "Postfix: 1 2 2 ^ 2 ^ 4";
+			valueHard.text = "Current value: 4 ";
 			hint.text = "Hint: Always append operands to postfix string";
 			x++;
 			break;
@@ -229,6 +241,7 @@ public class HardMode : MonoBehaviour {
 			m.push ("]");
 			helperHard.text = "Pushing a scope closer";
 			helperHard.text = "Popping the rest of the stack";
+			valueHard.text = "Current value: ] ";
 			hint.text = "Pop stack until you find matching brackets, append stack elements to postfix string";
 			m.pop ();
 			m.pop ();
