@@ -59,56 +59,58 @@ public class EasyMode : MonoBehaviour {
 			// Update other rectangles
 			for (int i = 0; i < rects.Count; ++i) {
 				Rect temp = rects[i];
-				temp.y += 60;
+				temp.y += 90;
 				rects[i] = temp;
 			}
-			rects.Add (new Rect (100, 70, 100, 50));
+			rects.Add (new Rect (125, 100, 150, 75));
 			//Debug.Log ("adding rect");
 
 
 		} else if (rects.Count > m.size () ) {
 			for (int i = 0; i < rects.Count; ++i) {
 				Rect temp = rects[i];
-				temp.y -= 60;
+				temp.y -= 90;
 				rects[i] = temp;
 			}
 			rects.RemoveAt(rects.Count-1);
 			//Debug.Log ("removing rect");
 		}
 
-		else if (garbage.Count < t.size () ) {
+		/*else if (garbage.Count < t.size () ) {
 			// Update other rectangles
 			for (int i = 0; i < garbage.Count; ++i) {
 				Rect temp = garbage[i];
-				temp.y += 60;
+				temp.y += 90;
 				garbage[i] = temp;
 			}
 			garbage.Add (new Rect (850, 70, 100, 50));
 			//Debug.Log ("adding rect");
-
+		
 
 		} else if (garbage.Count > t.size ()) {
 			for (int i = 0; i < garbage.Count; ++i) {
 				Rect temp = garbage[i];
-				temp.y -= 60;
+				temp.y -= 90;
 				garbage[i] = temp;
 			}
 			garbage.RemoveAt(garbage.Count-1);
 			//Debug.Log ("removing rect");
 		}
+		*/
 
 	}
 
 	void OnGUI () {
-
+		GUIStyle style = new GUIStyle (GUI.skin.button);
+		style.fontSize = 24;
 		if (m.size () > 0 && t.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
-				GUI.Box (rects [i], m.getAt (i)+"");
+				GUI.Box (rects [i], m.getAt (i)+"",style);
 			}		
 			for (int x = 0; x < garbage.Count; ++x) {
 				GUI.contentColor = Color.red;
-				GUI.Box (garbage[x], t.getAt (x)+"");
+				GUI.Box (garbage[x], t.getAt (x)+"",style);
 			}
 
 		}
@@ -116,13 +118,13 @@ public class EasyMode : MonoBehaviour {
 		else if (m.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
-				GUI.Box (rects [i], m.getAt (i)+"");
+				GUI.Box (rects [i], m.getAt (i)+"",style);
 			}		
 		}
 		else if (t.size () > 0) {
 			for (int x = 0; x < garbage.Count; ++x) {
 				GUI.contentColor = Color.red;
-				GUI.Box (garbage[x], t.getAt (x)+"");
+				GUI.Box (garbage[x], t.getAt (x)+"",style);
 			}
 		}
 
