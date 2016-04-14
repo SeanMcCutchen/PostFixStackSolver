@@ -54,7 +54,7 @@ public class  infixTopostfix : MonoBehaviour{
 							intCheck = isOperator(char.Parse(objStck.ToString()));
 							if (intCheck == 1)
 							{
-								strResult += objStck.ToString();
+								strResult +=objStck.ToString()+" ";
 							}
 						}//end of for(int intStackCount...)
 					}
@@ -72,14 +72,14 @@ public class  infixTopostfix : MonoBehaviour{
 					intCheck = isOperator(char.Parse(objStck.ToString()));
 					if (intCheck == 1)
 					{
-					strResult += objStck.ToString();
+					strResult += objStck.ToString()+ " ";
 					}
 				}//end of for(int intStackCount...)
 			}
 
 	
 
-			 return string.Join(" ", Array.ConvertAll(strResult.ToCharArray(), c => c.ToString()));
+		return strResult;
 		}
 
 		private Stack stkOperator = new Stack();
