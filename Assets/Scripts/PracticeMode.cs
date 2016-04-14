@@ -201,6 +201,13 @@ public class PracticeMode : MonoBehaviour {
 		m = new MyStack ();
 		postfix = "";
 	}
+
+	public void loadnextProb() {
+		curr = 0;
+		probindex++;
+		m = new MyStack ();
+		postfix = "";
+	}
 	void OnGUI () {
 		GUIStyle style = new GUIStyle (GUI.skin.button);
 		style.fontSize = 24;
