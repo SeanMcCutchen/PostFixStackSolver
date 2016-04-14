@@ -41,11 +41,16 @@ public class PracticeMode : MonoBehaviour {
 	List<Rect> rects = new List<Rect>();
 	String postfix;
 	String [] test;
+	public Button check1;
+	public Button check2;
+	public Button append;
+	bool isdone = false;
 	int curr = 0;
+	String theiranswer = "";
 	// Use this for initialization
 	void Start () {
 		test = expr [probindex].Split (' ');
-
+		check2.gameObject.SetActive(false);
 	}
 
 	
@@ -53,7 +58,22 @@ public class PracticeMode : MonoBehaviour {
 	void Update () {
 		postfixString.text = postfix;
 		infixString.text ="Infix String: " + expr [probindex];
-		currvalue.text = test [curr];
+		if(isdone!=true)
+			currvalue.text = test [curr];
+		if (isdone == true) {
+			
+			check2.gameObject.SetActive(true);
+			check1.gameObject.SetActive(false);
+			append.gameObject.SetActive(false);
+
+
+		}
+		if (curr == test.Length - 1) {
+			theiranswer = postfix;
+			m = new MyStack ();
+			isdone = true;
+		}
+	
 		if (rects.Count < m.size () ) {
 			// Update other rectangles
 			for (int i = 0; i < rects.Count; ++i) {
@@ -76,15 +96,28 @@ public class PracticeMode : MonoBehaviour {
 		}
 
 	}
+	int postcurr = 0;
 	public void pushToStack ()
 	{
-		m.push (test [curr]);
-		curr++;
+		if (isdone==true) {
+			String[] splitit = theiranswer.Split (' ');
+			m.push(splitit[postcurr]);
+			postcurr++;
+		}
+		if (curr < test.Length) {
+			m.push (test [curr]);
+			curr++;
+		} 
+
+
+		
 	}
 	public void appendToString()
 	{
-		postfix = string.Concat(postfix,test [curr]+ " ");
-		curr++;
+		if (curr < test.Length) {
+			postfix = string.Concat (postfix, test [curr] + " ");
+			curr++;
+		}
 	}
 
 	public void popStack()
