@@ -20,12 +20,20 @@ public class EasyMode : MonoBehaviour {
 	int y = 0;
 	int z = 0;
 
+	int ispnum = -1;
+	int icpnum = 0;
+
+	bool evaluate;
 	public Text txtEasy;
 	public Text valueEasy;
 	public Text helperEasy;
 	public Text postFix;
 	public Button nButton;
 	public Text buttonText;
+	public Text isp;
+	public Text icp;
+	public Text postfixString;
+	public Text hint;
 
 	char [] prob2;
 	bool which;
@@ -33,6 +41,7 @@ public class EasyMode : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+		evaluate = true;
 		problem1 = "[2*(6/2)+(3^2)]";
 		problem2 = "[(2+4)+3*(4/2)";
 		problem3 = "[1+(2^2^2)/6]";
@@ -52,8 +61,16 @@ public class EasyMode : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (x < prob2.Length)
-		valueEasy.text = "Current value: " +prob2[x];
+
+		if (evaluate) {
+			isp.text = "In Stack Priority : " + ispnum;
+			icp.text = "Incoming Priority : " + icpnum;
+		} else {
+			isp.text = "";
+			icp.text = "";
+			postfixString.text = "";
+		}
+
 		// Rectangle needs to be added
 		if (rects.Count < m.size () ) {
 			// Update other rectangles
@@ -130,49 +147,95 @@ public class EasyMode : MonoBehaviour {
 
 	}
 
-	//[8-(3+1)]
 
-	public void easyDemo(){
-		switch (x) {
-		case (0):
+	/*
+	case (0):
+			icpnum=7;
 			m.push ("[");
-			helperEasy.text = "Pushing a scope opener";
+			helperHard.text = "Pushing a scope opener";
+			valueHard.text = "Current value: [ ";
+			hint.text = "Hint: Always push scope openers";
 			x++;
 			break;
 		case (1):
-			t.push ("8");
-			helperEasy.text = "Number, discarding";
+			//t.push ("2");
+			ispnum=0;
+			helperHard.text = "Number, adding to postfix string: 1";
+			postfixString.text= "Postfix: 1";
+			valueHard.text = "Current value: 1 ";
+			hint.text = "Hint: Always append operands to postfix string";
+			x++;
+			break;
+	*/
+	//[8-(3+1)]
+	public void easyDemo(){
+		switch (x) {
+		case (0):
+			icpnum = 7;
+			m.push ("[");
+			helperEasy.text = "Pushing a scope opener";
+			valueEasy.text = "Current value: [ ";
+			hint.text = "Hint: Always push scope openers";
+			x++;
+			break;
+		case (1):
+			ispnum = 0;
+			//t.push ("8");
+			helperEasy.text = "Number, adding to postfix string: 8";
+			postfixString.text= "Postfix: 8";
+			valueEasy.text = "Current value: 8 ";
+			hint.text = "Hint: Always append operands to postfix string";
 			x++;
 			break;
 		case (2):
-			t.push ("-");
-			helperEasy.text = "Operator, discarding";
+			m.push ("-");
+			icpnum=1;
+			helperEasy.text = "Operator, pushing to stack";
+			valueEasy.text = "Current value: - ";
+			hint.text = "Hint: Incoming priority greater than instack priority";
 			x++;
 			break;
 		case (3):
 			m.push ("(");
+			icpnum = 7;
+			ispnum = 2;
 			helperEasy.text = "Pushing a scope opener";
+			valueEasy.text = "Current value: ( ";
+			hint.text = "Hint: Always push scope openers";
 			x++;
 			break;
 		case (4):
 			t.push ("3");
-			helperEasy.text = "Number, discarding";
+			ispnum = 0;
+			helperEasy.text = "Number, adding to postfix string: 3";
+			postfixString.text= "Postfix: 8 3";
+			valueEasy.text = "Current value: 3 ";
+			hint.text = "Hint: Always append operands to postfix string";
 			x++;
 			break;
 		case (5):
-			t.push ("+");
-			helperEasy.text = "Operator, discarding";
+			icpnum = 1;
+			m.push ("+");
+			helperEasy.text = "Operator, pushing to stack";
+			valueEasy.text = "Current value: + ";
+			hint.text = "Hint: Incoming priority greater than instack priority";
 			x++;
 			break;
 		case (6):
-			t.push ("1");
-			helperEasy.text = "Number, discarding";
+			//m.push ("1");
+			ispnum = 2;
+			helperEasy.text = "Number, adding to postfix string: 1";
+			postfixString.text= "Postfix: 8 3 1";
+			valueEasy.text = "Current value: 1 ";
+			hint.text = "Hint: Always append operands to postfix string";
 			x++;
 			break;
 		case (7):
 			m.push (")");
 			helperEasy.text = "Pushing a scope closer";
 			helperEasy.text = "Popping the stack twice";
+			postfixString.text= "Postfix: 8 3 1 +";
+			valueEasy.text = "Current value: ) ";
 			m.pop ();
 			m.pop ();
 			helperEasy.text = "Found opener and closer, valid";
@@ -182,6 +245,8 @@ public class EasyMode : MonoBehaviour {
 			m.push ("]");
 			helperEasy.text = "Pushing a scope closer";
 			helperEasy.text = "Popping the stack twice";
+			valueEasy.text = "Current value: ] ";
+			//postfixString.text= "Postfix: 8 3 1 + -";
 			m.pop ();
 			m.pop ();
 			helperEasy.text = "Found opener and closer, valid | This is the postfix expression: 8 3 1 + -";
@@ -193,7 +258,7 @@ public class EasyMode : MonoBehaviour {
 			m = new MyStack ();
 			t = new MyStack ();
 			buttonText.text = "Evaluate";
-			postFix.text = "Postfix expression: 8 3 1 + -";
+			postfixString.text = "Postfix expression: 8 3 1 + -";
 			x++;
 			break;
 		case (10): 
