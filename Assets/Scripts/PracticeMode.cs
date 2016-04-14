@@ -22,30 +22,34 @@ public class PracticeMode : MonoBehaviour {
 		"[ ( 5 ^ 2 + 5 * 20 ) / ( 125 / 5 ) ] ", "( 8 ^ 2 ) / 4 + 3 ^ 4 ", "[ 2 ^ ( 60 / 30 + 2 ) ] ", 
 		"[ ( 4 * 5 + 7 ) / ( 3 ^ 2 ) ] ", "30 * 2 / 15 + 37 ", "4 ^ 2 + 18 / 2 ", "[ ( 4 + 33 ) + ( 124 / 4 ) ] ",
 		"[ 5 * 3 / ( 7 - 2 ) ] " };                   
-	List<string> postfixes = new List<string>{"1 52 34 - +", "5 7 + 23 5 - *","100 5 4 * /", "2 3 ^ - 8", "5 8 * 8 4 / -",
-		"55 5 / 27 + 5 2 ^ +",
-		"55 5 / 10 -"," 1 5 8 * 10 - 6 / +"," 5 3 ^ 2 ^ 100 19 5 * - /"," 3 2 ^ 3 ^",
-		"50 3 7 4 * 2 / + -", "5 2 ^ 5 /", "20 3 * 4 + 2 3 ^ / ", "50 3 * 25 / 37 +"," 5 30 6 / 22 + *", 
-		"120 6 5 * 2 * /" ," 1 2 + 3 * 6 + 2 3 + /"," 8 4 / 120 60 / /", "5 3 ^ 5 2 ^ /",
-		"8 10 * 20 / 3 +", "7 5 * 3 4 ^ +"," 5 3 ^ 2 ^"," 2 3 ^ 2 4 ^ + 4 /", "7 2 + 3 * 6 + 2 1 + /",
-		"2 3 ^ 43 11 3 * - *"," 3 5 3 ^ * 25 /","45 2 * 9 / 3 + 11 -"," 45 5 / 10 * 33 11 / /",
-		"5 3 ^ 50 10 / / 27 +", "2 4 ^ 4 2 ^ /"," 5 44 4 / + 7 -", "5 2 ^ 5 20 * + 125 5 / /",
-		"8 2 ^ 4 / 3 4 ^ +"," 2 60 30 / 2 + ^"," 4 5 * 7 + 3 2 ^ /"," 30 2 * 15 / 37 +", 
-		"4 2 ^ 18 2 / +", "4 33 + 124 4 / +", "5 3 * 7 2 - /"}; 
+	List<string> postfixes = new List<string>{"1 52 34 - + ", "5 7 + 23 5 - * ","100 5 4 * / ", "2 3 ^ - 8 ", "5 8 * 8 4 / - ",
+		"55 5 / 27 + 5 2 ^ + ",
+		"55 5 / 10 - "," 1 5 8 * 10 - 6 / + "," 5 3 ^ 2 ^ 100 19 5 * - / "," 3 2 ^ 3 ^ ",
+		"50 3 7 4 * 2 / + - ", "5 2 ^ 5 / ", "20 3 * 4 + 2 3 ^ / ", "50 3 * 25 / 37 + "," 5 30 6 / 22 + * ", 
+		"120 6 5 * 2 * / " ," 1 2 + 3 * 6 + 2 3 + / "," 8 4 / 120 60 / / ", "5 3 ^ 5 2 ^ / ",
+		"8 10 * 20 / 3 + ", "7 5 * 3 4 ^ + "," 5 3 ^ 2 ^ "," 2 3 ^ 2 4 ^ + 4 / ", "7 2 + 3 * 6 + 2 1 + / ",
+		"2 3 ^ 43 11 3 * - * "," 3 5 3 ^ * 25 / ","45 2 * 9 / 3 + 11 - "," 45 5 / 10 * 33 11 / / ",
+		"5 3 ^ 50 10 / / 27 + ", "2 4 ^ 4 2 ^ / "," 5 44 4 / + 7 - ", "5 2 ^ 5 20 * + 125 5 / / ",
+		"8 2 ^ 4 / 3 4 ^ + "," 2 60 30 / 2 + ^ "," 4 5 * 7 + 3 2 ^ / "," 30 2 * 15 / 37 + ", 
+		"4 2 ^ 18 2 / + ", "4 33 + 124 4 / + ", "5 3 * 7 2 - / "}; 
 	MyStack m = new MyStack ();
 	public Text infixString;
 	public Text postfixString;
 	public Text currvalue;
+	public Text validity;
 
 	private int probindex =0; 
 	List<Rect> rects = new List<Rect>();
+	//List<string> pops = new List<string> ();
 	String postfix;
 	String [] test;
+	String popped;
 	public Button check1;
 	public Button check2;
 	public Button append;
 	bool isdone = false;
 	int curr = 0;
+	int currFix = 0;
 	String theiranswer = "";
 	// Use this for initialization
 	void Start () {
@@ -115,7 +119,7 @@ public class PracticeMode : MonoBehaviour {
 	public void appendToString()
 	{
 		if (curr < test.Length) {
-			postfix = string.Concat (postfix, test [curr] + " ");
+			postfix = string.Concat (postfix,  test [curr] + " ");
 			curr++;
 		}
 	}
@@ -123,9 +127,20 @@ public class PracticeMode : MonoBehaviour {
 	public void popStack()
 	{
 		if (m.isEmpty() == false)
-			m.pop();
+			popped = m.pop();
+			if(popped != "(" && popped != "[" && popped != ")" && popped != "]")
+			postfix = string.Concat (postfix,  popped + " " );
 	}
 
+	public void checkpostfix() {
+		Debug.Log (postfix);
+		Debug.Log (postfixes [currFix]);
+		if (postfix == postfixes [currFix])
+			validity.text = "Correct postfix expression!";
+		else
+			validity.text = "Incorrect postfix expression";
+
+	}
 	void OnGUI () {
 		GUIStyle style = new GUIStyle (GUI.skin.button);
 		style.fontSize = 24;
