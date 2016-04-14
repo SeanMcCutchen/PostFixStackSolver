@@ -33,24 +33,27 @@ public class PracticeMode : MonoBehaviour {
 		"8 2 ^ 4 / 3 4 ^ +"," 2 60 30 / 2 + ^"," 4 5 * 7 + 3 2 ^ /"," 30 2 * 15 / 37 +", 
 		"4 2 ^ 18 2 / +", "4 33 + 124 4 / +", "5 3 * 7 2 - /"}; 
 	MyStack m = new MyStack ();
+	public Text infixString;
 	public Text postfixString;
-	public Text currvalue=0;
+	public Text currvalue;
+
 	private int probindex =0; 
 	List<Rect> rects = new List<Rect>();
-
+	String postfix;
 	String [] test;
 	int curr = 0;
 	// Use this for initialization
 	void Start () {
 		test = expr [probindex].Split (' ');
 
-
 	}
 
 	
 	// Update is called once per frame
 	void Update () {
-		currvalue.text = test [currvalue];
+		postfixString.text = postfix;
+		infixString.text ="Infix String: " + expr [probindex];
+		currvalue.text = test [curr];
 		if (rects.Count < m.size () ) {
 			// Update other rectangles
 			for (int i = 0; i < rects.Count; ++i) {
@@ -72,6 +75,22 @@ public class PracticeMode : MonoBehaviour {
 			//Debug.Log ("removing rect");
 		}
 
+	}
+	public void pushToStack ()
+	{
+		m.push (test [curr]);
+		curr++;
+	}
+	public void appendToString()
+	{
+		postfix = string.Concat(postfix,test [curr]+ " ");
+		curr++;
+	}
+
+	public void popStack()
+	{
+		if (m.isEmpty() == false)
+			m.pop();
 	}
 
 	void OnGUI () {
