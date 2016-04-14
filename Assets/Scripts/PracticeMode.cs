@@ -48,6 +48,7 @@ public class PracticeMode : MonoBehaviour {
 	public Button check2;
 	public Button append;
 	bool isdone = false;
+	bool check = false;
 	int curr = 0;
 	int currFix = 0;
 	String theiranswer = "";
@@ -60,9 +61,11 @@ public class PracticeMode : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		postfixString.text = postfix;
-		infixString.text ="Infix String: " + expr [probindex];
-		if(isdone!=true)
+		if (check != true) {
+			postfixString.text = postfix;
+			infixString.text = "Infix String: " + expr [probindex];
+		}
+		if(isdone!=true && check != true)
 			currvalue.text = "Current Value: " + test [curr];
 		if (isdone == true) {
 			
@@ -136,7 +139,13 @@ public class PracticeMode : MonoBehaviour {
 		Debug.Log (postfix);
 		Debug.Log (postfixes [currFix]);
 		if (postfix == postfixes [currFix])
+		{
+			check = true;
+			infixString.text = "Postfix String: " + postfix;
+			postfixString.text = "";
+			currvalue.text = "";
 			validity.text = "Correct postfix expression!";
+		}
 		else
 			validity.text = "Incorrect postfix expression";
 
