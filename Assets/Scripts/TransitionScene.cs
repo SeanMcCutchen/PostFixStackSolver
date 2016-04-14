@@ -37,17 +37,4 @@ public class TransitionScene : MonoBehaviour {
 	public void loadHard() {
 		Application.LoadLevel ("HardDemo");
 	}
-	/*
-	public void loadOptions() {
-		Application.LoadLevel ("Options");
-	}
-
-	public void loadLearningMode() {
-		Application.LoadLevel ("LearningMode");
-	}
-
-	public void loadPauseScreen () {
-		Application.LoadLevel ("PauseMenu");
-	}
-*/
 }

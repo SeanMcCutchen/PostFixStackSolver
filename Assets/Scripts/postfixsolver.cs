@@ -58,5 +58,5 @@ public class postfixsolver : MonoBehaviour {
                 }
 		int answer = eval.Pop();
 		return answer;
-}
+	}
 }
