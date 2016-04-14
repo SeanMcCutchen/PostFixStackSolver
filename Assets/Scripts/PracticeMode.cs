@@ -59,7 +59,7 @@ public class PracticeMode : MonoBehaviour {
 		postfixString.text = postfix;
 		infixString.text ="Infix String: " + expr [probindex];
 		if(isdone!=true)
-			currvalue.text = test [curr];
+			currvalue.text = "Current Value: " + test [curr];
 		if (isdone == true) {
 			
 			check2.gameObject.SetActive(true);
