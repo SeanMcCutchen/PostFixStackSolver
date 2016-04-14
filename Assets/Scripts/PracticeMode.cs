@@ -49,9 +49,9 @@ public class PracticeMode : MonoBehaviour {
 	public Button applyOP;
 	public Button append;
 	
-	double temp1;
-	double temp2;
-	double temp3;
+	int temp1;
+	int temp2;
+	int temp3;
 	bool isdone = false;
 	bool check = false;
 	int curr = 0;
@@ -166,40 +166,40 @@ public class PracticeMode : MonoBehaviour {
 			applyOP.gameObject.SetActive (false);
 		}
 	}
-/*
+
 	public void applyOperation() {
-		if (postfix [curr] = "+") {
-			temp2 = m.pop ();
-			temp1 = m.pop ();
+		if (postfix [curr] == '+') {
+			temp2 = System.Int32.Parse(m.pop ());
+			temp1 = System.Int32.Parse(m.pop ());
 			temp3 = temp1 + temp2;
 			m.push (temp3.ToString());
 		}
-		else if (postfix [curr] == "-") {
-			temp2 = m.pop ();
-			temp1 = m.pop ();
+		else if (postfix [curr] == '-') {
+			temp2 = System.Int32.Parse(m.pop ());
+			temp1 = System.Int32.Parse(m.pop ());
 			temp3 = temp1 - temp2;
 			m.push (temp3.ToString());
 		}
-		else if (postfix [curr] == "*") {
-			temp2 = m.pop ();
-			temp1 = m.pop ();
+		else if (postfix [curr] == '*') {
+			temp2 = System.Int32.Parse(m.pop ());
+			temp1 = System.Int32.Parse(m.pop ());
 			temp3 = temp1 * temp2;
 			m.push (temp3.ToString());
 		}
-		else if (postfix [curr] == "/") {
-			temp2 = m.pop ();
-			temp1 = m.pop ();
+		else if (postfix [curr] == '/') {
+			temp2 = System.Int32.Parse(m.pop ());
+			temp1 = System.Int32.Parse(m.pop ());
 			temp3 = temp1 / temp2;
 			m.push (temp3.ToString());
 		}
-		else if (postfix [curr] == "^") {
-			temp2 = m.pop ();
-			temp1 = m.pop ();
-			temp3 = Math.Pow (temp1,temp2);
+		else if (postfix [curr] == '^') {
+			temp2 = System.Int32.Parse(m.pop ());
+			temp1 = System.Int32.Parse(m.pop ());
+			temp3 = (int)Math.Pow (temp1,temp2);
 			m.push (temp3.ToString());
 		}
 	}
-*/
+
 
 	public void reset() {
 		curr = 0;
