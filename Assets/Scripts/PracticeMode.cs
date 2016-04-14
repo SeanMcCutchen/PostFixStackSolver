@@ -158,8 +158,13 @@ public class PracticeMode : MonoBehaviour {
 		
 	}
 	public void toggle() {
-		append.gameObject.SetActive(false);
-		applyOP.gameObject.SetActive(true);
+		if (check) {
+			append.gameObject.SetActive (false);
+			applyOP.gameObject.SetActive (true);
+		} else {
+			append.gameObject.SetActive (true);
+			applyOP.gameObject.SetActive (false);
+		}
 	}
 /*
 	public void applyOperation() {
