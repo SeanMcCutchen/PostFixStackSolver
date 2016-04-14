@@ -46,7 +46,12 @@ public class PracticeMode : MonoBehaviour {
 	String popped;
 	public Button check1;
 	public Button check2;
+	public Button applyOP;
 	public Button append;
+
+	double temp1;
+	double temp2;
+	double temp3;
 	bool isdone = false;
 	bool check = false;
 	int curr = 0;
@@ -55,6 +60,7 @@ public class PracticeMode : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		test = expr [probindex].Split (' ');
+		applyOP.gameObject.SetActive(false);
 		//check2.gameObject.SetActive(false);
 	}
 
@@ -144,12 +150,51 @@ public class PracticeMode : MonoBehaviour {
 			infixString.text = "Postfix String: " + postfix;
 			postfixString.text = "";
 			currvalue.text = "";
+			test = postfix.Split (' ');
 			validity.text = "Correct postfix expression!";
 		}
 		else
 			validity.text = "Incorrect postfix expression";
 
 	}
+	public void toggle() {
+		append.gameObject.SetActive(false);
+		applyOP.gameObject.SetActive(true);
+	}
+/*
+	public void applyOperation() {
+		if (postfix [curr] = "+") {
+			temp2 = m.pop ();
+			temp1 = m.pop ();
+			temp3 = temp1 + temp2;
+			m.push (temp3.ToString());
+		}
+		else if (postfix [curr] == "-") {
+			temp2 = m.pop ();
+			temp1 = m.pop ();
+			temp3 = temp1 - temp2;
+			m.push (temp3.ToString());
+		}
+		else if (postfix [curr] == "*") {
+			temp2 = m.pop ();
+			temp1 = m.pop ();
+			temp3 = temp1 * temp2;
+			m.push (temp3.ToString());
+		}
+		else if (postfix [curr] == "/") {
+			temp2 = m.pop ();
+			temp1 = m.pop ();
+			temp3 = temp1 / temp2;
+			m.push (temp3.ToString());
+		}
+		else if (postfix [curr] == "^") {
+			temp2 = m.pop ();
+			temp1 = m.pop ();
+			temp3 = Math.Pow (temp1,temp2);
+			m.push (temp3.ToString());
+		}
+	}
+*/
 	void OnGUI () {
 		GUIStyle style = new GUIStyle (GUI.skin.button);
 		style.fontSize = 24;
