@@ -55,7 +55,7 @@ public class PracticeMode : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		test = expr [probindex].Split (' ');
-		check2.gameObject.SetActive(false);
+		//check2.gameObject.SetActive(false);
 	}
 
 	
