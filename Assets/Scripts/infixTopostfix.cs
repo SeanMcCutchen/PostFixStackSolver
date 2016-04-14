@@ -2,14 +2,17 @@
 using System.Collections;
 using System.Text;
 
-	class infixTopostfix
-	{
-		public infixTopostfix(string strTemp)
-		{
-			strInput = strTemp;
-		}
+using UnityEngine;
 
-		private int isOperand(char  chrTemp)
+
+public class  infixTopostfix : MonoBehaviour{
+	public void test ()
+	{
+		Debug.Log(createPrefix("(6+42)/2+(3^2)"));
+	}
+	private string strResult = "";
+
+	private int isOperand(char chrTemp)
 		{
 			char[] op = new char[6] { '*', '/', '+', '-', '^', '(' };
 			foreach(char chr in op)
@@ -19,7 +22,7 @@ using System.Text;
 				}
 			return 0;
 		}
-		private int isOperator(char chrTemp)
+	private int isOperator(char chrTemp)
 		{
 			char[] op = new char[5] { '*', '/', '+', '-', '^' };
 			foreach (char chr in op)
@@ -30,9 +33,8 @@ using System.Text;
 			return 0;
 		}
 
-		private string strResualt = "";
-		private string strInput = "";
-		public string createPrifex()
+
+	public string createPrefix(string strInput)
 		{
 			int intCheck = 0;
 			//int intStackCount = 0;
@@ -41,44 +43,46 @@ using System.Text;
 			{
 				intCheck = isOperand(strInput[intNextToken]);
 				if (intCheck == 1)
-					stkOperatore.Push(strInput[intNextToken]);
+					stkOperator.Push(strInput[intNextToken]);
 				else
 					if (strInput[intNextToken] == ')')
 					{
-						int c = stkOperatore.Count;
+						int c = stkOperator.Count;
 						for (int intStackCount = 0; intStackCount <= c-1; intStackCount++)
 						{
-							objStck = stkOperatore.Pop();
+							objStck = stkOperator.Pop();
 							intCheck = isOperator(char.Parse(objStck.ToString()));
 							if (intCheck == 1)
 							{
-								strResualt += objStck.ToString();
+								strResult += objStck.ToString();
 							}
 						}//end of for(int intStackCount...)
 					}
 					else
-						strResualt += strInput[intNextToken];
+						strResult += strInput[intNextToken];
 
 			}//end of for(int intNextToken...)
-			int intCount = stkOperatore.Count;
+			int intCount = stkOperator.Count;
 			if (intCount > 0)
 			{
-				int c = stkOperatore.Count;
+				int c = stkOperator.Count;
 				for (int intStackCount = 0; intStackCount <= c-1 ; intStackCount++)
 				{
-					objStck = stkOperatore.Pop();
+					objStck = stkOperator.Pop();
 					intCheck = isOperator(char.Parse(objStck.ToString()));
 					if (intCheck == 1)
 					{
-						strResualt += objStck.ToString();
+					strResult += objStck.ToString();
 					}
 				}//end of for(int intStackCount...)
 			}
 
-			return strResualt;
+	
+
+			 return string.Join(" ", Array.ConvertAll(strResult.ToCharArray(), c => c.ToString()));
 		}
 
-		private Stack stkOperatore = new Stack();
+		private Stack stkOperator = new Stack();
 
 	}
 
