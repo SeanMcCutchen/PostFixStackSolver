@@ -5,10 +5,10 @@ using UnityEngine.UI;
 using System;
 using System.Text;
 public class PracticeMode : MonoBehaviour {
-
+	
 	//var expr = new List<Type>();
-
-
+	
+	
 	List<string> expr = new List<string>{"1 + ( 52 - 34 ) ", "[ ( 5 + 7 ) * ( 23 - 5 ) ]", "100 / ( 5 * 4 ) ","[ ( 2 ^ 3 ) - 8 ]"
 		, "5 * 8 - 8 / 4", "( 55 / 5 + 27 ) + 5 ^ 2", "55 / 5 - 10", "[1 + ( 5 * 8 - 10 ) / 6 ] "
 		, "[ ( 5 ^ 3 ^ 2 ) / ( 100 - 19 * 5 ) ]", "( 3 ^ 2 ^ 3 ) ",
@@ -37,7 +37,7 @@ public class PracticeMode : MonoBehaviour {
 	public Text postfixString;
 	public Text currvalue;
 	public Text validity;
-
+	
 	private int probindex =0; 
 	List<Rect> rects = new List<Rect>();
 	//List<string> pops = new List<string> ();
@@ -48,7 +48,7 @@ public class PracticeMode : MonoBehaviour {
 	public Button check2;
 	public Button applyOP;
 	public Button append;
-
+	
 	double temp1;
 	double temp2;
 	double temp3;
@@ -63,7 +63,7 @@ public class PracticeMode : MonoBehaviour {
 		applyOP.gameObject.SetActive(false);
 		//check2.gameObject.SetActive(false);
 	}
-
+	
 	
 	// Update is called once per frame
 	void Update () {
@@ -78,15 +78,15 @@ public class PracticeMode : MonoBehaviour {
 			check2.gameObject.SetActive(true);
 			check1.gameObject.SetActive(false);
 			append.gameObject.SetActive(false);
-
-
+			
+			
 		}
 		if (curr == test.Length - 1) {
 			theiranswer = postfix;
 			m = new MyStack ();
 			isdone = true;
 		}
-	
+		
 		if (rects.Count < m.size () ) {
 			// Update other rectangles
 			for (int i = 0; i < rects.Count; ++i) {
@@ -107,7 +107,7 @@ public class PracticeMode : MonoBehaviour {
 			rects.RemoveAt(rects.Count-1);
 			//Debug.Log ("removing rect");
 		}
-
+		
 	}
 	int postcurr = 0;
 	public void pushToStack ()
@@ -121,8 +121,8 @@ public class PracticeMode : MonoBehaviour {
 			m.push (test [curr]);
 			curr++;
 		} 
-
-
+		
+		
 		
 	}
 	public void appendToString()
@@ -132,15 +132,15 @@ public class PracticeMode : MonoBehaviour {
 			curr++;
 		}
 	}
-
+	
 	public void popStack()
 	{
 		if (m.isEmpty() == false)
 			popped = m.pop();
-			if(popped != "(" && popped != "[" && popped != ")" && popped != "]")
+		if(popped != "(" && popped != "[" && popped != ")" && popped != "]")
 			postfix = string.Concat (postfix,  popped + " " );
 	}
-
+	
 	public void checkpostfix() {
 		Debug.Log (postfix);
 		Debug.Log (postfixes [currFix]);
@@ -155,7 +155,7 @@ public class PracticeMode : MonoBehaviour {
 		}
 		else
 			validity.text = "Incorrect postfix expression";
-
+		
 	}
 	public void toggle() {
 		append.gameObject.SetActive(false);
@@ -195,6 +195,12 @@ public class PracticeMode : MonoBehaviour {
 		}
 	}
 */
+
+	public void reset() {
+		curr = 0;
+		m = new MyStack ();
+		postfix = "";
+	}
 	void OnGUI () {
 		GUIStyle style = new GUIStyle (GUI.skin.button);
 		style.fontSize = 24;
@@ -203,7 +209,7 @@ public class PracticeMode : MonoBehaviour {
 				GUI.contentColor = Color.green;
 				GUI.Box (rects [i], m.getAt (i) + "", style);
 			}		
-
+			
 			
 		} else if (m.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
@@ -212,8 +218,8 @@ public class PracticeMode : MonoBehaviour {
 			}		
 		}
 	}
-			
-		
 	
-
+	
+	
+	
 }
