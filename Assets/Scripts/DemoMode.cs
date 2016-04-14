@@ -87,7 +87,7 @@ public class DemoMode : MonoBehaviour {
 				temp.y += 60;
 				garbage[i] = temp;
 			}
-			garbage.Add (new Rect (850, 70, 100, 50));
+			garbage.Add (new Rect (1400, 70, 100, 50));
 			//Debug.Log ("adding rect");
 			
 			
