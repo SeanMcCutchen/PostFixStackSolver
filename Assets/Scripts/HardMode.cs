@@ -32,6 +32,7 @@ public class HardMode : MonoBehaviour {
 	public Button nButton;
 	public Text hint;
 	public Text exprDisplay;
+	public Image table;
 
 	char [] prob3;
 	
@@ -40,6 +41,7 @@ public class HardMode : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+		table.gameObject.SetActive (false);
 		evaluate = true;
 		problem1 = "[2*(6/2)+(3^2)]";
 		problem2 = "[(2+4)+3*(4/2)";
@@ -269,6 +271,7 @@ public class HardMode : MonoBehaviour {
 			valueHard.text = "Current value: 1";
 			helperHard.text = "Operand, pushing to stack. Remaining expression: 2 3 2 ^ ^ 4 / +";
 			hint.text = "When evaluating, always push operands to stack";
+			table.gameObject.SetActive (false);
 			m.push("1");
 			x++;
 			break;
