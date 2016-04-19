@@ -49,10 +49,11 @@ public class PracticeMode : MonoBehaviour {
 	public Button applyOP;
 	public Button append;
 	public Image table;
-	
+	bool bracket, build, eval,isvalid; 
 	int temp1;
 	int temp2;
 	int temp3;
+	int wrong;
 	bool isdone = false;
 	bool check = false;
 	int curr = 0;
@@ -134,7 +135,17 @@ public class PracticeMode : MonoBehaviour {
 			curr++;
 		}
 	}
-	
+	public void checkValid()
+	{
+		
+		if (isvalid == true)
+			wrong = -1;
+		else 
+			wrong = 1;
+		
+		
+	}
+
 	public void popStack()
 	{
 		if (m.isEmpty() == false)
@@ -218,6 +229,10 @@ public class PracticeMode : MonoBehaviour {
 	void OnGUI () {
 		GUIStyle style = new GUIStyle (GUI.skin.button);
 		style.fontSize = 24;
+		if(wrong==1)
+			GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 50), "Incorrect.");
+		if (wrong==-1)
+			GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 50), "Correct.");
 		if (m.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
