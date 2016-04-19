@@ -48,10 +48,12 @@ public class PracticeMode : MonoBehaviour {
 	public Button check2;
 	public Button applyOP;
 	public Button append;
-	
+
+	bool bracket, build, eval,isvalid; 
 	int temp1;
 	int temp2;
 	int temp3;
+	int wrong;
 	bool isdone = false;
 	bool check = false;
 	int curr = 0;
@@ -61,12 +63,16 @@ public class PracticeMode : MonoBehaviour {
 	void Start () {
 		test = expr [probindex].Split (' ');
 		applyOP.gameObject.SetActive(false);
+		wrong = 0;
 		//check2.gameObject.SetActive(false);
 	}
 	
 	
 	// Update is called once per frame
 	void Update () {
+	
+
+
 		if (check != true) {
 			postfixString.text = postfix;
 			infixString.text = "Infix String: " + expr [probindex];
@@ -125,6 +131,7 @@ public class PracticeMode : MonoBehaviour {
 		
 		
 	}
+
 	public void appendToString()
 	{
 		if (curr < test.Length) {
@@ -165,6 +172,16 @@ public class PracticeMode : MonoBehaviour {
 			append.gameObject.SetActive (true);
 			applyOP.gameObject.SetActive (false);
 		}
+	}
+	public void checkValid()
+	{
+
+		if (isvalid == true)
+			wrong = -1;
+		else 
+			wrong = 1;
+
+
 	}
 
 	public void applyOperation() {
@@ -216,6 +233,11 @@ public class PracticeMode : MonoBehaviour {
 	void OnGUI () {
 		GUIStyle style = new GUIStyle (GUI.skin.button);
 		style.fontSize = 24;
+		if(wrong==1)
+			GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 50), "Incorrect.");
+		if (wrong==-1)
+			GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 50), "Correct.");
+
 		if (m.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
