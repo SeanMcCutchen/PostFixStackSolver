@@ -456,10 +456,11 @@ MonoBehaviour:
   postfixString: {fileID: 619137862}
   currvalue: {fileID: 541878727}
   validity: {fileID: 1055648469}
-  check1: {fileID: 0}
-  check2: {fileID: 0}
+  check1: {fileID: 1742188605}
+  check2: {fileID: 786456347}
   applyOP: {fileID: 1227285935}
   append: {fileID: 1972034947}
+  table: {fileID: 0}
 --- !u!4 &350586833
 Transform:
   m_ObjectHideFlags: 0

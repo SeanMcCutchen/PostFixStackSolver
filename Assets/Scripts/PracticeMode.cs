@@ -48,6 +48,7 @@ public class PracticeMode : MonoBehaviour {
 	public Button check2;
 	public Button applyOP;
 	public Button append;
+	public Image table;
 	
 	int temp1;
 	int temp2;
@@ -59,6 +60,7 @@ public class PracticeMode : MonoBehaviour {
 	String theiranswer = "";
 	// Use this for initialization
 	void Start () {
+		table.gameObject.SetActive (false);
 		test = expr [probindex].Split (' ');
 		applyOP.gameObject.SetActive(false);
 		//check2.gameObject.SetActive(false);

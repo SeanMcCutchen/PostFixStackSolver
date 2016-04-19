@@ -1754,6 +1754,7 @@ MonoBehaviour:
   icp: {fileID: 1420086332}
   postfixString: {fileID: 91928531}
   hint: {fileID: 1506147272}
+  table: {fileID: 1295002357}
 --- !u!4 &2055165887
 Transform:
   m_ObjectHideFlags: 0
