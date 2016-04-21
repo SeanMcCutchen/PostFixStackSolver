@@ -49,7 +49,17 @@ public class PracticeMode : MonoBehaviour {
 	public Button applyOP;
 	public Button append;
 	public Image table;
-	bool bracket, build, eval,isvalid; 
+	public Button num0;
+	public Button num1;
+	public Button num2;
+	public Button num3;
+	public Button num4;
+	public Button num5;
+	public Button num6;
+	public Button num7;
+	public Button num8;
+	public Button num9;
+	bool bracket, build, eval,isvalid, numsVisible; 
 	int temp1;
 	int temp2;
 	int temp3;
@@ -64,6 +74,7 @@ public class PracticeMode : MonoBehaviour {
 		table.gameObject.SetActive (false);
 		test = expr [probindex].Split (' ');
 		applyOP.gameObject.SetActive(false);
+		numsVisible = false;
 		//check2.gameObject.SetActive(false);
 	}
 	
@@ -177,6 +188,32 @@ public class PracticeMode : MonoBehaviour {
 		} else {
 			append.gameObject.SetActive (true);
 			applyOP.gameObject.SetActive (false);
+		}
+	}
+
+	public void toggleNums() {
+		if (numsVisible) {
+			num0.gameObject.SetActive (false);
+			num1.gameObject.SetActive (false);
+			num2.gameObject.SetActive (false);
+			num3.gameObject.SetActive (false);
+			num4.gameObject.SetActive (false);
+			num5.gameObject.SetActive (false);
+			num6.gameObject.SetActive (false);
+			num7.gameObject.SetActive (false);
+			num8.gameObject.SetActive (false);
+			num9.gameObject.SetActive (false);
+		} else {
+			num0.gameObject.SetActive (true);
+			num1.gameObject.SetActive (true);
+			num2.gameObject.SetActive (true);
+			num3.gameObject.SetActive (true);
+			num4.gameObject.SetActive (true);
+			num5.gameObject.SetActive (true);
+			num6.gameObject.SetActive (true);
+			num7.gameObject.SetActive (true);
+			num8.gameObject.SetActive (true);
+			num9.gameObject.SetActive (true);
 		}
 	}
 	
