@@ -203,6 +203,7 @@ public class PracticeMode : MonoBehaviour {
 			num7.gameObject.SetActive (false);
 			num8.gameObject.SetActive (false);
 			num9.gameObject.SetActive (false);
+			numsVisible = false;
 		} else {
 			num0.gameObject.SetActive (true);
 			num1.gameObject.SetActive (true);
@@ -214,6 +215,7 @@ public class PracticeMode : MonoBehaviour {
 			num7.gameObject.SetActive (true);
 			num8.gameObject.SetActive (true);
 			num9.gameObject.SetActive (true);
+			numsVisible = true;
 		}
 	}
 	
