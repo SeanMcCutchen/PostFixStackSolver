@@ -21,6 +21,7 @@ public class DemoMode : MonoBehaviour {
 	public Text value;
 	public Text helper;
 	public Button btn;
+	public AudioSource sound;
 
 	char [] prob;
 
@@ -177,11 +178,13 @@ public class DemoMode : MonoBehaviour {
 			break;
 		case (15):
 			m.pop ();
+			sound.Play ();
 			helper.text = "Popped thed stack. Let's pop again:  )";
 			y++;
 			break;
 		case (16):
 			m.pop ();
+			sound.Play ();
 			helper.text = "Now we compare: (  )";
 			y++;
 			break;
@@ -243,11 +246,13 @@ public class DemoMode : MonoBehaviour {
 			break;
 		case (29):
 			m.pop ();
+			sound.Play ();
 			helper.text = "Popped the stack. Let's pop again:  )";
 			y++;
 			break;
 		case (30):
-			m.pop ();
+			m.pop ();		
+			sound.Play ();
 			helper.text = "Now we compare: (  )";
 			y++;
 			break;
@@ -275,11 +280,13 @@ public class DemoMode : MonoBehaviour {
 			break;
 		case (36):
 			m.pop ();
+			sound.Play ();
 			helper.text = "Popped the stack. Let's pop again:  ]";
 			y++;
 			break;
 		case (37):
 			m.pop ();
+			sound.Play ();
 			helper.text = "Now we compare: [  ]";
 			y++;
 			break;
