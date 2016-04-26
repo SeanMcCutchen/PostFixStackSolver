@@ -94,17 +94,17 @@ public class PracticeMode : MonoBehaviour {
 			// Update other rectangles
 			for (int i = 0; i < rects.Count; ++i) {
 				Rect temp = rects[i];
-				temp.y += 90;
+				temp.y += 45;
 				rects[i] = temp;
 			}
-			rects.Add (new Rect (125, 100, 150, 75));
+			rects.Add (new Rect (0,0, 75, 37));
 			//Debug.Log ("adding rect");
 
 
 		} else if (rects.Count > m.size () ) {
 			for (int i = 0; i < rects.Count; ++i) {
 				Rect temp = rects[i];
-				temp.y -= 90;
+				temp.y -= 45;
 				rects[i] = temp;
 			}
 			rects.RemoveAt(rects.Count-1);
