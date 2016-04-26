@@ -9,7 +9,7 @@ public class PracticeMode : MonoBehaviour {
 	//var expr = new List<Type>();
 
 
-	List<string> expr = new List<string>{"1 + ( 52 - 34 ) ", "[ ( 5 + 7 ) * ( 23 - 5 ) ]", "100 / ( 5 * 4 ) ","[ ( 2 ^ 3 ) - 8 ]"
+	List<string> expr = new List<string>{"1 + ( 52 - 34 )", "[ ( 5 + 7 ) * ( 23 - 5 ) ]", "100 / ( 5 * 4 ) ","[ ( 2 ^ 3 ) - 8 ]"
 		, "5 * 8 - 8 / 4", "( 55 / 5 + 27 ) + 5 ^ 2", "55 / 5 - 10", "[1 + ( 5 * 8 - 10 ) / 6 ] "
 		, "[ ( 5 ^ 3 ^ 2 ) / ( 100 - 19 * 5 ) ]", "( 3 ^ 2 ^ 3 ) ",
 		"50 - ( 3 + 7 * 4 / 2 ) ", "[ ( 5 ^ 2 ) / 5 ] ", 
@@ -44,16 +44,10 @@ public class PracticeMode : MonoBehaviour {
 	String postfix;
 	String [] test;
 	String popped;
-	public Button check1;
-	public Button check2;
-	public Button applyOP;
-	public Button append;
+	public Button check1,check2,applyOP,append;
 	public Image table;
-	bool bracket, build, eval,isvalid; 
-	int temp1;
-	int temp2;
-	int temp3;
-	int wrong;
+	bool bracket, build, eval,isvalid, canpop; 
+	int temp1,temp2,temp3,wrong, isp, theirisp;
 	bool isdone = false;
 	bool check = false;
 	int curr = 0;
@@ -128,6 +122,46 @@ public class PracticeMode : MonoBehaviour {
 
 
 	}
+	public void checkISP()
+	{
+		switch (test [curr]) {
+		case("+"):
+			isp = 2;
+			break;
+		case("-"):
+			isp = 2;
+			break;
+		case("*"):
+			isp = 4;
+			break;
+		case("/"):
+			isp = 4;
+			break;
+		case("^"):
+			isp = 5;
+			break;
+		case("("):
+			isp = 0;
+			break;
+		case("{"):
+			isp = 0;
+			break;	
+		case("["):
+			isp = 0;
+			break;
+		default:
+			isp = 0;
+			break;
+		}
+		if (theirisp != isp) {
+			wrong = 1;
+			reset ();
+		} else
+			wrong = -1;
+
+
+	}
+
 	public void appendToString()
 	{
 		if (curr < test.Length) {
@@ -148,7 +182,22 @@ public class PracticeMode : MonoBehaviour {
 
 	public void popStack()
 	{
-		if (m.isEmpty() == false)
+		if (m.peek() == "]")
+		if (m.getAt (m.size() - 2) != "[") {
+			canpop = false;
+			validity.text = "Brackets don't match up";
+		}
+		if (m.peek() == ")")
+		if (m.getAt (m.size() - 2) != "(") {
+			canpop = false;
+			validity.text = "Brackets don't match up";
+		}
+		if (m.peek ()== "}")
+		if (m.getAt (m.size() - 2) != "{") {
+			canpop = false;
+			validity.text = "Brackets don't match up";
+		}
+		if (m.isEmpty() == false&&canpop==true)
 			popped = m.pop();
 		if(popped != "(" && popped != "[" && popped != ")" && popped != "]")
 			postfix = string.Concat (postfix,  popped + " " );

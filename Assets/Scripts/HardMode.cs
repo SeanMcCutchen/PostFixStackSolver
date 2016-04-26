@@ -6,7 +6,7 @@ using System;
 using System.Text;
 
 public class HardMode : MonoBehaviour {
-	
+
 	static string problem1,problem2, problem3 ,problem4;
 	MyStack m = new MyStack ();
 	MyStack t = new MyStack ();
@@ -19,7 +19,7 @@ public class HardMode : MonoBehaviour {
 	int x = 0;
 	int y = 0;
 	int z = 0;
-	int ispnum = -1;
+	int ispnum;
 	int icpnum = 0;
 	bool evaluate;
 	public Text txtHard;
@@ -33,9 +33,11 @@ public class HardMode : MonoBehaviour {
 	public Text hint;
 	public Text exprDisplay;
 	public Image table;
+	public AudioSource sound;
+
 
 	char [] prob3;
-	
+
 	bool which;
 	int countop,countcp,countobr, countcbr;
 	// Use this for initialization
@@ -49,22 +51,22 @@ public class HardMode : MonoBehaviour {
 		problem4 = "[8-(3+1)]";
 		prob3 = problem3.ToCharArray ();
 		txtHard.text = "Infix Expression: " + problem3;
-		
-		
-		
+
+
+
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-	/*	if (evaluate) {
+		if (evaluate) {
 			isp.text = "In Stack Priority : " + ispnum;
 			icp.text = "Incoming Priority : " + icpnum;
 		} else {
 			isp.text = "";
 			icp.text = "";
-			postfixString.text = "";
+			//postfixString.text = "";
 		}
-*/
+
 		// Rectangle needs to be added
 		if (rects.Count < m.size () ) {
 			// Update other rectangles
@@ -75,8 +77,8 @@ public class HardMode : MonoBehaviour {
 			}
 			rects.Add (new Rect (125, 100, 150, 75));
 			//Debug.Log ("adding rect");
-			
-			
+
+
 		} else if (rects.Count > m.size () ) {
 			for (int i = 0; i < rects.Count; ++i) {
 				Rect temp = rects[i];
@@ -86,10 +88,10 @@ public class HardMode : MonoBehaviour {
 			rects.RemoveAt(rects.Count-1);
 			//Debug.Log ("removing rect");
 		}
-		
-		
+
+
 	}
-	
+
 	void OnGUI () {
 		GUIStyle style = new GUIStyle (GUI.skin.button);
 		style.fontSize = 24;
@@ -97,19 +99,19 @@ public class HardMode : MonoBehaviour {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
 				GUI.Box (rects [i], m.getAt (i)+"",style);
-			}		
+			}        
 			for (int x = 0; x < garbage.Count; ++x) {
 				GUI.contentColor = Color.red;
 				GUI.Box (garbage[x], t.getAt (x)+"",style);
 			}
-			
+
 		}
-		
+
 		else if (m.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
 				GUI.Box (rects [i], m.getAt (i)+"",style);
-			}		
+			}        
 		}
 		else if (t.size () > 0) {
 			for (int x = 0; x < garbage.Count; ++x) {
@@ -117,8 +119,8 @@ public class HardMode : MonoBehaviour {
 				GUI.Box (garbage[x], t.getAt (x)+"",style);
 			}
 		}
-		
-	
+
+
 	}
 
 	public void bracketDemo(){
@@ -133,6 +135,7 @@ public class HardMode : MonoBehaviour {
 			break;
 		case (1):
 			icpnum=7;
+			ispnum = 0;
 			m.push ("[");
 			helperHard.text = "Pushed scope opener to stack";
 			y++;
@@ -140,6 +143,7 @@ public class HardMode : MonoBehaviour {
 			break;
 		case (2):
 			ispnum=0;
+			evaluate = false;
 			helperHard.text = "Operand, appending to postfix string: 1";
 			valueHard.text = "Current value: 1 ";
 			hint.text = "Hint: Always append operands to postfix string";
@@ -154,6 +158,7 @@ public class HardMode : MonoBehaviour {
 			break;
 		case (4):
 			icpnum=1;
+			evaluate = true;
 			helperHard.text = "Operator, pushing to stack";
 			valueHard.text = "Current value: + ";
 			hint.text = "Hint: Incoming priority greater than instack priority";
@@ -180,6 +185,7 @@ public class HardMode : MonoBehaviour {
 			x++;
 			break;
 		case (8):
+			evaluate = false;
 			helperHard.text = "Operand, appending to postfix string";
 			valueHard.text = "Current value: 2 ";
 			hint.text = "Hint: Always append operands to postfix string";
@@ -194,6 +200,7 @@ public class HardMode : MonoBehaviour {
 		case (10):
 			ispnum=0;
 			icpnum=6;
+			evaluate = true;
 			helperHard.text = "Operator, pushing to stack";
 			valueHard.text = "Current value: ^ ";
 			hint.text = "Hint: Incoming priority greater than instack priority";
@@ -208,7 +215,9 @@ public class HardMode : MonoBehaviour {
 			x++;
 			break;
 		case (12):
+			evaluate = false;
 			helperHard.text = "Operand, appending to postfix string";
+			ispnum =5;
 			valueHard.text = "Current value: 3 ";
 			hint.text = "Hint: Always append operands to postfix string";
 			y++;
@@ -220,7 +229,7 @@ public class HardMode : MonoBehaviour {
 			y++;
 			break;
 		case (14):
-			ispnum=5;
+			evaluate = true;
 			icpnum=6;
 			helperHard.text = "Operator, pushing to stack";
 			valueHard.text = "Current value: ^ ";
@@ -229,11 +238,13 @@ public class HardMode : MonoBehaviour {
 			break;
 		case (15):
 			m.push ("^");
+			ispnum=5;
 			helperHard.text = "Pushed operator to stack";
 			y++;
 			x++;
 			break;
 		case (16):
+			evaluate = false;
 			helperHard.text = "Operand, appending to postfix string";
 			valueHard.text = "Current value: 2 ";
 			y++;
@@ -252,8 +263,8 @@ public class HardMode : MonoBehaviour {
 			y++;
 			break;
 		case (19):
-			helperHard.text = "Pushing a scope closer, popping the stack until matching scope opener is found";
 			m.pop ();
+			sound.Play ();
 			valueHard.text = "Current value: ) ";
 			helperHard.text = "Adding operators to postfix string: 1 2 3 2 ^ ^";
 			postfixString.text = "Postfix: 1 2 3 2 ^ ^";
@@ -261,8 +272,8 @@ public class HardMode : MonoBehaviour {
 			y++;
 			break;
 		case (20):
-			helperHard.text = "Pushing a scope closer, popping the stack until matching scope opener is found";
 			m.pop ();
+			sound.Play ();
 			valueHard.text = "Current value: ^ ";
 			helperHard.text = "Adding operator to postfix string";
 			postfixString.text = "Postfix: 1 2 3 2 ^";
@@ -270,8 +281,8 @@ public class HardMode : MonoBehaviour {
 			y++;
 			break;
 		case (21):
-			helperHard.text = "Pushing a scope closer, popping the stack until matching scope opener is found";
 			m.pop ();
+			sound.Play ();
 			valueHard.text = "Current value: ^ ";
 			helperHard.text = "Adding operators to postfix string";
 			postfixString.text = "Postfix: 1 2 3 2 ^ ^";
@@ -279,8 +290,8 @@ public class HardMode : MonoBehaviour {
 			y++;
 			break;
 		case (22):
-			helperHard.text = "Pushing a scope closer, popping the stack until matching scope opener is found";
 			m.pop ();
+			sound.Play ();
 			valueHard.text = "Current value: ( ";
 			helperHard.text = "Found matching bracket";
 			postfixString.text = "Postfix: 1 2 3 2 ^ ^";
@@ -290,6 +301,7 @@ public class HardMode : MonoBehaviour {
 			break;
 		case (23):
 			icpnum=3;
+			evaluate = true;
 			helperHard.text = "Operator, pushing to stack";
 			valueHard.text = "Current value: / ";
 			hint.text = "Hint: Incoming priority greater than instack priority";
@@ -303,6 +315,7 @@ public class HardMode : MonoBehaviour {
 			x++;
 			break;
 		case (25):
+			evaluate = false;
 			ispnum=4;
 			helperHard.text = "Operand, appending to postfix string";
 			valueHard.text = "Current value: 4 ";
@@ -326,7 +339,7 @@ public class HardMode : MonoBehaviour {
 			break;
 		case (28):
 			m.pop ();
-			helperHard.text = "Popping the stack";
+			sound.Play ();
 			helperHard.text = "Popping the rest of the stack, appending operands to postfix string";
 			valueHard.text = "Current value: ] ";
 			hint.text = "Pop stack until you find matching brackets, append stack elements to postfix string";
@@ -334,7 +347,7 @@ public class HardMode : MonoBehaviour {
 			break;
 		case (29):
 			m.pop ();
-			helperHard.text = "Popping the stack";
+			sound.Play ();
 			helperHard.text = "Popping the rest of the stack, appending operands to postfix string";
 			valueHard.text = "Current value: / ";
 			postfixString.text = "Postfix: 1 2 3 2 ^ ^ 4 /";
@@ -343,7 +356,7 @@ public class HardMode : MonoBehaviour {
 			break;
 		case (30):
 			m.pop ();
-			helperHard.text = "Popping the stack";
+			sound.Play ();
 			helperHard.text = "Popping the rest of the stack, appending operands to postfix string";
 			valueHard.text = "Current value: + ";
 			postfixString.text = "Postfix: 1 2 3 2 ^ ^ 4 / +";
@@ -352,7 +365,7 @@ public class HardMode : MonoBehaviour {
 			break;
 		case (31):
 			m.pop ();
-			helperHard.text = "Popping the stack, matching bracket found";
+			sound.Play ();    
 			helperHard.text = "Popping the rest of the stack, appending operands to postfix string";
 			valueHard.text = "Current value: [ ";
 			hint.text = "Matching bracket found, postfix expression has been formed";
@@ -367,6 +380,7 @@ public class HardMode : MonoBehaviour {
 			valueHard.text = "";
 			hint.text = "";
 			t = new MyStack();
+			y++;
 			x++;
 			break;
 		case (33):
@@ -374,6 +388,7 @@ public class HardMode : MonoBehaviour {
 			helperHard.text = "Let's now evaluate our postfix expression";
 			evaluate = false;
 			m = new MyStack();
+			y++;
 			x++;
 			break;
 		case (34):
@@ -438,6 +453,7 @@ public class HardMode : MonoBehaviour {
 			valueHard.text = "Current value: 2";
 			hint.text = "When evaluating, operators cause the stack to pop twice. Put the first element on the right of the expression, the second on the left";
 			m.pop ();
+			sound.Play ();
 			y++;
 			break;
 		case (44):
@@ -445,6 +461,7 @@ public class HardMode : MonoBehaviour {
 			valueHard.text = "Current value: 3";
 			hint.text = "When evaluating, operators cause the stack to pop twice. Put the first element on the right of the expression, the second on the left";
 			m.pop ();
+			sound.Play ();
 			y++;
 			break;
 		case (45):
@@ -461,18 +478,18 @@ public class HardMode : MonoBehaviour {
 			break;
 		case (47):
 			helperHard.text = "Operator, popping stack twice.";
-			m.pop();
-			m.pop();
 			y++;
 			break;
 		case (48):
 			helperHard.text = "Popped stack:__ ^ 9";
 			m.pop();
+			sound.Play ();
 			y++;
 			break;
 		case (49):
 			helperHard.text = "Popped stack: 2 ^ 9";
 			m.pop();
+			sound.Play ();
 			y++;
 			break;
 		case (50):
@@ -509,6 +526,7 @@ public class HardMode : MonoBehaviour {
 		case (55):
 			helperHard.text = "Popped stack: __ / 4";
 			m.pop ();
+			sound.Play ();
 			valueHard.text = "Current value: 4";
 			hint.text = "When evaluating, operators cause the stack to pop twice. Put the first element on the right of the expression, the second on the left";
 			y++;
@@ -516,6 +534,7 @@ public class HardMode : MonoBehaviour {
 		case (56):
 			helperHard.text = "Popped stack: 512 / 4";
 			m.pop ();
+			sound.Play ();
 			valueHard.text = "Current value: 512";
 			hint.text = "When evaluating, operators cause the stack to pop twice. Put the first element on the right of the expression, the second on the left";
 			y++;
@@ -541,12 +560,14 @@ public class HardMode : MonoBehaviour {
 			helperHard.text = "Popped stack: __ + 1";
 			valueHard.text = "Current value: 1";
 			m.pop();
+			sound.Play ();
 			y++;
 			break;
 		case (61):
 			helperHard.text = "Popped stack: 128 + 1";
 			valueHard.text = "Current value: +128";
 			m.pop();
+			sound.Play ();
 			y++;
 			break;
 		case (62):
@@ -560,13 +581,13 @@ public class HardMode : MonoBehaviour {
 		default:
 			break;
 
-			
+
 		}
 
-		
-		
-		
+
+
+
 	}
 
-	
+
 }
