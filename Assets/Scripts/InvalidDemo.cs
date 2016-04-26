@@ -16,6 +16,7 @@ public class InvalidDemo: MonoBehaviour {
 	List<Rect> garbage = new List<Rect>();
 	string numbers = "0123456789";
 	string expressions = "+-/*^()[]";
+	int t;
 	int x = 0;
 	int y = 0;
 	int z = 0;
