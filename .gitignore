@@ -63,6 +63,7 @@ Library/AssetServerCacheV3
 Library/AssetServerCacheV3
 *.stamp
 Library/assetDatabase3
+buildDay/
 ProjectSettings/ProjectSettings.asset
 Library/ScriptMapper
 Library/assetDatabase3
