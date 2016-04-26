@@ -9,7 +9,7 @@ public class PracticeMode : MonoBehaviour {
 	//var expr = new List<Type>();
 
 
-	List<string> expr = new List<string>{"1 + ( 52 - 34 )", "[ ( 5 + 7 ) * ( 23 - 5 ) ]", "100 / ( 5 * 4 ) ","[ ( 2 ^ 3 ) - 8 ]"
+	List<string> expr = new List<string>{"{ }", "[ ( 5 + 7 ) * ( 23 - 5 ) ]", "100 / ( 5 * 4 ) ","[ ( 2 ^ 3 ) - 8 ]"
 		, "5 * 8 - 8 / 4", "( 55 / 5 + 27 ) + 5 ^ 2", "55 / 5 - 10", "[1 + ( 5 * 8 - 10 ) / 6 ] "
 		, "[ ( 5 ^ 3 ^ 2 ) / ( 100 - 19 * 5 ) ]", "( 3 ^ 2 ^ 3 ) ",
 		"50 - ( 3 + 7 * 4 / 2 ) ", "[ ( 5 ^ 2 ) / 5 ] ", 
@@ -69,7 +69,7 @@ public class PracticeMode : MonoBehaviour {
 			postfixString.text = postfix;
 			infixString.text = "Infix String: " + expr [probindex];
 		}
-		if(isdone!=true && check != true)
+		if(isdone!=true && check != true&& curr<test.Length)
 			currvalue.text = "Current Value: " + test [curr];
 		if (isdone == true) {
 
