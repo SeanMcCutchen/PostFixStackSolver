@@ -34,6 +34,7 @@ public class EasyMode : MonoBehaviour {
 	public Text icp;
 	public Text postfixString;
 	public Text hint;
+	public Image table;
 
 	char [] prob2;
 	bool which;
@@ -41,6 +42,7 @@ public class EasyMode : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+		table.gameObject.SetActive (false);
 		evaluate = true;
 		problem1 = "[2*(6/2)+(3^2)]";
 		problem2 = "[(2+4)+3*(4/2)";
@@ -265,6 +267,7 @@ public class EasyMode : MonoBehaviour {
 			helperEasy.text = "Operand, pushing to stack. Remaining expression: 3 1 + -";
 			valueEasy.text = "Current Value: 8";
 			buttonText.text = "Next Step";
+			table.gameObject.SetActive (false);
 			m.push("8");
 			x++; 
 			break;

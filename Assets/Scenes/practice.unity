@@ -456,10 +456,11 @@ MonoBehaviour:
   postfixString: {fileID: 619137862}
   currvalue: {fileID: 541878727}
   validity: {fileID: 1055648469}
-  check1: {fileID: 0}
-  check2: {fileID: 0}
+  check1: {fileID: 1742188605}
+  check2: {fileID: 786456347}
   applyOP: {fileID: 1227285935}
   append: {fileID: 1972034947}
+  table: {fileID: 0}
 --- !u!4 &350586833
 Transform:
   m_ObjectHideFlags: 0
@@ -1009,7 +1010,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 350586832}
-        m_MethodName: popStack
+        m_MethodName: checkValid
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1648,7 +1649,7 @@ RectTransform:
   m_RootOrder: 11
   m_AnchorMin: {x: 0.5866632, y: 0.279}
   m_AnchorMax: {x: 0.5866632, y: 0.279}
-  m_AnchoredPosition: {x: 23.587036, y: 9.001984}
+  m_AnchoredPosition: {x: 23.586983, y: -49.98001}
   m_SizeDelta: {x: 160, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1227285933

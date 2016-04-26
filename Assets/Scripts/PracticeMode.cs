@@ -48,10 +48,12 @@ public class PracticeMode : MonoBehaviour {
 	public Button check2;
 	public Button applyOP;
 	public Button append;
-	
+	public Image table;
+	bool bracket, build, eval,isvalid; 
 	int temp1;
 	int temp2;
 	int temp3;
+	int wrong;
 	bool isdone = false;
 	bool check = false;
 	int curr = 0;
@@ -59,6 +61,7 @@ public class PracticeMode : MonoBehaviour {
 	String theiranswer = "";
 	// Use this for initialization
 	void Start () {
+		table.gameObject.SetActive (false);
 		test = expr [probindex].Split (' ');
 		applyOP.gameObject.SetActive(false);
 		//check2.gameObject.SetActive(false);
@@ -132,7 +135,17 @@ public class PracticeMode : MonoBehaviour {
 			curr++;
 		}
 	}
-	
+	public void checkValid()
+	{
+		
+		if (isvalid == true)
+			wrong = -1;
+		else 
+			wrong = 1;
+		
+		
+	}
+
 	public void popStack()
 	{
 		if (m.isEmpty() == false)
@@ -166,7 +179,7 @@ public class PracticeMode : MonoBehaviour {
 			applyOP.gameObject.SetActive (false);
 		}
 	}
-
+	
 	public void applyOperation() {
 		if (postfix [curr] == '+') {
 			temp2 = System.Int32.Parse(m.pop ());
@@ -199,14 +212,14 @@ public class PracticeMode : MonoBehaviour {
 			m.push (temp3.ToString());
 		}
 	}
-
-
+	
+	
 	public void reset() {
 		curr = 0;
 		m = new MyStack ();
 		postfix = "";
 	}
-
+	
 	public void loadnextProb() {
 		curr = 0;
 		probindex++;
@@ -216,6 +229,10 @@ public class PracticeMode : MonoBehaviour {
 	void OnGUI () {
 		GUIStyle style = new GUIStyle (GUI.skin.button);
 		style.fontSize = 24;
+		if(wrong==1)
+			GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 50), "Incorrect.");
+		if (wrong==-1)
+			GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 50), "Correct.");
 		if (m.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;

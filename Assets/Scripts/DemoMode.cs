@@ -9,11 +9,9 @@ public class DemoMode : MonoBehaviour {
 	
 	static string problem1,problem2, problem3 ,problem4;
 	MyStack m = new MyStack ();
-	MyStack t = new MyStack ();
 	//Stack<char> main = new Stack<char>();
 	//Stack<char> trash = new Stack<char>();
 	List<Rect> rects = new List<Rect>();
-	List<Rect> garbage = new List<Rect>();
 	string numbers = "0123456789";
 	string expressions = "+-/*^()[]";
 	int x = 0;
@@ -79,7 +77,7 @@ public class DemoMode : MonoBehaviour {
 			rects.RemoveAt(rects.Count-1);
 			//Debug.Log ("removing rect");
 		}
-		
+/*		
 		else if (garbage.Count < t.size () ) {
 			// Update other rectangles
 			for (int i = 0; i < garbage.Count; ++i) {
@@ -100,20 +98,16 @@ public class DemoMode : MonoBehaviour {
 			garbage.RemoveAt(garbage.Count-1);
 			//Debug.Log ("removing rect");
 		}
-		
+*/		
 	}
 	
 	void OnGUI () {
 
-		if (m.size () > 0 && t.size () > 0) {
+		if (m.size () > 0 ) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
 				GUI.Box (rects [i], m.getAt (i)+"");
 			}		
-			for (int x = 0; x < garbage.Count; ++x) {
-				GUI.contentColor = Color.red;
-				GUI.Box (garbage[x], t.getAt (x)+"");
-			}
 
 		}
 
@@ -123,14 +117,10 @@ public class DemoMode : MonoBehaviour {
 				GUI.Box (rects [i], m.getAt (i)+"");
 			}		
 		}
-		else if (t.size () > 0) {
-			for (int x = 0; x < garbage.Count; ++x) {
-				GUI.contentColor = Color.red;
-				GUI.Box (garbage[x], t.getAt (x)+"");
-			}
+
 		}
 		
-	}
+
 
 	public void bracketDemo(){
 		switch (x)
@@ -141,12 +131,10 @@ public class DemoMode : MonoBehaviour {
 			x++;
 			break;
 		case (1):
-			t.push ("2");
 			helper.text = "Number, discarding";
 			x++;
 			break;
 		case (2):
-			t.push ("*");
 			helper.text = "Operator, discarding";
 			x++;
 			break;
@@ -156,17 +144,14 @@ public class DemoMode : MonoBehaviour {
 			x++;
 			break;
 		case (4):
-			t.push ("6");
 			helper.text = "Number, discarding";
 			x++;
 			break;
 		case (5):
-			t.push ("/");
 			helper.text = "Operator, discarding";
 			x++;
 			break;
 		case (6):
-			t.push ("2");
 			helper.text = "Number, discarding";
 			x++;
 			break;
@@ -182,7 +167,6 @@ public class DemoMode : MonoBehaviour {
 
 
 		case (8):
-			t.push ("+");
 			helper.text = "Operator, discarding";
 			x++;
 			break;
@@ -192,17 +176,14 @@ public class DemoMode : MonoBehaviour {
 			x++;
 			break;
 		case (10):
-			t.push ("3");
 			helper.text = "Number, discarding";
 			x++;
 			break;
 		case (11):
-			t.push ("^");
 			helper.text = "Operator, discarding";
 			x++;
 			break;
 		case (12):
-			t.push ("2");
 			helper.text = "Number, discarding";
 			x++;
 			break;
@@ -226,7 +207,6 @@ public class DemoMode : MonoBehaviour {
 			break;
 		case (15):
 			helper.text = "Valid expression";
-			t = new MyStack();
 			btn.gameObject.SetActive(false);
 			break;
 		default:
