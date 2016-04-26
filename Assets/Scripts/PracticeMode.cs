@@ -84,6 +84,7 @@ public class PracticeMode : MonoBehaviour {
 		if (checkWhenOver == 0)
 			bracketEval = true;
 		if (checkWhenOver == 2) {
+			bracketEval = false;
 			Debug.Log ("hello");
 			switchToPostFix = true;
 			hideAllBut(new List<Button>{append,push,pop,invalid,checkPostFix,resetbtn});
@@ -98,7 +99,7 @@ public class PracticeMode : MonoBehaviour {
 			checkWhenOver = 2;
 			curr = 0;
 		}
-		if (checkWhenOver == 2&&curr == test.Length-1) {
+		if (checkWhenOver == 2&&curr == test.Length-1&&m.isEmpty()==true) {
 			foreach (Button kk in btnlist) 
 				kk.gameObject.SetActive(true);
 			checkWhenOver = 3;
@@ -148,7 +149,7 @@ public class PracticeMode : MonoBehaviour {
 				temp.y += 90;
 				rects[i] = temp;
 			}
-			rects.Add (new Rect (120,220, 150, 75));
+			rects.Add (new Rect (145,220, 150, 75));
 			//Debug.Log ("adding rect");
 
 
@@ -289,8 +290,8 @@ public class PracticeMode : MonoBehaviour {
 			validity.text = "Brackets don't match up";
 			hideAllBut (new List<Button>{invalid});
 		}
-		if (switchToPostFix == true && brackets.Contains (test [curr]) == false)
-			appendToString ();
+		if (switchToPostFix == true && brackets.Contains (m.getAt(m.getTop())) == false)
+			postfix = string.Concat (postfix, m.getAt(m.getTop()));
 		if (m.isEmpty () == false && canpop == true) {
 			popped = popS ();
 			curr++;
@@ -357,6 +358,8 @@ public class PracticeMode : MonoBehaviour {
 		m = new MyStack ();
 		postfix = "";
 		checkWhenOver = 0;
+		foreach (Button kk in btnlist) 
+			kk.gameObject.SetActive(true);
 		hideAllBut(new List<Button>{discardbtn,push,pop,invalid,resetbtn});
 	}
 
@@ -374,10 +377,7 @@ public class PracticeMode : MonoBehaviour {
 		GUIStyle style = new GUIStyle (GUI.skin.button);
 	
 		style.fontSize = 40;
-		if(wrong==1)
-			GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 50), "Incorrect.");
-		if (wrong==-1)
-			GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 50), "Correct.");
+
 		if (m.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
