@@ -59,9 +59,8 @@ public class PracticeMode : MonoBehaviour {
 	String theiranswer = "";
 	// Use this for initialization
 	void Start () {
-		table.gameObject.SetActive (false);
 		test = expr [probindex].Split (' ');
-		applyOP.gameObject.SetActive(false);
+
 		canpop = true;
 		btnlist.Add (checkPostFix);
 		btnlist.Add (checkEval);
@@ -71,7 +70,6 @@ public class PracticeMode : MonoBehaviour {
 		btnlist.Add (push);
 		btnlist.Add (invalid);
 		btnlist.Add (resetbtn);
-
 		btnlist.Add (loadn);
 		btnlist.Add (discardbtn);
 		hideAllBut(new List<Button>{discardbtn,push,pop,invalid,resetbtn});
@@ -86,6 +84,7 @@ public class PracticeMode : MonoBehaviour {
 		if (checkWhenOver == 0)
 			bracketEval = true;
 		if (checkWhenOver == 2) {
+			Debug.Log ("hello");
 			switchToPostFix = true;
 			hideAllBut(new List<Button>{append,push,pop,invalid,checkPostFix,resetbtn});
 		}
@@ -94,10 +93,14 @@ public class PracticeMode : MonoBehaviour {
 			hideAllBut(new List<Button>{push,pop,applyOP,checkEval,resetbtn,loadn});
 		}
 		if (curr == test.Length) {
+			foreach (Button kk in btnlist) 
+					kk.gameObject.SetActive(true);
 			checkWhenOver = 2;
 			curr = 0;
 		}
 		if (checkWhenOver == 2&&curr == test.Length-1) {
+			foreach (Button kk in btnlist) 
+				kk.gameObject.SetActive(true);
 			checkWhenOver = 3;
 			curr = 0;
 		}
@@ -123,14 +126,7 @@ public class PracticeMode : MonoBehaviour {
 		}
 		if(switchToPostFix!=true && switchToEvaluate != true&& curr<test.Length)
 			currvalue.text = "Current Value: " + test [curr];
-		if (switchToPostFix == true) {
-
-			checkEval.gameObject.SetActive(true);
-			checkPostFix.gameObject.SetActive(false);
-			append.gameObject.SetActive(false);
-
-
-		}
+		
 
 
 		/*if(prob index == index of invalid expression)
@@ -152,7 +148,7 @@ public class PracticeMode : MonoBehaviour {
 				temp.y += 90;
 				rects[i] = temp;
 			}
-			rects.Add (new Rect (80,100, 150, 75));
+			rects.Add (new Rect (120,220, 150, 75));
 			//Debug.Log ("adding rect");
 
 
@@ -167,16 +163,16 @@ public class PracticeMode : MonoBehaviour {
 		}
 
 	}
-	int postcurr = 0;
+
 
 	public void pushToStack ()
 	{
 		if (switchToPostFix==true) {
-			String[] splitit = theiranswer.Split (' ');
-			m.push(splitit[postcurr]);
-			postcurr++;
+		//	String[] splitit = theiranswer.Split (' ');
+			m.push(test[curr]);
+			curr++;
 		}
-		if (curr < test.Length) {
+		if (curr < test.Length&&switchToPostFix==false) {
 			m.push (test [curr]);
 			curr++;
 		} 
@@ -295,8 +291,10 @@ public class PracticeMode : MonoBehaviour {
 		}
 		if (switchToPostFix == true && brackets.Contains (test [curr]) == false)
 			appendToString ();
-		if (m.isEmpty() == false&&canpop==true)
+		if (m.isEmpty () == false && canpop == true) {
 			popped = popS ();
+			curr++;
+		}
 	//	if(popped != "(" && popped != "[" && popped != ")" && popped != "]")
 		//	postfix = string.Concat (postfix,  popped + " " );
 	}
@@ -317,15 +315,7 @@ public class PracticeMode : MonoBehaviour {
 			validity.text = "Incorrect postfix expression";
 
 	}
-	public void toggle() {
-		if (switchToEvaluate) {
-			append.gameObject.SetActive (false);
-			applyOP.gameObject.SetActive (true);
-		} else {
-			append.gameObject.SetActive (true);
-			applyOP.gameObject.SetActive (false);
-		}
-	}
+
 
 	public void applyOperation() {
 		if (test[curr] == "+"&&m.size()>=2) {
@@ -383,7 +373,7 @@ public class PracticeMode : MonoBehaviour {
 
 		GUIStyle style = new GUIStyle (GUI.skin.button);
 	
-		style.fontSize = 24;
+		style.fontSize = 40;
 		if(wrong==1)
 			GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 50), "Incorrect.");
 		if (wrong==-1)
