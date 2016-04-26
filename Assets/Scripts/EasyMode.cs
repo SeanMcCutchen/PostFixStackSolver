@@ -42,7 +42,7 @@ public class EasyMode : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		table.gameObject.SetActive (false);
+		//table.gameObject.SetActive (false);
 		evaluate = true;
 		problem1 = "[2*(6/2)+(3^2)]";
 		problem2 = "[(2+4)+3*(4/2)";
@@ -65,8 +65,8 @@ public class EasyMode : MonoBehaviour {
 	void Update () {
 
 		if (evaluate) {
-			isp.text = "In Stack Priority : " + ispnum;
-			icp.text = "Incoming Priority : " + icpnum;
+			isp.text = "In Stack Priority (ISP): " + ispnum;
+			icp.text = "Incoming Priority (ICP): " + icpnum;
 		} else {
 			isp.text = "";
 			icp.text = "";
@@ -170,17 +170,167 @@ public class EasyMode : MonoBehaviour {
 			break;
 	*/
 	//[8-(3+1)]
+
+	/*
+	If Operand, Write it to the Postfix String
+	If Scope Opener or Operator
+		If the In-Coming Priority (ICP) is greater than the In-Stack Priority (ISP) Push
+		If ICP < ISP Pop – Write Values To Postfix Until Can Push
+		If Scope Closer, Pop till find opener – Write values to Postfix – Throw out scope opener!
+	*/
 	public void easyDemo(){
 		switch (x) {
 		case (0):
+			//helperEasy.text = "Notice that In Stack Priority Starts at -1";
+			hint.text = "If Operand, Write it to the Postfix String" +
+				"\nIf Scope Opener or Operator" +
+				"\n\t\t\tIf the ICP is greater than the ISP Push" +
+				"\n\t\t\tIf ICP < ISP Pop – Write Values To Postfix Until Can Push" +
+				"\n\t\t\tIf Scope Closer, Pop till find opener – Write values to Postfix " +
+				"\n\t\t\t\t– Throw out scope opener!";
+			x++;
+			break;
+		case (1):
 			icpnum = 7;
-			m.push ("[");
-			helperEasy.text = "Pushing a scope opener";
+			helperEasy.text = "Since ICP > ISP - Push scope opener";
 			valueEasy.text = "Current value: [ ";
 			hint.text = "Hint: Always push scope openers";
 			x++;
 			break;
-		case (1):
+		case (2):
+			m.push ("[");	
+			ispnum = 0;
+			helperEasy.text = "Pushed scope opener to stack";
+			x++;
+			break;
+		case (3):
+			icpnum = 0;
+			ispnum = 0;
+			valueEasy.text = "Current value: 8 ";
+			helperEasy.text = "Operand found";
+			hint.text = "Hint: Always appending operand to postfix string";
+			x++;
+			break;
+		case (4):
+			helperEasy.text = "Operand, adding to postfix string: 8";
+			postfixString.text = "Postfix: 8";
+			x++;
+			break;
+		case (5):
+			icpnum=1;
+			helperEasy.text = "Since ICP > ISP - Push operator";
+			valueEasy.text = "Current value: - ";
+			hint.text = "Hint: Incoming priority greater than instack priority";
+			x++;
+			break;
+		case (6):
+			m.push ("-");
+			helperEasy.text = "Operator, pushing to stack";
+			ispnum = 2;
+			hint.text = "";
+			x++;
+			break;
+		case (7):
+			icpnum = 7;
+			helperEasy.text = "Since ICP > ISP - Push scope opener";
+			valueEasy.text = "Current value: ( ";
+			hint.text = "Hint: Always push scope openers";
+			x++;
+			break;
+		case (8):
+			m.push ("(");
+			helperEasy.text = "Pushed scope opener to stack";
+			ispnum = 0;
+			x++;
+			break;
+		case (9):
+			icpnum = 0;
+			valueEasy.text = "Current value: 3 ";
+			helperEasy.text = "Operand found";
+			hint.text = "Hint: Always append operands to postfix string";
+			x++;
+			break;
+		case (10):
+			helperEasy.text = "Operand, appending to postfix string: 3";
+			postfixString.text= "Postfix: 8 3";
+			x++;
+			break;
+		case (11):
+			icpnum=1;
+			helperEasy.text = "Since ICP > ISP - Push operator";
+			valueEasy.text = "Current value: + ";
+			hint.text = "Hint: Incoming priority greater than instack priority";
+			x++;
+			break;
+		case (12):
+			m.push ("+");
+			ispnum = 2;
+			helperEasy.text = "Operator, pushing to stack";
+			hint.text = "";
+			x++;
+			break;
+		case (13):
+			valueEasy.text = "Current value: 1 ";
+			helperEasy.text = "Operand found";
+			hint.text = "Hint: Always append operands to postfix string";
+			x++;
+			break;
+		case (14):
+			helperEasy.text = "Operand, adding to postfix string: 1";
+			postfixString.text = "Postfix: 8 3 1";
+			x++;
+			break;
+		case (15):
+			helperEasy.text = "Scope closer found";
+			hint.text = "Hint: Pop till find opener – Write values to Postfix – Throw out scope opener!";
+			x++;
+			break;
+		case (16):
+			x++;
+			break;
+		case (17):
+			m.pop ();
+			helperEasy.text = "Popping Stack";
+			hint.text = "Hint: Pop until scope opener is found";
+			x++;
+			break;
+		case (18):
+			m.pop ();
+			helperEasy.text = "Popping Stack";
+			hint.text = "Hint: Pop until scope opener is found";
+			x++;
+			break;
+		case (19):
+			helperEasy.text = "Writing values to postfix.";
+			hint.text = "";
+			x++;
+			break;
+		case (20):
+			postfixString.text = "Postfix: 8 3 1 +";
+			x++;
+			break;
+		case (21):
+			postfixString.text = "Postfix: 8 3 1 + -";
+			helperEasy.text = "Found opener and closer, valid | This is the postfix expression: 8 3 1 + -";
+			hint.text = "Hint: Once postfix expression is built, empty the stack";
+			x++;
+			break;
+		case (22):
+			helperEasy.text = "Popping stack";
+			m.pop ();
+			x++;
+			break;
+		case (23):
+			helperEasy.text = "Popping stack";
+			m.pop ();
+			x++;
+			break;
+
+			/*case ():
+			  x++;
+			break;
+
+		case (100):
 			ispnum = 0;
 			//t.push ("8");
 			helperEasy.text = "Number, adding to postfix string: 8";
@@ -189,7 +339,7 @@ public class EasyMode : MonoBehaviour {
 			hint.text = "Hint: Always append operands to postfix string";
 			x++;
 			break;
-		case (2):
+		case (200):
 			m.push ("-");
 			icpnum=1;
 			helperEasy.text = "Operator, pushing to stack";
@@ -307,7 +457,8 @@ public class EasyMode : MonoBehaviour {
 			nButton.gameObject.SetActive(false);
 			break;
 		default:
-			break;
+			break;*/
+
 		}
 	}
 
@@ -418,75 +569,85 @@ public class EasyMode : MonoBehaviour {
 
 	/*public void stepThrough (){
 	/	if(which==false)
-			load1 ();
-		else
-			load2 ();
-	}
-	public void load1 (){
-		
-		if (x < prob.Length) {
-			value.text = "Current value: " +prob[x];
-			if (numbers.Contains (prob[x] + "")){
-				Debug.Log(prob[x]);
-				t.push (prob [x].ToString ());
-			}
-			else if (expressions.Contains(prob [x] + "")){
-				m.push (prob [x].ToString ());
-			}
-			
-		}
-		if (x == prob.Length - 1) {
-			
-			if ((countop != countcp) || (countobr != countcbr)) {
-				Debug.Log ("Invalid entry");
-			}
-			else{
-				Debug.Log ("Works");
-			}
-		}
-		if (x == prob.Length) {		
-			switchproblem();
-		}
-		
-		x++;
-	}
-	public void load2 (){
-		
-		if (x < prob.Length) {
-			value.text ="Current value: "+ prob[x];
-			if (numbers.Contains (prob [x] + ""))
-			{
-				
-				t.push (prob [x].ToString ());
-			}
-			else if (expressions.Contains (prob [x] + ""))
-			{
-				
-				m.push (prob [x].ToString ());
-			}
-			
-		}
-		if (x == prob.Length - 1) {
-			
-			if ((countop != countcp) || (countobr != countcbr)) {
-				Debug.Log ("Invalid entry");
-			} else {
-				Debug.Log ("Works");
-			}
-			
-		}
-		x++;
-	}
-	void switchproblem(){
-		x = 0;
-		t = new MyStack ();
-		m = new MyStack ();
-		prob = problem2.ToCharArray ();
-		countop = problem2.Split ('(').Length - 1;
-		countcp = problem2.Split (')').Length - 1;
-		countobr = problem2.Split ('[').Length - 1;
-		countcbr = problem2.Split (']').Length - 1;
-		txt.text = "Expression: " + problem2;
-		which = true;
-	}*/
+		load1 ();
+	else
+		load2 ();
 }
+public void load1 (){
+
+	if (x < prob.Length) {
+		value.text = "Current value: " +prob[x];
+		if (numbers.Contains (prob[x] + "")){
+			Debug.Log(prob[x]);
+			t.push (prob [x].ToString ());
+		}
+		else if (expressions.Contains(prob [x] + "")){
+			m.push (prob [x].ToString ());
+		}
+
+	}
+	if (x == prob.Length - 1) {
+
+		if ((countop != countcp) || (countobr != countcbr)) {
+			Debug.Log ("Invalid entry");
+		}
+		else{
+			Debug.Log ("Works");
+		}
+	}
+	if (x == prob.Length) {		
+		switchproblem();
+	}
+
+	x++;
+}
+public void load2 (){
+
+	if (x < prob.Length) {
+		value.text ="Current value: "+ prob[x];
+		if (numbers.Contains (prob [x] + ""))
+		{
+
+			t.push (prob [x].ToString ());
+		}
+		else if (expressions.Contains (prob [x] + ""))
+		{
+
+			m.push (prob [x].ToString ());
+		}
+
+	}
+	if (x == prob.Length - 1) {
+
+		if ((countop != countcp) || (countobr != countcbr)) {
+			Debug.Log ("Invalid entry");
+		} else {
+			Debug.Log ("Works");
+		}
+
+	}
+	x++;
+}
+void switchproblem(){
+	x = 0;
+	t = new MyStack ();
+	m = new MyStack ();
+	prob = problem2.ToCharArray ();
+	countop = problem2.Split ('(').Length - 1;
+	countcp = problem2.Split (')').Length - 1;
+	countobr = problem2.Split ('[').Length - 1;
+	countcbr = problem2.Split (']').Length - 1;
+	txt.text = "Expression: " + problem2;
+	which = true;
+}*/
+}
+
+/*
+Helpful Hints:
+Always push scope openers
+Append all operands to postfic string
+If ICP > ISP Push
+If ICP < ISP Pop and append to postfix until push is possible
+When a scope closer is found, Pop until opener is found and append to postfix
+
+*/
