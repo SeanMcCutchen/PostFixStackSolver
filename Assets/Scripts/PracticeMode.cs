@@ -49,16 +49,7 @@ public class PracticeMode : MonoBehaviour {
 	public Button applyOP;
 	public Button append;
 	public Image table;
-	public Button num0;
-	public Button num1;
-	public Button num2;
-	public Button num3;
-	public Button num4;
-	public Button num5;
-	public Button num6;
-	public Button num7;
-	public Button num8;
-	public Button num9;
+	public Button num0,num1,num2,num3,num4,num5,num6,num7,num8,num9;
 	bool bracket, build, eval,isvalid, numsVisible; 
 	int temp1;
 	int temp2;
