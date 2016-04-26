@@ -35,6 +35,7 @@ public class EasyMode : MonoBehaviour {
 	public Text postfixString;
 	public Text hint;
 	public Image table;
+	public AudioSource sound;
 
 	char [] prob2;
 	bool which;
@@ -293,6 +294,7 @@ public class EasyMode : MonoBehaviour {
 			break;
 		case (17):
 			m.pop ();
+			sound.Play();
 			helperEasy.text = "Popping Stack | Appending operator";
 			hint.text = "Hint: Pop until scope opener is found";
 			postfixString.text = "Postfix: 8 3 1 +";
@@ -300,37 +302,40 @@ public class EasyMode : MonoBehaviour {
 			break;
 		case (18):
 			m.pop ();
+			sound.Play();
 			valueEasy.text = "Current value: ] ";
 			helperEasy.text = "Scope closer found";
 			hint.text = "Hint: Pop until scope opener is found";
 			x++;
 			break;
 		case (19):
-			helperEasy.text = "Writing values to postfix.";
-			postfixString.text = "Postfix: 8 3 1 + -";
+			helperEasy.text = "Popping the stack and appending operator to postfix string.";
 			hint.text = "";
 			x++;
 			break;
 		case (20):
 			postfixString.text = "Postfix: 8 3 1 + -";
 			m.pop ();
+			sound.Play();
 			x++;
 			break;
 		case (21):
 			postfixString.text = "Postfix: 8 3 1 + -";
-			helperEasy.text = "Found opener and closer, valid | This is the postfix expression: 8 3 1 + -";
 			hint.text = "Hint: Once postfix expression is built, empty the stack";
 			x++;
 			break;
 		case (22):
 			helperEasy.text = "Popping stack";
 			m.pop ();
+			sound.Play();
 			x++;
 			break;
 		case (23):
-			helperEasy.text = "Popping stack";
-			m.pop ();
+			helperEasy.text = "Found opener and closer, valid | This is the postfix expression: 8 3 1 + -";
 			x++;
+			break;
+		case (24):
+			helperEasy.text = "Postfix string has been formed";
 			break;
 
 			/*case ():
