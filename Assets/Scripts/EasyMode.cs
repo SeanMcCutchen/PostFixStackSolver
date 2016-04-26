@@ -82,7 +82,7 @@ public class EasyMode : MonoBehaviour {
 				temp.y += 90;
 				rects[i] = temp;
 			}
-			rects.Add (new Rect (80, 100, 150, 75));
+			rects.Add (new Rect (125, 250, 200, 75));
 			//Debug.Log ("adding rect");
 
 
@@ -122,7 +122,7 @@ public class EasyMode : MonoBehaviour {
 
 	void OnGUI () {
 		GUIStyle style = new GUIStyle (GUI.skin.button);
-		style.fontSize = 24;
+		style.fontSize = 40;
 		if (m.size () > 0 && t.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;

@@ -65,7 +65,7 @@ public class DemoMode : MonoBehaviour {
 				temp.y += 90;
 				rects[i] = temp;
 			}
-			rects.Add (new Rect (80, 80, 150, 75));
+			rects.Add (new Rect (150, 200, 200, 75));
 			//Debug.Log ("adding rect");
 			
 			
@@ -103,11 +103,12 @@ public class DemoMode : MonoBehaviour {
 	}
 	
 	void OnGUI () {
-
+		GUIStyle style = new GUIStyle (GUI.skin.button);
+		style.fontSize = 40;
 		if (m.size () > 0 ) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
-				GUI.Box (rects [i], m.getAt (i)+"");
+				GUI.Box (rects [i], m.getAt (i)+"", style);
 			}		
 
 		}
@@ -115,11 +116,11 @@ public class DemoMode : MonoBehaviour {
 		else if (m.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
-				GUI.Box (rects [i], m.getAt (i)+"");
+				GUI.Box (rects [i], m.getAt (i)+"", style);
 			}		
 		}
 
-		}
+	}
 		
 
 
