@@ -254,10 +254,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1609907425}
   m_RootOrder: 2
-  m_AnchorMin: {x: 0.5, y: 0.92773557}
-  m_AnchorMax: {x: 0.5, y: 0.92773557}
-  m_AnchoredPosition: {x: -4.642646, y: 3.877411}
-  m_SizeDelta: {x: 414.71, y: 43.841}
+  m_AnchorMin: {x: 0.46413124, y: 0.9336703}
+  m_AnchorMax: {x: 0.46413124, y: 0.9336703}
+  m_AnchoredPosition: {x: -2.7509995, y: -2}
+  m_SizeDelta: {x: 289, y: 44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &115404834
 MonoBehaviour:
@@ -280,7 +280,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 4fbec733f0b1cb6458765c2400b37b94, type: 3}
-    m_FontSize: 50
+    m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -528,16 +528,6 @@ MonoBehaviour:
   applyOP: {fileID: 1227285935}
   append: {fileID: 1972034947}
   table: {fileID: 53114128}
-  num0: {fileID: 0}
-  num1: {fileID: 0}
-  num2: {fileID: 0}
-  num3: {fileID: 0}
-  num4: {fileID: 0}
-  num5: {fileID: 0}
-  num6: {fileID: 0}
-  num7: {fileID: 0}
-  num8: {fileID: 0}
-  num9: {fileID: 0}
 --- !u!4 &350586833
 Transform:
   m_ObjectHideFlags: 0
