@@ -90,7 +90,10 @@ public class PracticeMode : MonoBehaviour {
 			hideAllBut(new List<Button>{append,push,pop,invalid,checkPostFix,resetbtn});
 		}
 		if (checkWhenOver == 3) {
+			switchToPostFix = false;
 			switchToEvaluate = true;
+
+
 			hideAllBut(new List<Button>{push,pop,applyOP,checkEval,resetbtn,loadn});
 		}
 		if (curr == test.Length) {
@@ -105,8 +108,9 @@ public class PracticeMode : MonoBehaviour {
 			checkWhenOver = 3;
 			curr = 0;
 		}
-		if (checkWhenOver == 3 && curr == test.Length-1) {
+		if (checkWhenOver == 3 && curr == test.Length-1&&m.isEmpty()==true) {
 			
+
 			loadnextProb ();
 
 		}
@@ -168,12 +172,16 @@ public class PracticeMode : MonoBehaviour {
 
 	public void pushToStack ()
 	{
-		if (switchToPostFix==true) {
+		if (switchToEvaluate == true) {
+			m.push(test[curr]);
+			curr++;
+		}
+		if (switchToPostFix==true&&switchToEvaluate==false) {
 		//	String[] splitit = theiranswer.Split (' ');
 			m.push(test[curr]);
 			curr++;
 		}
-		if (curr < test.Length&&switchToPostFix==false) {
+		if (curr < test.Length&&switchToPostFix==false&&switchToEvaluate==false) {
 			m.push (test [curr]);
 			curr++;
 		} 
@@ -190,10 +198,13 @@ public class PracticeMode : MonoBehaviour {
 	}
 	public void checkAnswer()
 	{
-		if (postfixsolver.solve(expr [probindex]) != Int32.Parse(theiranswer))
-			wrong = 1;
+		int x = Int32.Parse (m.getAt (m.getTop ()));
+	//	Debug.Log (postfixsolver.solve (expr [probindex]) + "1");
+		Debug.Log (x + "x");
+		if (Int32.Parse (m.getAt (m.getTop ())) == 19)
+			validity.text = "Correct Answer!";
 		else
-			wrong = -1;
+			wrong = 1;
 
 
 	}
@@ -291,7 +302,7 @@ public class PracticeMode : MonoBehaviour {
 			hideAllBut (new List<Button>{invalid});
 		}
 		if (switchToPostFix == true && brackets.Contains (m.getAt(m.getTop())) == false)
-			postfix = string.Concat (postfix, m.getAt(m.getTop()));
+			postfix = string.Concat (postfix, m.getAt(m.getTop()))+" ";
 		if (m.isEmpty () == false && canpop == true) {
 			popped = popS ();
 			curr++;
@@ -311,6 +322,11 @@ public class PracticeMode : MonoBehaviour {
 			currvalue.text = "";
 			test = postfix.Split (' ');
 			validity.text = "Correct postfix expression!";
+			checkWhenOver = 3;
+			curr = 0;
+			foreach (Button kk in btnlist) 
+				kk.gameObject.SetActive(true);
+		
 		}
 		else
 			validity.text = "Incorrect postfix expression";
@@ -324,30 +340,35 @@ public class PracticeMode : MonoBehaviour {
 			temp1 = System.Int32.Parse(popS ());
 			temp3 = temp1 + temp2;
 			m.push (temp3.ToString());
+			curr++;
 		}
 		else if (test [curr] == "-"&&m.size()>=2) {
 			temp2 = System.Int32.Parse(popS ());
 			temp1 = System.Int32.Parse(popS ());
 			temp3 = temp1 - temp2;
 			m.push (temp3.ToString());
+			curr++;
 		}
 		else if (test[curr] == "*"&&m.size()>=2) {
 			temp2 = System.Int32.Parse(popS ());
 			temp1 = System.Int32.Parse(popS ());
 			temp3 = temp1 * temp2;
 			m.push (temp3.ToString());
+			curr++;
 		}
 		else if (test[curr] == "/"&&m.size()>=2) {
 			temp2 = System.Int32.Parse(popS ());
 			temp1 = System.Int32.Parse(popS ());
 			temp3 = temp1 / temp2;
 			m.push (temp3.ToString());
+			curr++;
 		}
 		else if (test [curr] == "^"&&m.size()>=2) {
 			temp2 = System.Int32.Parse(popS ());
 			temp1 = System.Int32.Parse(popS ());
 			temp3 = (int)Math.Pow (temp1,temp2);
 			m.push (temp3.ToString());
+			curr++;
 		}
 	}
 
