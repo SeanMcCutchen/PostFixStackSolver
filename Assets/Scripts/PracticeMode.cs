@@ -80,8 +80,8 @@ public class PracticeMode : MonoBehaviour {
 		}
 		if (curr == test.Length - 1) {
 			theiranswer = postfix;
-			m = new MyStack ();
-			isdone = true;
+			//m = new MyStack ();
+			//isdone = true;
 		}
 
 		if (rects.Count < m.size () ) {

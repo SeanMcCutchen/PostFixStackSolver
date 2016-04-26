@@ -75,7 +75,7 @@ public class HardMode : MonoBehaviour {
 				temp.y += 90;
 				rects[i] = temp;
 			}
-			rects.Add (new Rect (125, 100, 150, 75));
+			rects.Add (new Rect (80, 100, 150, 75));
 			//Debug.Log ("adding rect");
 
 
