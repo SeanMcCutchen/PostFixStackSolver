@@ -9,7 +9,7 @@ public class PracticeMode : MonoBehaviour {
 	//var expr = new List<Type>();
 
 
-	List<string> expr = new List<string>{"1 + ( 52 - 34)", "[ ( 5 + 7 ) * ( 23 - 5 ) ]", "100 / ( 5 * 4 ) ","[ ( 2 ^ 3 ) - 8 ]"
+	List<string> expr = new List<string>{"1 + ( 52 - 34 )", "[ ( 5 + 7 ) * ( 23 - 5 ) ]", "100 / ( 5 * 4 ) ","[ ( 2 ^ 3 ) - 8 ]"
 		, "5 * 8 - 8 / 4", "( 55 / 5 + 27 ) + 5 ^ 2", "55 / 5 - 10", "[1 + ( 5 * 8 - 10 ) / 6 ] "
 		, "[ ( 5 ^ 3 ^ 2 ) / ( 100 - 19 * 5 ) ]", "( 3 ^ 2 ^ 3 ) ",
 		"50 - ( 3 + 7 * 4 / 2 ) ", "[ ( 5 ^ 2 ) / 5 ] ", 
@@ -78,9 +78,20 @@ public class PracticeMode : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		//StringBuilder strBuilder = new StringBuilder(expr[probindex]);
+	//	strBuilder[curr] =string.Format("<color=blue>{0}</color>",test[curr]);
+
+		//expr[probindex]=strBuilder.ToString();
+		StringBuilder str = new StringBuilder();
+		foreach (String s in test) {
+			if (s == test [curr])
+				str.Append (string.Format ("<color=yellow>{0}</color>", test [curr]));
+			else
+				str.Append (s);
+		}
 		if (check != true) {
 			postfixString.text = postfix;
-			infixString.text = "Infix String: " + expr [probindex];
+			infixString.text = "Infix String: " + str.ToString();
 		}
 		if(isdone!=true && check != true&& curr<test.Length)
 			currvalue.text = "Current Value: " + test [curr];
@@ -328,7 +339,9 @@ public class PracticeMode : MonoBehaviour {
 		postfix = "";
 	}
 	void OnGUI () {
+
 		GUIStyle style = new GUIStyle (GUI.skin.button);
+	
 		style.fontSize = 24;
 		if(wrong==1)
 			GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 50), "Incorrect.");
@@ -339,7 +352,7 @@ public class PracticeMode : MonoBehaviour {
 				GUI.contentColor = Color.green;
 				GUI.Box (rects [i], m.getAt (i) + "", style);
 			}		
-
+		
 
 		} else if (m.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
