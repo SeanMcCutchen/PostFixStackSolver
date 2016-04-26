@@ -35,6 +35,7 @@ public class EasyMode : MonoBehaviour {
 	public Text postfixString;
 	public Text hint;
 	public Image table;
+	public AudioSource sound;
 
 	char [] prob2;
 	bool which;
@@ -81,7 +82,7 @@ public class EasyMode : MonoBehaviour {
 				temp.y += 90;
 				rects[i] = temp;
 			}
-			rects.Add (new Rect (125, 100, 150, 75));
+			rects.Add (new Rect (80, 100, 150, 75));
 			//Debug.Log ("adding rect");
 
 
@@ -187,7 +188,7 @@ public class EasyMode : MonoBehaviour {
 				"\n\t\t\tIf the ICP is greater than the ISP Push" +
 				"\n\t\t\tIf ICP < ISP Pop – Write Values To Postfix Until Can Push" +
 				"\n\t\t\tIf Scope Closer, Pop till find opener – Write values to Postfix " +
-				"\n\t\t\t\t– Throw out scope opener!";
+				"– Throw out scope opener!";
 			x++;
 			break;
 		case (1):
@@ -281,49 +282,60 @@ public class EasyMode : MonoBehaviour {
 			x++;
 			break;
 		case (15):
+			valueEasy.text = "Current value: ) ";
 			helperEasy.text = "Scope closer found";
 			hint.text = "Hint: Pop till find opener – Write values to Postfix – Throw out scope opener!";
 			x++;
 			break;
 		case (16):
+			helperEasy.text = "Operator found - Pop and append  to the string";
+			hint.text = "Hint: Pop till scope opener is found";
 			x++;
 			break;
 		case (17):
 			m.pop ();
-			helperEasy.text = "Popping Stack";
+			sound.Play();
+			helperEasy.text = "Popping Stack | Appending operator";
 			hint.text = "Hint: Pop until scope opener is found";
+			postfixString.text = "Postfix: 8 3 1 +";
 			x++;
 			break;
 		case (18):
 			m.pop ();
-			helperEasy.text = "Popping Stack";
+			sound.Play();
+			valueEasy.text = "Current value: ] ";
+			helperEasy.text = "Scope closer found";
 			hint.text = "Hint: Pop until scope opener is found";
 			x++;
 			break;
 		case (19):
-			helperEasy.text = "Writing values to postfix.";
+			helperEasy.text = "Popping the stack and appending operator to postfix string.";
 			hint.text = "";
 			x++;
 			break;
 		case (20):
-			postfixString.text = "Postfix: 8 3 1 +";
+			postfixString.text = "Postfix: 8 3 1 + -";
+			m.pop ();
+			sound.Play();
 			x++;
 			break;
 		case (21):
 			postfixString.text = "Postfix: 8 3 1 + -";
-			helperEasy.text = "Found opener and closer, valid | This is the postfix expression: 8 3 1 + -";
 			hint.text = "Hint: Once postfix expression is built, empty the stack";
 			x++;
 			break;
 		case (22):
 			helperEasy.text = "Popping stack";
 			m.pop ();
+			sound.Play();
 			x++;
 			break;
 		case (23):
-			helperEasy.text = "Popping stack";
-			m.pop ();
+			helperEasy.text = "Found opener and closer, valid | This is the postfix expression: 8 3 1 + -";
 			x++;
+			break;
+		case (24):
+			helperEasy.text = "Postfix string has been formed";
 			break;
 
 			/*case ():

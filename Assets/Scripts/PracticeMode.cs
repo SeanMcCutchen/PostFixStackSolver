@@ -89,25 +89,25 @@ public class PracticeMode : MonoBehaviour {
 		 */
 		if (curr == test.Length - 1) {
 			theiranswer = postfix;
-			m = new MyStack ();
-			isdone = true;
+			//m = new MyStack ();
+			//isdone = true;
 		}
 
 		if (rects.Count < m.size () ) {
 			// Update other rectangles
 			for (int i = 0; i < rects.Count; ++i) {
 				Rect temp = rects[i];
-				temp.y += 45;
+				temp.y += 90;
 				rects[i] = temp;
 			}
-			rects.Add (new Rect (0,0, 75, 37));
+			rects.Add (new Rect (80,100, 150, 75));
 			//Debug.Log ("adding rect");
 
 
 		} else if (rects.Count > m.size () ) {
 			for (int i = 0; i < rects.Count; ++i) {
 				Rect temp = rects[i];
-				temp.y -= 45;
+				temp.y -= 90;
 				rects[i] = temp;
 			}
 			rects.RemoveAt(rects.Count-1);

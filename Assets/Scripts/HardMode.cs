@@ -19,7 +19,7 @@ public class HardMode : MonoBehaviour {
 	int x = 0;
 	int y = 0;
 	int z = 0;
-	int ispnum;
+	int ispnum = -1;
 	int icpnum = 0;
 	bool evaluate;
 	public Text txtHard;
@@ -75,7 +75,7 @@ public class HardMode : MonoBehaviour {
 				temp.y += 90;
 				rects[i] = temp;
 			}
-			rects.Add (new Rect (125, 100, 150, 75));
+			rects.Add (new Rect (80, 100, 150, 75));
 			//Debug.Log ("adding rect");
 
 
@@ -266,7 +266,7 @@ public class HardMode : MonoBehaviour {
 			m.pop ();
 			sound.Play ();
 			valueHard.text = "Current value: ) ";
-			helperHard.text = "Adding operators to postfix string: 1 2 3 2 ^ ^";
+			helperHard.text = "Appending operators to postfix string: 1 2 3 2 ^ ^";
 			postfixString.text = "Postfix: 1 2 3 2 ^ ^";
 			hint.text = "Pop stack until you find matching brackets, append stack elements to postfix string";
 			y++;
@@ -275,7 +275,7 @@ public class HardMode : MonoBehaviour {
 			m.pop ();
 			sound.Play ();
 			valueHard.text = "Current value: ^ ";
-			helperHard.text = "Adding operator to postfix string";
+			helperHard.text = "Appending operator to postfix string";
 			postfixString.text = "Postfix: 1 2 3 2 ^";
 			hint.text = "Pop stack until you find matching brackets, append stack elements to postfix string";
 			y++;
@@ -284,7 +284,7 @@ public class HardMode : MonoBehaviour {
 			m.pop ();
 			sound.Play ();
 			valueHard.text = "Current value: ^ ";
-			helperHard.text = "Adding operators to postfix string";
+			helperHard.text = "Appending operators to postfix string";
 			postfixString.text = "Postfix: 1 2 3 2 ^ ^";
 			hint.text = "Pop stack until you find matching brackets, append stack elements to postfix string";
 			y++;
