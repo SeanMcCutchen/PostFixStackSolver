@@ -21,6 +21,7 @@ public class DemoMode : MonoBehaviour {
 	public Text value;
 	public Text helper;
 	public Button btn;
+	public AudioSource sound;
 
 	char [] prob;
 
@@ -34,7 +35,7 @@ public class DemoMode : MonoBehaviour {
 		problem3 = "[1+(2^2^2)/6]";
 		problem4 = "[8-(3+1)]";
 
-
+		helper.text = "";
 		which = false;
 /*		countop = problem1.Split('(').Length - 1;
 		countcp = problem1.Split(')').Length - 1;
@@ -123,90 +124,200 @@ public class DemoMode : MonoBehaviour {
 
 
 	public void bracketDemo(){
-		switch (x)
+		switch (y)
 		{
 		case (0):
-			m.push ("[");
-			helper.text = "Pushing a scope opener";
-			x++;
+			helper.text = "Our current value is a scope opener";
+			y++;
 			break;
-		case (1):
-			helper.text = "Number, discarding";
-			x++;
+		case(1):
+			helper.text = "Always push scope openers";
+			y++;
 			break;
 		case (2):
-			helper.text = "Operator, discarding";
-			x++;
+			m.push ("[");
+			helper.text = "Pushing scope opener";
+			y++;
 			break;
 		case (3):
-			m.push ("(");
-			helper.text = "Pushing a scope opener";
+			helper.text = "Operand, discarding. While checking for bracket validity we ignore operators and operands";
+			y++;
 			x++;
 			break;
 		case (4):
-			helper.text = "Number, discarding";
+			helper.text = "Operator, discarding. While checking for bracket validity we ignore operators and operands";
+			y++;
 			x++;
 			break;
 		case (5):
-			helper.text = "Operator, discarding";
+			helper.text = "Our current value is a scope opener";
 			x++;
+			y++;
 			break;
 		case (6):
-			helper.text = "Number, discarding";
-			x++;
+			helper.text = "Always push scope openers";
+			y++;
 			break;
 		case (7):
-			m.push (")");
-			helper.text = "Pushing a scope closer";
-			helper.text = "Popping the stack twice";
-			m.pop ();
-			m.pop ();
-			helper.text = "Found opener and closer, valid";
-			x++;
+			m.push ("(");
+			helper.text = "Pushing scope opener";
+			y++;
 			break;
-
-
 		case (8):
-			helper.text = "Operator, discarding";
+			helper.text = "Operand, discarding. While checking for bracket validity we ignore operators and operands";
+			y++;
 			x++;
 			break;
 		case (9):
-			m.push ("(");
-			helper.text = "Pushing a scope opener";
+			helper.text = "Operator, discarding. While checking for bracket validity we ignore operators and operands";
+			y++;
 			x++;
 			break;
 		case (10):
-			helper.text = "Number, discarding";
+			helper.text = "Operand, discarding. While checking for bracket validity we ignore operators and operands";
+			y++;
 			x++;
 			break;
 		case (11):
-			helper.text = "Operator, discarding";
+			helper.text = "Our current value is a scope closer";
+			y++;
 			x++;
 			break;
 		case (12):
-			helper.text = "Number, discarding";
-			x++;
+			helper.text = "Let's push it to the stack";
+			y++;
 			break;
 		case (13):
+			helper.text = "Pushing scope closer to the stack";
 			m.push (")");
-			helper.text = "Pushing a scope closer";
-			helper.text = "Popping the stack twice";
-			m.pop ();
-			m.pop ();
-			helper.text = "Found opener and closer, valid";
-			x++;
+			y++;
 			break;
 		case (14):
-			m.push ("]");
-			helper.text = "Pushing a scope closer";
-			helper.text = "Popping the stack twice";
-			m.pop ();
-			m.pop ();
-			helper.text = "Found opener and closer, valid";
-			x++;
+			helper.text = "We now need to pop the stack twice to check for matching brackets";
+			y++;
 			break;
 		case (15):
+			m.pop ();
+			sound.Play ();
+			helper.text = "Popped thed stack. Let's pop again:  )";
+			y++;
+			break;
+		case (16):
+			m.pop ();
+			sound.Play ();
+			helper.text = "Now we compare: (  )";
+			y++;
+			break;
+		case (17):
+			helper.text = "The brackets match! Let's continue through the expression";
+			y++;
+			break;
+		case (18):
+			helper.text = "Operator, discarding. While checking for bracket validity we ignore operators and operands";
+			y++;
+			x++;
+			break;
+		case (19):
+			helper.text = "Our current value is a scope opener";
+			y++;
+			x++;
+			break;
+		case (20):
+			helper.text = "Always push scope openers";
+			y++;
+			break;
+		case (21):
+			m.push ("(");
+			helper.text = "Pushing scope opener";
+			y++;
+			break;
+		case (22):
+			helper.text = "Operand, discarding. While checking for bracket validity we ignore operators and operands";
+			y++;
+			x++;
+			break;
+		case (23):
+			helper.text = "Operator, discarding. While checking for bracket validity we ignore operators and operands";
+			y++;
+			x++;
+			break;
+		case (24):
+			helper.text = "Operand, discarding. While checking for bracket validity we ignore operators and operands";
+			y++;
+			x++;
+			break;
+		case (25):
+			helper.text = "Our current value is a scope closer";
+			y++;
+			x++;
+			break;
+		case (26):
+			helper.text = "Let's push it to the stack";
+			y++;
+			break;
+		case (27):
+			helper.text = "Pushing scope closer to the stack";
+			m.push (")");
+			y++;
+			break;
+		case (28):
+			helper.text = "We now need to pop the stack twice to check for matching brackets";
+			y++;
+			break;
+		case (29):
+			m.pop ();
+			sound.Play ();
+			helper.text = "Popped the stack. Let's pop again:  )";
+			y++;
+			break;
+		case (30):
+			m.pop ();		
+			sound.Play ();
+			helper.text = "Now we compare: (  )";
+			y++;
+			break;
+		case (31):
+			helper.text = "The brackets match! Let's continue through the expression";
+			y++;
+			break;
+		case (32):
+			helper.text = "Our current value is a scope closer";
+			y++;
+			x++;
+			break;
+		case (33):
+			helper.text = "Let's push it to the stack";
+			y++;
+			break;
+		case (34):
+			helper.text = "Pushing scope closer to the stack";
+			m.push ("]");
+			y++;
+			break;
+		case (35):
+			helper.text = "We now need to pop the stack twice to check for matching brackets";
+			y++;
+			break;
+		case (36):
+			m.pop ();
+			sound.Play ();
+			helper.text = "Popped the stack. Let's pop again:  ]";
+			y++;
+			break;
+		case (37):
+			m.pop ();
+			sound.Play ();
+			helper.text = "Now we compare: [  ]";
+			y++;
+			break;
+		case (38):
+			helper.text = "The brackets match!";
+			y++;
+			x++;
+			break;
+		case (39):
 			helper.text = "Valid expression";
+			value.text = "";
 			btn.gameObject.SetActive(false);
 			break;
 		default:

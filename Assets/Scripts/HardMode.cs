@@ -41,7 +41,7 @@ public class HardMode : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		table.gameObject.SetActive (false);
+		table.gameObject.SetActive (true);
 		evaluate = true;
 		problem1 = "[2*(6/2)+(3^2)]";
 		problem2 = "[(2+4)+3*(4/2)";
@@ -56,7 +56,7 @@ public class HardMode : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (evaluate) {
+	/*	if (evaluate) {
 			isp.text = "In Stack Priority : " + ispnum;
 			icp.text = "Incoming Priority : " + icpnum;
 		} else {
@@ -64,7 +64,7 @@ public class HardMode : MonoBehaviour {
 			icp.text = "";
 			postfixString.text = "";
 		}
-
+*/
 		// Rectangle needs to be added
 		if (rects.Count < m.size () ) {
 			// Update other rectangles
@@ -122,133 +122,244 @@ public class HardMode : MonoBehaviour {
 	}
 
 	public void bracketDemo(){
-		switch (x)
+		switch (y)
 		{
 		case (0):
 			icpnum=7;
-			m.push ("[");
 			helperHard.text = "Pushing a scope opener";
 			valueHard.text = "Current value: [ ";
 			hint.text = "Hint: Always push scope openers";
-			x++;
+			y++;
 			break;
 		case (1):
-			//t.push ("2");
-			ispnum=0;
-			helperHard.text = "Number, adding to postfix string: 1";
-			postfixString.text= "Postfix: 1";
-			valueHard.text = "Current value: 1 ";
-			hint.text = "Hint: Always append operands to postfix string";
+			icpnum=7;
+			m.push ("[");
+			helperHard.text = "Pushed scope opener to stack";
+			y++;
 			x++;
 			break;
-
 		case (2):
-
-			m.push ("+");
+			ispnum=0;
+			helperHard.text = "Operand, appending to postfix string: 1";
+			valueHard.text = "Current value: 1 ";
+			hint.text = "Hint: Always append operands to postfix string";
+			y++;
+			break;
+		case (3):
+			helperHard.text = "Operand appended to postfix string";
+			postfixString.text= "Postfix: 1";
+			hint.text = "Hint: Always append operands to postfix string";
+			y++;
+			x++;
+			break;
+		case (4):
 			icpnum=1;
 			helperHard.text = "Operator, pushing to stack";
 			valueHard.text = "Current value: + ";
 			hint.text = "Hint: Incoming priority greater than instack priority";
+			y++;
+			break;
+		case (5):
+			m.push ("+");
+			helperHard.text = "Pushed Operator to stack";
+			y++;
 			x++;
 			break;
-		case (3):
+		case (6):
 			ispnum=2;
-			m.push ("(");
 			icpnum=7;
 			helperHard.text = "Pushing a scope opener";
 			valueHard.text = "Current value: ( ";
 			hint.text = "Hint: Always push scope openers";
+			y++;
+			break;
+		case (7):
+			m.push ("(");
+			helperHard.text = "Pushed scope opener to stack";
+			y++;
 			x++;
 			break;
-		case (4):
-			//m.push ("2");
-			helperHard.text = "Operand, adding to postfix string: 1 2";
-			postfixString.text = "Postfix: 1 2";
+		case (8):
+			helperHard.text = "Operand, appending to postfix string";
 			valueHard.text = "Current value: 2 ";
 			hint.text = "Hint: Always append operands to postfix string";
+			y++;
+			break;
+		case (9):
+			helperHard.text = "Operand appended to postfix string";
+			postfixString.text = "Postfix: 1 2";
+			y++;
 			x++;
 			break;
-		case (5):
+		case (10):
+			ispnum=0;
+			icpnum=6;
+			helperHard.text = "Operator, pushing to stack";
+			valueHard.text = "Current value: ^ ";
+			hint.text = "Hint: Incoming priority greater than instack priority";
+			y++;
+			break;
+		case (11):
 			ispnum=0;
 			m.push ("^");
 			icpnum=6;
-			helperHard.text = "Operator, pushing to stack";
-			valueHard.text = "Current value: ^ ";
-			hint.text = "Hint: Incoming priority greater than instack priority";
+			helperHard.text = "Pushed operator to stack";
+			y++;
 			x++;
 			break;
-		case (6):
-			//m.push ("2");
-			helperHard.text = "Number, adding to postfix string: 1 2 3";
-			postfixString.text= "Postfix: 1 2 3";
+		case (12):
+			helperHard.text = "Operand, appending to postfix string";
 			valueHard.text = "Current value: 3 ";
 			hint.text = "Hint: Always append operands to postfix string";
-			x++;
+			y++;
 			break;
-		case (7):
+		case (13):
+			helperHard.text = "Operand appended to postfix string";
+			postfixString.text= "Postfix: 1 2 3";
+			x++;
+			y++;
+			break;
+		case (14):
 			ispnum=5;
-			m.push ("^");
 			icpnum=6;
 			helperHard.text = "Operator, pushing to stack";
-			postfixString.text = "Postfix: 1 2 3";
 			valueHard.text = "Current value: ^ ";
 			hint.text = "Hint: Incoming priority greater than instack priority";
-			//m.pop ();
+			y++;
+			break;
+		case (15):
+			m.push ("^");
+			helperHard.text = "Pushed operator to stack";
+			y++;
 			x++;
 			break;
-
-		case (8):
-		//	t.push ("2");
-			helperHard.text = "Operand, adding to postfix string: 1 2 3 2";
-			postfixString.text= "Postfix: 1 2 3 2";
+		case (16):
+			helperHard.text = "Operand, appending to postfix string";
 			valueHard.text = "Current value: 2 ";
+			y++;
+			break;
+		case (17):
+			helperHard.text = "Operand appended to postfix string";
+			postfixString.text= "Postfix: 1 2 3 2";
+			y++;
 			x++;
 			break;
-		case (9):
-
+		case (18):
 			m.push (")");
 			helperHard.text = "Pushing a scope closer, popping the stack until matching scope opener is found";
-			m.pop ();
-			m.pop ();
-			m.pop ();
+			valueHard.text = "Current value: ) ";
+			hint.text = "Pop stack until you find matching brackets, append stack elements to postfix string";
+			y++;
+			break;
+		case (19):
+			helperHard.text = "Pushing a scope closer, popping the stack until matching scope opener is found";
 			m.pop ();
 			valueHard.text = "Current value: ) ";
 			helperHard.text = "Adding operators to postfix string: 1 2 3 2 ^ ^";
 			postfixString.text = "Postfix: 1 2 3 2 ^ ^";
 			hint.text = "Pop stack until you find matching brackets, append stack elements to postfix string";
+			y++;
+			break;
+		case (20):
+			helperHard.text = "Pushing a scope closer, popping the stack until matching scope opener is found";
+			m.pop ();
+			valueHard.text = "Current value: ^ ";
+			helperHard.text = "Adding operator to postfix string";
+			postfixString.text = "Postfix: 1 2 3 2 ^";
+			hint.text = "Pop stack until you find matching brackets, append stack elements to postfix string";
+			y++;
+			break;
+		case (21):
+			helperHard.text = "Pushing a scope closer, popping the stack until matching scope opener is found";
+			m.pop ();
+			valueHard.text = "Current value: ^ ";
+			helperHard.text = "Adding operators to postfix string";
+			postfixString.text = "Postfix: 1 2 3 2 ^ ^";
+			hint.text = "Pop stack until you find matching brackets, append stack elements to postfix string";
+			y++;
+			break;
+		case (22):
+			helperHard.text = "Pushing a scope closer, popping the stack until matching scope opener is found";
+			m.pop ();
+			valueHard.text = "Current value: ( ";
+			helperHard.text = "Found matching bracket";
+			postfixString.text = "Postfix: 1 2 3 2 ^ ^";
+			hint.text = "Matching bracket has been found, time to continue the postfix formation";
+			y++;
 			x++;
 			break;
-		case (10):
-
-			m.push ("/");
+		case (23):
 			icpnum=3;
 			helperHard.text = "Operator, pushing to stack";
 			valueHard.text = "Current value: / ";
 			hint.text = "Hint: Incoming priority greater than instack priority";
+			y++;
+			break;
+		case (24):
+			m.push ("/");
+			icpnum=3;
+			helperHard.text = "Pushed operator to stack";
+			y++;
 			x++;
 			break;
-		case (11):
+		case (25):
 			ispnum=4;
-			//m.push ("6");
-			helperHard.text = "Operand, adding to postfix string: 1 2 3 2 ^ ^ 4";
-			postfixString.text = "Postfix: 1 2 3 2 ^ ^ 4";
+			helperHard.text = "Operand, appending to postfix string";
 			valueHard.text = "Current value: 4 ";
 			hint.text = "Hint: Always append operands to postfix string";
+			y++;
+			break;
+		case (26):
+			ispnum=4;
+			helperHard.text = "Operand, adding to postfix string: 1 2 3 2 ^ ^ 4";
+			postfixString.text = "Postfix: 1 2 3 2 ^ ^ 4";
+			y++;
 			x++;
 			break;
-		case (12):
+		case (27):
 			m.push ("]");
 			helperHard.text = "Pushing a scope closer";
 			helperHard.text = "Popping the rest of the stack, appending operands to postfix string";
 			valueHard.text = "Current value: ] ";
 			hint.text = "Pop stack until you find matching brackets, append stack elements to postfix string";
-			m.pop ();
-			m.pop ();
-			m.pop ();
-			m.pop ();
-			x++;
+			y++;
 			break;
-		case (13):
+		case (28):
+			m.pop ();
+			helperHard.text = "Popping the stack";
+			helperHard.text = "Popping the rest of the stack, appending operands to postfix string";
+			valueHard.text = "Current value: ] ";
+			hint.text = "Pop stack until you find matching brackets, append stack elements to postfix string";
+			y++;
+			break;
+		case (29):
+			m.pop ();
+			helperHard.text = "Popping the stack";
+			helperHard.text = "Popping the rest of the stack, appending operands to postfix string";
+			valueHard.text = "Current value: / ";
+			postfixString.text = "Postfix: 1 2 3 2 ^ ^ 4 /";
+			hint.text = "Pop stack until you find matching brackets, append stack elements to postfix string";
+			y++;
+			break;
+		case (30):
+			m.pop ();
+			helperHard.text = "Popping the stack";
+			helperHard.text = "Popping the rest of the stack, appending operands to postfix string";
+			valueHard.text = "Current value: + ";
+			postfixString.text = "Postfix: 1 2 3 2 ^ ^ 4 / +";
+			hint.text = "Pop stack until you find matching brackets, append stack elements to postfix string";
+			y++;
+			break;
+		case (31):
+			m.pop ();
+			helperHard.text = "Popping the stack, matching bracket found";
+			helperHard.text = "Popping the rest of the stack, appending operands to postfix string";
+			valueHard.text = "Current value: [ ";
+			hint.text = "Matching bracket found, postfix expression has been formed";
+			x++;
+			y++;
+			break;
+		case (32):
 			icp.text="";
 			isp.text="";
 			helperHard.text = "Valid expression, final postfix string: 1 2 3 2 ^ ^ 4 / +";
@@ -258,94 +369,187 @@ public class HardMode : MonoBehaviour {
 			t = new MyStack();
 			x++;
 			break;
-		case (14):
+		case (33):
 			nextButton.text = "Evaluate";
 			helperHard.text = "Let's now evaluate our postfix expression";
 			evaluate = false;
 			m = new MyStack();
 			x++;
 			break;
-		case (15):
+		case (34):
 			nextButton.text = "Next Step";
 			exprDisplay.text = "Postfix Expression: 1 2 3 2 ^ ^ 4 / +";
 			valueHard.text = "Current value: 1";
-			helperHard.text = "Operand, pushing to stack. Remaining expression: 2 3 2 ^ ^ 4 / +";
+			helperHard.text = "Operand, pushing to stack";
 			hint.text = "When evaluating, always push operands to stack";
 			table.gameObject.SetActive (false);
-			m.push("1");
+			y++;
+			break;
+		case (35):
+			m.push ("1");
+			helperHard.text = "Pushed operand to stack. Remaining expression: 2 3 2 ^ ^ 4 / +";
+			hint.text = "When evaluating, always push operands to stack";
+			y++;
 			x++;
 			break;
-		case (16):
-			helperHard.text = "Operand, pushing to stack. Remaining expression: 3 2 ^ ^ 4 / +";
+		case (36):
+			helperHard.text = "Operand, pushing to stack";
+			valueHard.text = "Current value: 2";
+			y++;
+			break;
+		case (37):
+			helperHard.text = "Pushed operand to stack. Remaining expression: 3 2 ^ ^ 4 / +";
 			valueHard.text = "Current value: 2";
 			m.push("2");
+			y++;
 			x++;
 			break;
-		case (17):
-			helperHard.text = "Operand, pushing to stack. Remaining expression: 2 ^ ^ 4 / +";
+		case (38):
+			helperHard.text = "Operand, pushing to stack";
 			valueHard.text = "Current value: 3";
-			m.push("3");
+			y++;
+			break;
+		case (39):
+			helperHard.text = "Pushed operand to stack. Remaining expression: 2 ^ ^ 4 / +";
+			m.push ("3");
+			y++;
 			x++;
 			break;
-		case (18):
-			helperHard.text = "Operand, pushing to stack. Remaining expression: ^ ^ 4 / +";
+		case (40):
+			helperHard.text = "Operand, pushing to stack";
+			valueHard.text = "Current value: 2";
+			y++;
+			break;
+		case (41):
+			helperHard.text = "Pushed operand to stack. Remaining expression: ^ ^ 4 / +";
 			valueHard.text = "Current value: 2";
 			m.push ("2");
+			y++;
 			x++;
 			break;
-		case (19):
+		case (42):
 			helperHard.text = "Operator, popping stack twice";
 			valueHard.text = "Current value: ^";
 			hint.text = "When evaluating, operators cause the stack to pop twice. Put the first element on the right of the expression, the second on the left";
-			m.pop ();
-			m.pop ();
-			x++;
+			y++;
 			break;
-		case (20):
-			helperHard.text = "Applying operation: 3 ^ 2 = 9. Pushing 9 to stack. Remaining expression: ^ 4 / +";
+		case (43):
+			helperHard.text = "Popped stack: __ ^ 2";
+			valueHard.text = "Current value: 2";
+			hint.text = "When evaluating, operators cause the stack to pop twice. Put the first element on the right of the expression, the second on the left";
+			m.pop ();
+			y++;
+			break;
+		case (44):
+			helperHard.text = "Popped stack: 3 ^ 2";
+			valueHard.text = "Current value: 3";
+			hint.text = "When evaluating, operators cause the stack to pop twice. Put the first element on the right of the expression, the second on the left";
+			m.pop ();
+			y++;
+			break;
+		case (45):
+			helperHard.text = "Applying operation: 3 ^ 2 = 9. Pushing 9 to stack";
+			valueHard.text = "Current value: 9";
+			y++;
+			break;
+		case (46):
+			helperHard.text = "Pushed operand to stack. Remaining expression: ^ 4 / +";
+			valueHard.text = "";
 			m.push("9");
 			x++;
+			y++;
 			break;
-		case (21):
+		case (47):
 			helperHard.text = "Operator, popping stack twice.";
 			m.pop();
 			m.pop();
-			x++;
+			y++;
 			break;
-		case (22):
-			helperHard.text = "Applying operation: 2 ^ 9 = 512. Pushing 512 to stack. Remaining expression: 4 / +";
+		case (48):
+			helperHard.text = "Popped stack:__ ^ 9";
+			m.pop();
+			y++;
+			break;
+		case (49):
+			helperHard.text = "Popped stack: 2 ^ 9";
+			m.pop();
+			y++;
+			break;
+		case (50):
+			helperHard.text = "Applying operation: 2 ^ 9 = 512. Pushing 512 to stack";
+			valueHard.text = "Current value: 512";
+			y++;
+			break;
+		case (51):
+			helperHard.text = "Pushed operand to stack. Remaining expression: 4 / +";
 			m.push("512");
 			x++;
+			y++;
 			break;
-		case (23):
-			helperHard.text = "Operand, pushing to stack. Remaining expression: / +";
+		case (52):
+			helperHard.text = "Operand, pushing to stack";
+			valueHard.text = "Current value: 4";
+			hint.text = "When evaluating, always push operands to stack";
+			y++;
+			break;
+		case (53):
+			helperHard.text = "Pushed operand to stack. Remaining expression: / +";
 			valueHard.text = "Current value: 4";
 			hint.text = "When evaluating, always push operands to stack";
 			m.push("4");
+			y++;
 			x++;
 			break;
-		case (24):
+		case (54):
 			helperHard.text = "Operator, popping stack twice.";
-			m.pop ();
-			m.pop();
 			valueHard.text = "Current value: /";
 			hint.text = "When evaluating, operators cause the stack to pop twice. Put the first element on the right of the expression, the second on the left";
-			x++;
+			y++;
 			break;
-		case (25):
+		case (55):
+			helperHard.text = "Popped stack: __ / 4";
+			m.pop ();
+			valueHard.text = "Current value: 4";
+			hint.text = "When evaluating, operators cause the stack to pop twice. Put the first element on the right of the expression, the second on the left";
+			y++;
+			break;
+		case (56):
+			helperHard.text = "Popped stack: 512 / 4";
+			m.pop ();
+			valueHard.text = "Current value: 512";
+			hint.text = "When evaluating, operators cause the stack to pop twice. Put the first element on the right of the expression, the second on the left";
+			y++;
+			break;
+		case (57):
 			helperHard.text = "Applying operation: 512 / 4 = 128. Pushing 128 to stack. Remaining expression: +";
+			valueHard.text = "Current value: 128";
+			y++;
+			break;
+		case (58):
+			helperHard.text = "Pushed operand to stack. Remaining expression: +";
+			valueHard.text = "Current value: 128";
 			m.push("128");
+			y++;
 			x++;
 			break;
-		case (26):
+		case (59):
 			helperHard.text = "Operator, popping stack twice.";
 			valueHard.text = "Current value: +";
-			m.pop();
-			m.pop();
-			x++;
+			y++;
 			break;
-		case (27):
-
+		case (60):
+			helperHard.text = "Popped stack: __ + 1";
+			valueHard.text = "Current value: 1";
+			m.pop();
+			y++;
+			break;
+		case (61):
+			helperHard.text = "Popped stack: 128 + 1";
+			valueHard.text = "Current value: +128";
+			m.pop();
+			y++;
+			break;
+		case (62):
 			helperHard.text = "Applying operation: 128 + 1 = 129. Houston, we have an answer!";
 			m.push ("129");
 			hint.text = "";
