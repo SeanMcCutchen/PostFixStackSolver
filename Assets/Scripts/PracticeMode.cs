@@ -122,6 +122,15 @@ public class PracticeMode : MonoBehaviour {
 
 
 	}
+	public void checkAnswer()
+	{
+		if (postfixsolver.solve(expr [probindex]) != Int32.Parse(theiranswer))
+			wrong = 1;
+		else
+			wrong = -1;
+
+
+	}
 	public void checkISP()
 	{
 		switch (test [curr]) {
@@ -265,6 +274,7 @@ public class PracticeMode : MonoBehaviour {
 
 	public void reset() {
 		curr = 0;
+		currvalue.text = test [curr];
 		m = new MyStack ();
 		postfix = "";
 	}

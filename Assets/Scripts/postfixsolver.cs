@@ -6,7 +6,7 @@ using System;
 public class postfixsolver : MonoBehaviour {
 	
 
-	public int solve(string postfix){
+	public static int solve(string postfix){
 				postfix = postfix.Trim();
 				string[] ans = postfix.Split(' ');
                 Stack<int> eval = new Stack<int>();
