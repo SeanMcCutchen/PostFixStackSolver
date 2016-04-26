@@ -36,6 +36,7 @@ public class EasyMode : MonoBehaviour {
 	public Text hint;
 	public Image table;
 	public AudioSource sound;
+	string[] test;
 
 	char [] prob2;
 	bool which;
@@ -48,7 +49,7 @@ public class EasyMode : MonoBehaviour {
 		problem1 = "[2*(6/2)+(3^2)]";
 		problem2 = "[(2+4)+3*(4/2)";
 		problem3 = "[1+(2^2^2)/6]";
-		problem4 = "[8-(3+1)]";
+		problem4 = "[ 8 - ( 3 + 1 ) ]";
 
 
 		which = false;
@@ -60,6 +61,8 @@ public class EasyMode : MonoBehaviour {
 
 		prob2 = problem4.ToCharArray ();
 		txtEasy.text = "Expression: " + problem4;
+		test = problem4.Split (' ');
+
 	}
 
 	// Update is called once per frame
@@ -73,7 +76,15 @@ public class EasyMode : MonoBehaviour {
 			icp.text = "";
 			postfixString.text = "";
 		}
+		StringBuilder str = new StringBuilder();
+		for (int i = 0; i < test.Length; i++) {
+			if (i ==  z)
+				str.Append (string.Format ("<color=yellow>{0}</color>", test [z]));
+			else
+				str.Append (test[i]);
+		}
 
+		txtEasy.text = "Infix String: " + str.ToString();
 		// Rectangle needs to be added
 		if (rects.Count < m.size () ) {
 			// Update other rectangles
@@ -176,8 +187,8 @@ public class EasyMode : MonoBehaviour {
 	If Operand, Write it to the Postfix String
 	If Scope Opener or Operator
 		If the In-Coming Priority (ICP) is greater than the In-Stack Priority (ISP) Push
-		If ICP < ISP Pop – Write Values To Postfix Until Can Push
-		If Scope Closer, Pop till find opener – Write values to Postfix – Throw out scope opener!
+		If ICP < ISP Pop ñ Write Values To Postfix Until Can Push
+		If Scope Closer, Pop till find opener ñ Write values to Postfix ñ Throw out scope opener!
 	*/
 	public void easyDemo(){
 		switch (x) {
@@ -186,9 +197,9 @@ public class EasyMode : MonoBehaviour {
 			hint.text = "If Operand, Write it to the Postfix String" +
 				"\nIf Scope Opener or Operator" +
 				"\n\t\t\tIf the ICP is greater than the ISP Push" +
-				"\n\t\t\tIf ICP < ISP Pop – Write Values To Postfix Until Can Push" +
-				"\n\t\t\tIf Scope Closer, Pop till find opener – Write values to Postfix " +
-				"– Throw out scope opener!";
+				"\n\t\t\tIf ICP < ISP Pop ñ Write Values To Postfix Until Can Push" +
+				"\n\t\t\tIf Scope Closer, Pop till find opener ñ Write values to Postfix " +
+				"ñ Throw out scope opener!";
 			x++;
 			break;
 		case (1):
@@ -211,6 +222,7 @@ public class EasyMode : MonoBehaviour {
 			helperEasy.text = "Operand found";
 			hint.text = "Hint: Always appending operand to postfix string";
 			x++;
+			z++;
 			break;
 		case (4):
 			helperEasy.text = "Operand, adding to postfix string: 8";
@@ -223,6 +235,7 @@ public class EasyMode : MonoBehaviour {
 			valueEasy.text = "Current value: - ";
 			hint.text = "Hint: Incoming priority greater than instack priority";
 			x++;
+			z++;
 			break;
 		case (6):
 			m.push ("-");
@@ -237,6 +250,7 @@ public class EasyMode : MonoBehaviour {
 			valueEasy.text = "Current value: ( ";
 			hint.text = "Hint: Always push scope openers";
 			x++;
+			z++;
 			break;
 		case (8):
 			m.push ("(");
@@ -250,6 +264,7 @@ public class EasyMode : MonoBehaviour {
 			helperEasy.text = "Operand found";
 			hint.text = "Hint: Always append operands to postfix string";
 			x++;
+			z++;
 			break;
 		case (10):
 			helperEasy.text = "Operand, appending to postfix string: 3";
@@ -262,6 +277,7 @@ public class EasyMode : MonoBehaviour {
 			valueEasy.text = "Current value: + ";
 			hint.text = "Hint: Incoming priority greater than instack priority";
 			x++;
+			z++;
 			break;
 		case (12):
 			m.push ("+");
@@ -275,6 +291,7 @@ public class EasyMode : MonoBehaviour {
 			helperEasy.text = "Operand found";
 			hint.text = "Hint: Always append operands to postfix string";
 			x++;
+			z++;
 			break;
 		case (14):
 			helperEasy.text = "Operand, adding to postfix string: 1";
@@ -284,8 +301,9 @@ public class EasyMode : MonoBehaviour {
 		case (15):
 			valueEasy.text = "Current value: ) ";
 			helperEasy.text = "Scope closer found";
-			hint.text = "Hint: Pop till find opener – Write values to Postfix – Throw out scope opener!";
+			hint.text = "Hint: Pop till find opener ñ Write values to Postfix ñ Throw out scope opener!";
 			x++;
+			z++;
 			break;
 		case (16):
 			helperEasy.text = "Operator found - Pop and append  to the string";
@@ -307,6 +325,7 @@ public class EasyMode : MonoBehaviour {
 			helperEasy.text = "Scope closer found";
 			hint.text = "Hint: Pop until scope opener is found";
 			x++;
+			z++;
 			break;
 		case (19):
 			helperEasy.text = "Popping the stack and appending operator to postfix string.";

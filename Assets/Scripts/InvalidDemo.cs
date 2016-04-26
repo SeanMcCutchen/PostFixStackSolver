@@ -6,7 +6,7 @@ using System;
 using System.Text;
 
 public class InvalidDemo: MonoBehaviour {
-	
+
 	static string problem1,problem2, problem3 ,problem4, problem5;
 	MyStack m = new MyStack ();
 	MyStack t = new MyStack ();
@@ -16,7 +16,6 @@ public class InvalidDemo: MonoBehaviour {
 	List<Rect> garbage = new List<Rect>();
 	string numbers = "0123456789";
 	string expressions = "+-/*^()[]";
-	//int t;
 	int x = 0;
 	int y = 0;
 	int z = 0;
@@ -35,15 +34,16 @@ public class InvalidDemo: MonoBehaviour {
 	public Text exprDisplay;
 	public Image table;
 	public AudioSource sound;
-	
-	
+	string[] test;
+
+
 	char [] prob3;
-	
+
 	bool which;
 	int countop,countcp,countobr, countcbr;
 	// Use this for initialization
 	void Start () {
-		
+
 		table.gameObject.SetActive (false);
 		evaluate = true;
 		problem1 = "[2*(6/2)+(3^2)]";
@@ -52,18 +52,28 @@ public class InvalidDemo: MonoBehaviour {
 		problem4 = "[8-(3+1)]";
 		problem5 = "[ ( 4 - 3 ) * ( 4 + 5 ]";
 		prob3 = problem3.ToCharArray ();
-		exprDisplay.text = "Infix Expression: " + problem5;
+		txtInval.text = "Infix Expression: " + problem5;
 		icp.text = "";
 		isp.text = "";
-		
-		
+		test = problem5.Split (' ');
+
+
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
 
-		
+		StringBuilder str = new StringBuilder();
+		for (int i = 0; i < test.Length; i++) {
+			if (i ==  x)
+				str.Append (string.Format ("<color=yellow>{0}</color>", test [x]));
+			else
+				str.Append (test[i]);
+		}
+
+		txtInval.text = "Infix String: " + str.ToString();
+
 		// Rectangle needs to be added
 		if (rects.Count < m.size () ) {
 			// Update other rectangles
@@ -72,10 +82,10 @@ public class InvalidDemo: MonoBehaviour {
 				temp.y += 90;
 				rects[i] = temp;
 			}
-			rects.Add (new Rect (80, 100, 150, 75));
+			rects.Add (new Rect (130, 150, 150, 75));
 			//Debug.Log ("adding rect");
-			
-			
+
+
 		} else if (rects.Count > m.size () ) {
 			for (int i = 0; i < rects.Count; ++i) {
 				Rect temp = rects[i];
@@ -85,13 +95,13 @@ public class InvalidDemo: MonoBehaviour {
 			rects.RemoveAt(rects.Count-1);
 			//Debug.Log ("removing rect");
 		}
-		
-		
+
+
 	}
-	
+
 	void OnGUI () {
 		GUIStyle style = new GUIStyle (GUI.skin.button);
-		style.fontSize = 24;
+		style.fontSize = 40;
 		if (m.size () > 0 && t.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
@@ -101,9 +111,9 @@ public class InvalidDemo: MonoBehaviour {
 				GUI.contentColor = Color.red;
 				GUI.Box (garbage[x], t.getAt (x)+"",style);
 			}
-			
+
 		}
-		
+
 		else if (m.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
@@ -116,8 +126,8 @@ public class InvalidDemo: MonoBehaviour {
 				GUI.Box (garbage[x], t.getAt (x)+"",style);
 			}
 		}
-		
-		
+
+
 	}
 
 	public void bracketDemo(){
@@ -133,19 +143,18 @@ public class InvalidDemo: MonoBehaviour {
 			m.push ("[");
 			helperInval.text = "Pushed scope opener to stack";
 			y++;
-			x++;
 			break;
 		case (2):
 			helperInval.text = "Pushing a scope opener";
 			valueInval.text = "Current value: ( ";
 			hint.text = "Hint: Always push scope openers";
 			y++;
+			x++;
 			break;
 		case (3):
 			m.push ("(");
 			helperInval.text = "Pushed scope opener to stack";
 			y++;
-			x++;
 			break;
 		case (4):
 			helperInval.text = "Operand, discarding";
@@ -173,6 +182,7 @@ public class InvalidDemo: MonoBehaviour {
 			valueInval.text = "Current value: )";
 			hint.text = "Pop stack after pushinga scope closer, make sure the brackets match";
 			y++;
+			x++;
 			break;
 		case (8):
 			m.push (")");
@@ -194,7 +204,6 @@ public class InvalidDemo: MonoBehaviour {
 		case (11):
 			helperInval.text = "Brackets match! Moving on with expression";
 			y++;
-			x++;
 			break;
 		case (12):
 			helperInval.text = "Operator, discarding";
@@ -208,6 +217,7 @@ public class InvalidDemo: MonoBehaviour {
 			valueInval.text = "Current value: (";
 			hint.text = "Always push scope openers";
 			y++;
+			x++;
 			break;
 		case (14):
 			m.push ("(");
@@ -240,6 +250,7 @@ public class InvalidDemo: MonoBehaviour {
 			valueInval.text = "Current value: ]";
 			hint.text = "Pop stack after pushinga scope closer, make sure the brackets match";
 			y++;
+			x++;
 			break;
 		case (19):
 			m.push ("]");

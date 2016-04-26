@@ -6,8 +6,8 @@ using System;
 using System.Text;
 
 public class DemoMode : MonoBehaviour {
-	
-	static string problem1,problem2, problem3 ,problem4;
+
+	static string problem1, prob1,problem2, problem3 ,problem4;
 	MyStack m = new MyStack ();
 	//Stack<char> main = new Stack<char>();
 	//Stack<char> trash = new Stack<char>();
@@ -22,6 +22,8 @@ public class DemoMode : MonoBehaviour {
 	public Text helper;
 	public Button btn;
 	public AudioSource sound;
+	string[] test;
+
 
 	char [] prob;
 
@@ -29,33 +31,45 @@ public class DemoMode : MonoBehaviour {
 	int countop,countcp,countobr, countcbr;
 	// Use this for initialization
 	void Start () {
-		
-		problem1 = "[2*(6/2)+(3^2)]";
+
+		problem1 = "[ 2 * ( 6 / 2 ) + ( 3 ^ 2 ) ]";
 		problem2 = "[(2+4)+3*(4/2)";
 		problem3 = "[1+(2^2^2)/6]";
 		problem4 = "[8-(3+1)]";
+		prob1="[2*(6/2)+(3^2)]";
 
 		helper.text = "";
 		which = false;
-/*		countop = problem1.Split('(').Length - 1;
+		/*		countop = problem1.Split('(').Length - 1;
 		countcp = problem1.Split(')').Length - 1;
 		countobr = problem1.Split('[').Length - 1;
 		countcbr = problem1.Split(']').Length - 1;
 		*/
-		prob = problem1.ToCharArray ();
+		prob = prob1.ToCharArray ();
 		txt.text = "Expression: " + problem1;
+		test = problem1.Split (' ');
 
-	//	prob3 = problem3.ToCharArray ();
-	//txtHard.text = "Expression: " + problem3;
-	
+		//	prob3 = problem3.ToCharArray ();
+		//txtHard.text = "Expression: " + problem3;
 
-		
+
+
 	}
 
 	// Update is called once per frame
 	void Update () {
+		StringBuilder str = new StringBuilder();
+		for (int i = 0; i < test.Length; i++) {
+			if (i ==  x)
+				str.Append (string.Format ("<color=yellow>{0}</color>", test [x]));
+			else
+				str.Append (test[i]);
+		}
+
+		txt.text = "Infix String: " + str.ToString();
+
 		if (x < prob.Length)
-		value.text = "Current value: " +prob[x];
+			value.text = "Current value: " +prob[x];
 		//valueHard.text = "Current value: " + prob [x];
 		// Rectangle needs to be added
 		if (rects.Count < m.size () ) {
@@ -67,8 +81,8 @@ public class DemoMode : MonoBehaviour {
 			}
 			rects.Add (new Rect (150, 200, 200, 75));
 			//Debug.Log ("adding rect");
-			
-			
+
+
 		} else if (rects.Count > m.size () ) {
 			for (int i = 0; i < rects.Count; ++i) {
 				Rect temp = rects[i];
@@ -78,7 +92,7 @@ public class DemoMode : MonoBehaviour {
 			rects.RemoveAt(rects.Count-1);
 			//Debug.Log ("removing rect");
 		}
-/*		
+		/*		
 		else if (garbage.Count < t.size () ) {
 			// Update other rectangles
 			for (int i = 0; i < garbage.Count; ++i) {
@@ -101,7 +115,7 @@ public class DemoMode : MonoBehaviour {
 		}
 */		
 	}
-	
+
 	void OnGUI () {
 		GUIStyle style = new GUIStyle (GUI.skin.button);
 		style.fontSize = 40;
@@ -121,7 +135,7 @@ public class DemoMode : MonoBehaviour {
 		}
 
 	}
-		
+
 
 
 	public void bracketDemo(){
@@ -328,10 +342,10 @@ public class DemoMode : MonoBehaviour {
 
 
 
-		
+
 	}
-	
-	
+
+
 
 
 	/*public void stepThrough (){
