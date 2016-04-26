@@ -44,16 +44,10 @@ public class PracticeMode : MonoBehaviour {
 	String postfix;
 	String [] test;
 	String popped;
-	public Button check1;
-	public Button check2;
-	public Button applyOP;
-	public Button append;
+	public Button check1,check2,applyOP,append;
 	public Image table;
 	bool bracket, build, eval,isvalid; 
-	int temp1;
-	int temp2;
-	int temp3;
-	int wrong;
+	int temp1,temp2,temp3,wrong, isp, theirisp;
 	bool isdone = false;
 	bool check = false;
 	int curr = 0;
@@ -128,6 +122,46 @@ public class PracticeMode : MonoBehaviour {
 
 
 	}
+	public void checkISP()
+	{
+		switch (test [curr]) {
+		case('+'):
+			isp = 2;
+			break;
+		case('-'):
+			isp = 2;
+			break;
+		case('*'):
+			isp = 4;
+			break;
+		case('/'):
+			isp = 4;
+			break;
+		case('^'):
+			isp = 5;
+			break;
+		case('('):
+			isp = 0;
+			break;
+		case('{'):
+			isp = 0;
+			break;	
+		case('['):
+			isp = 0;
+			break;
+		default:
+			isp = 0;
+			break;
+		}
+		if (theirisp != isp) {
+			wrong = 1;
+			reset ();
+		} else
+			wrong = -1;
+
+
+	}
+
 	public void appendToString()
 	{
 		if (curr < test.Length) {
