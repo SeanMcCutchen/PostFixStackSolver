@@ -11,7 +11,11 @@ public class MyStack {
 		elems = new string[100];
 		top = -1;
 	}
-	
+
+	public int getTop()
+	{
+		return top;
+	}
 	public void push(string elem) {
 		top += 1;
 		if (top < elems.Length) {

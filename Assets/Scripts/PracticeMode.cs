@@ -9,7 +9,7 @@ public class PracticeMode : MonoBehaviour {
 	//var expr = new List<Type>();
 
 
-	List<string> expr = new List<string>{"{ }", "[ ( 5 + 7 ) * ( 23 - 5 ) ]", "100 / ( 5 * 4 ) ","[ ( 2 ^ 3 ) - 8 ]"
+	List<string> expr = new List<string>{"1 + ( 52 - 34)", "[ ( 5 + 7 ) * ( 23 - 5 ) ]", "100 / ( 5 * 4 ) ","[ ( 2 ^ 3 ) - 8 ]"
 		, "5 * 8 - 8 / 4", "( 55 / 5 + 27 ) + 5 ^ 2", "55 / 5 - 10", "[1 + ( 5 * 8 - 10 ) / 6 ] "
 		, "[ ( 5 ^ 3 ^ 2 ) / ( 100 - 19 * 5 ) ]", "( 3 ^ 2 ^ 3 ) ",
 		"50 - ( 3 + 7 * 4 / 2 ) ", "[ ( 5 ^ 2 ) / 5 ] ", 
@@ -44,7 +44,8 @@ public class PracticeMode : MonoBehaviour {
 	String postfix;
 	String [] test;
 	String popped;
-	public Button check1,check2,applyOP,append;
+	public Button check1,check2,applyOP,append,pop,push,invalid,resetbtn,mainmenu,loadn;
+	List <Button> btnlist = new List<Button>();
 	public Image table;
 	bool bracket, build, eval,isvalid, canpop; 
 	int temp1,temp2,temp3,wrong, isp, theirisp;
@@ -59,6 +60,17 @@ public class PracticeMode : MonoBehaviour {
 		test = expr [probindex].Split (' ');
 		applyOP.gameObject.SetActive(false);
 		canpop = true;
+		btnlist.Add (check1);
+		btnlist.Add (check2);
+		btnlist.Add (applyOP);
+		btnlist.Add (append);
+		btnlist.Add (pop);
+		btnlist.Add (push);
+		btnlist.Add (invalid);
+		btnlist.Add (resetbtn);
+		btnlist.Add (mainmenu);
+		btnlist.Add (loadn);
+
 		//check2.gameObject.SetActive(false);
 	}
 
@@ -179,6 +191,13 @@ public class PracticeMode : MonoBehaviour {
 
 
 	}
+	public void hideAllBut(Button btn){
+		foreach (Button kk in btnlist) {
+			if(kk!=btn)
+				kk.gameObject.SetActive(false);
+		}
+
+	}
 
 	public void appendToString()
 	{
@@ -202,20 +221,24 @@ public class PracticeMode : MonoBehaviour {
 
 	public void popStack()
 	{
-		if (m.peek() == "]")
-		if (m.getAt (m.size() - 2) != "[") {
+		
+		if (test[curr] != "]")
+		if (m.getAt (m.getTop()) == "[") {
 			canpop = false;
 			validity.text = "Brackets don't match up";
+			hideAllBut (invalid);
 		}
-		if (m.peek() == ")")
-		if (m.getAt (m.size() - 2) != "(") {
+		if (test[curr] != ")")
+		if (m.getAt (m.getTop()) == "(") {
 			canpop = false;
 			validity.text = "Brackets don't match up";
+			hideAllBut (invalid);
 		}
-		if (m.peek ()== "}")
-		if (m.getAt (m.size() - 2) != "{") {
+		if (test[curr]!= "}")
+		if (m.getAt (m.getTop()) == "{") {
 			canpop = false;
 			validity.text = "Brackets don't match up";
+			hideAllBut (invalid);
 		}
 		if (m.isEmpty() == false&&canpop==true)
 			popped = m.pop();
