@@ -44,16 +44,18 @@ public class PracticeMode : MonoBehaviour {
 	String postfix;
 	String [] test;
 	String popped;
-	public Button check1,check2,applyOP,append,pop,push,invalid,resetbtn,mainmenu,loadn;
+	public Button checkPostFix,checkEval,applyOP,append,pop,push,invalid,resetbtn,loadn,discardbtn;
 	List <Button> btnlist = new List<Button>();
 	public Image table;
 	public AudioSource sound;
 	bool bracket, build, eval,isvalid, canpop; 
 	int temp1,temp2,temp3,wrong, isp, theirisp;
-	bool isdone = false;
-	bool check = false;
+	bool switchToPostFix = false;
+	bool switchToEvaluate = false;
+	int checkWhenOver = 0;
 	int curr = 0;
 	int currFix = 0;
+	bool bracketEval = false;
 	String theiranswer = "";
 	// Use this for initialization
 	void Start () {
@@ -61,18 +63,19 @@ public class PracticeMode : MonoBehaviour {
 		test = expr [probindex].Split (' ');
 		applyOP.gameObject.SetActive(false);
 		canpop = true;
-		btnlist.Add (check1);
-		btnlist.Add (check2);
+		btnlist.Add (checkPostFix);
+		btnlist.Add (checkEval);
 		btnlist.Add (applyOP);
 		btnlist.Add (append);
 		btnlist.Add (pop);
 		btnlist.Add (push);
 		btnlist.Add (invalid);
 		btnlist.Add (resetbtn);
-		btnlist.Add (mainmenu);
-		btnlist.Add (loadn);
 
-		//check2.gameObject.SetActive(false);
+		btnlist.Add (loadn);
+		btnlist.Add (discardbtn);
+		hideAllBut(new List<Button>{discardbtn,push,pop,invalid,resetbtn});
+		//checkEval.gameObject.SetActive(false);
 	}
 
 
@@ -80,25 +83,50 @@ public class PracticeMode : MonoBehaviour {
 	void Update () {
 		//StringBuilder strBuilder = new StringBuilder(expr[probindex]);
 	//	strBuilder[curr] =string.Format("<color=blue>{0}</color>",test[curr]);
+		if (checkWhenOver == 0)
+			bracketEval = true;
+		if (checkWhenOver == 2) {
+			switchToPostFix = true;
+			hideAllBut(new List<Button>{append,push,pop,invalid,checkPostFix,resetbtn});
+		}
+		if (checkWhenOver == 3) {
+			switchToEvaluate = true;
+			hideAllBut(new List<Button>{push,pop,applyOP,checkEval,resetbtn,loadn});
+		}
+		if (curr == test.Length) {
+			checkWhenOver = 2;
+			curr = 0;
+		}
+		if (checkWhenOver == 2&&curr == test.Length-1) {
+			checkWhenOver = 3;
+			curr = 0;
+		}
+		if (checkWhenOver == 3 && curr == test.Length-1) {
+			
+			loadnextProb ();
+
+		}
+	
+
 
 		//expr[probindex]=strBuilder.ToString();
 		StringBuilder str = new StringBuilder();
 		foreach (String s in test) {
-			if (s == test [curr])
+			if (curr<test.Length&&s == test [curr])
 				str.Append (string.Format ("<color=yellow>{0}</color>", test [curr]));
 			else
 				str.Append (s);
 		}
-		if (check != true) {
+		if (switchToEvaluate != true) {
 			postfixString.text = postfix;
 			infixString.text = "Infix String: " + str.ToString();
 		}
-		if(isdone!=true && check != true&& curr<test.Length)
+		if(switchToPostFix!=true && switchToEvaluate != true&& curr<test.Length)
 			currvalue.text = "Current Value: " + test [curr];
-		if (isdone == true) {
+		if (switchToPostFix == true) {
 
-			check2.gameObject.SetActive(true);
-			check1.gameObject.SetActive(false);
+			checkEval.gameObject.SetActive(true);
+			checkPostFix.gameObject.SetActive(false);
 			append.gameObject.SetActive(false);
 
 
@@ -114,7 +142,7 @@ public class PracticeMode : MonoBehaviour {
 		if (curr == test.Length - 1) {
 			theiranswer = postfix;
 			//m = new MyStack ();
-			//isdone = true;
+			//switchToPostFix = true;
 		}
 
 		if (rects.Count < m.size () ) {
@@ -143,7 +171,7 @@ public class PracticeMode : MonoBehaviour {
 
 	public void pushToStack ()
 	{
-		if (isdone==true) {
+		if (switchToPostFix==true) {
 			String[] splitit = theiranswer.Split (' ');
 			m.push(splitit[postcurr]);
 			postcurr++;
@@ -158,9 +186,10 @@ public class PracticeMode : MonoBehaviour {
 	}
 	public void discard ()
 	{
-		curr++;
-		currvalue.text = test [curr];
-
+		if (curr < test.Length) {
+			curr++;
+			currvalue.text = test [curr];
+		}
 	}
 	public void checkAnswer()
 	{
@@ -176,7 +205,7 @@ public class PracticeMode : MonoBehaviour {
 		sound.Play ();
 		return temp;
 	}
-	public void checkISP()
+/*	public void checkISP()
 	{
 		switch (test [curr]) {
 		case("+"):
@@ -214,7 +243,7 @@ public class PracticeMode : MonoBehaviour {
 			wrong = -1;
 
 
-	}
+	}*/
 	public void hideAllBut(List<Button> btn){
 		foreach (Button kk in btnlist) {
 			if(btn.Contains(kk)==false)
@@ -246,7 +275,7 @@ public class PracticeMode : MonoBehaviour {
 	public void popStack()
 	{
 		
-		if (test[curr] != "]")
+		if (test[curr] != "]"&&)
 		if (m.getAt (m.getTop()) == "[") {
 			canpop = false;
 			validity.text = "Brackets don't match up";
@@ -275,7 +304,7 @@ public class PracticeMode : MonoBehaviour {
 		Debug.Log (postfixes [currFix]);
 		if (postfix == postfixes [currFix])
 		{
-			check = true;
+			
 			infixString.text = "Postfix String: " + postfix;
 			postfixString.text = "";
 			currvalue.text = "";
@@ -287,7 +316,7 @@ public class PracticeMode : MonoBehaviour {
 
 	}
 	public void toggle() {
-		if (check) {
+		if (switchToEvaluate) {
 			append.gameObject.SetActive (false);
 			applyOP.gameObject.SetActive (true);
 		} else {
@@ -297,31 +326,31 @@ public class PracticeMode : MonoBehaviour {
 	}
 
 	public void applyOperation() {
-		if (postfix [curr] == '+') {
+		if (test[curr] == "+"&&m.size()>=2) {
 			temp2 = System.Int32.Parse(popS ());
 			temp1 = System.Int32.Parse(popS ());
 			temp3 = temp1 + temp2;
 			m.push (temp3.ToString());
 		}
-		else if (postfix [curr] == '-') {
+		else if (test [curr] == "-"&&m.size()>=2) {
 			temp2 = System.Int32.Parse(popS ());
 			temp1 = System.Int32.Parse(popS ());
 			temp3 = temp1 - temp2;
 			m.push (temp3.ToString());
 		}
-		else if (postfix [curr] == '*') {
+		else if (test[curr] == "*"&&m.size()>=2) {
 			temp2 = System.Int32.Parse(popS ());
 			temp1 = System.Int32.Parse(popS ());
 			temp3 = temp1 * temp2;
 			m.push (temp3.ToString());
 		}
-		else if (postfix [curr] == '/') {
+		else if (test[curr] == "/"&&m.size()>=2) {
 			temp2 = System.Int32.Parse(popS ());
 			temp1 = System.Int32.Parse(popS ());
 			temp3 = temp1 / temp2;
 			m.push (temp3.ToString());
 		}
-		else if (postfix [curr] == '^') {
+		else if (test [curr] == "^"&&m.size()>=2) {
 			temp2 = System.Int32.Parse(popS ());
 			temp1 = System.Int32.Parse(popS ());
 			temp3 = (int)Math.Pow (temp1,temp2);
@@ -335,6 +364,8 @@ public class PracticeMode : MonoBehaviour {
 		currvalue.text = test [curr];
 		m = new MyStack ();
 		postfix = "";
+		checkWhenOver = 0;
+		hideAllBut(new List<Button>{discardbtn,push,pop,invalid,resetbtn});
 	}
 
 	public void loadnextProb() {
@@ -344,6 +375,7 @@ public class PracticeMode : MonoBehaviour {
 		currvalue.text = test [curr];
 		m = new MyStack ();
 		postfix = "";
+		hideAllBut(new List<Button>{discardbtn,push,pop,invalid,resetbtn});
 	}
 	void OnGUI () {
 
