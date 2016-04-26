@@ -62,10 +62,10 @@ public class DemoMode : MonoBehaviour {
 			// Update other rectangles
 			for (int i = 0; i < rects.Count; ++i) {
 				Rect temp = rects[i];
-				temp.y += 60;
+				temp.y += 90;
 				rects[i] = temp;
 			}
-			rects.Add (new Rect (100, 70, 100, 50));
+			rects.Add (new Rect (80, 80, 150, 75));
 			//Debug.Log ("adding rect");
 			
 			
