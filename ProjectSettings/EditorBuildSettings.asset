@@ -25,3 +25,5 @@ EditorBuildSettings:
     path: Assets/Scenes/EasyDemo.unity
   - enabled: 1
     path: Assets/Scenes/bracket.unity
+  - enabled: 1
+    path: Assets/Scenes/InvalidDemo.unity

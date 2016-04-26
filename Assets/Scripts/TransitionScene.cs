@@ -37,4 +37,7 @@ public class TransitionScene : MonoBehaviour {
 	public void loadHard() {
 		Application.LoadLevel ("HardDemo");
 	}
+	public void loadInvalid() {
+		Application.LoadLevel ("InvalidDemo");
+	}
 }
