@@ -140,6 +140,7 @@ public class PracticeMode : MonoBehaviour {
 
 	}
 	int postcurr = 0;
+
 	public void pushToStack ()
 	{
 		if (isdone==true) {
@@ -153,6 +154,12 @@ public class PracticeMode : MonoBehaviour {
 		} 
 
 
+
+	}
+	public void discard ()
+	{
+		curr++;
+		currvalue.text = test [curr];
 
 	}
 	public void checkAnswer()
@@ -208,9 +215,9 @@ public class PracticeMode : MonoBehaviour {
 
 
 	}
-	public void hideAllBut(Button btn){
+	public void hideAllBut(List<Button> btn){
 		foreach (Button kk in btnlist) {
-			if(kk!=btn)
+			if(btn.Contains(kk)==false)
 				kk.gameObject.SetActive(false);
 		}
 
@@ -243,19 +250,19 @@ public class PracticeMode : MonoBehaviour {
 		if (m.getAt (m.getTop()) == "[") {
 			canpop = false;
 			validity.text = "Brackets don't match up";
-			hideAllBut (invalid);
+			hideAllBut (new List<Button>{invalid});
 		}
 		if (test[curr] != ")")
 		if (m.getAt (m.getTop()) == "(") {
 			canpop = false;
 			validity.text = "Brackets don't match up";
-			hideAllBut (invalid);
+			hideAllBut (new List<Button>{invalid});
 		}
 		if (test[curr]!= "}")
 		if (m.getAt (m.getTop()) == "{") {
 			canpop = false;
 			validity.text = "Brackets don't match up";
-			hideAllBut (invalid);
+			hideAllBut (new List<Button>{invalid});
 		}
 		if (m.isEmpty() == false&&canpop==true)
 			popped = popS ();
