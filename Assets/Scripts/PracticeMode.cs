@@ -58,6 +58,7 @@ public class PracticeMode : MonoBehaviour {
 		table.gameObject.SetActive (false);
 		test = expr [probindex].Split (' ');
 		applyOP.gameObject.SetActive(false);
+		canpop = true;
 		//check2.gameObject.SetActive(false);
 	}
 
@@ -78,6 +79,14 @@ public class PracticeMode : MonoBehaviour {
 
 
 		}
+
+
+		/*if(prob index == index of invalid expression)
+		 * isvalid = false;
+		 * 
+		 * 
+		 * 
+		 */
 		if (curr == test.Length - 1) {
 			theiranswer = postfix;
 			m = new MyStack ();
@@ -178,6 +187,8 @@ public class PracticeMode : MonoBehaviour {
 			curr++;
 		}
 	}
+
+
 	public void checkValid()
 	{
 
@@ -208,8 +219,8 @@ public class PracticeMode : MonoBehaviour {
 		}
 		if (m.isEmpty() == false&&canpop==true)
 			popped = m.pop();
-		if(popped != "(" && popped != "[" && popped != ")" && popped != "]")
-			postfix = string.Concat (postfix,  popped + " " );
+	//	if(popped != "(" && popped != "[" && popped != ")" && popped != "]")
+		//	postfix = string.Concat (postfix,  popped + " " );
 	}
 
 	public void checkpostfix() {
@@ -282,6 +293,8 @@ public class PracticeMode : MonoBehaviour {
 	public void loadnextProb() {
 		curr = 0;
 		probindex++;
+		test = expr [probindex].Split (' ');
+		currvalue.text = test [curr];
 		m = new MyStack ();
 		postfix = "";
 	}
