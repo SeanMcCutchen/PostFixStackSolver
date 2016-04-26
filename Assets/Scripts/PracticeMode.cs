@@ -46,6 +46,7 @@ public class PracticeMode : MonoBehaviour {
 	String popped;
 	public Button check1,check2,applyOP,append;
 	public Image table;
+	public AudioSource sound;
 	bool bracket, build, eval,isvalid, canpop; 
 	int temp1,temp2,temp3,wrong, isp, theirisp;
 	bool isdone = false;
@@ -140,6 +141,11 @@ public class PracticeMode : MonoBehaviour {
 
 
 	}
+	public string popS() {
+		var temp = m.pop ();
+		sound.Play ();
+		return temp;
+	}
 	public void checkISP()
 	{
 		switch (test [curr]) {
@@ -218,7 +224,7 @@ public class PracticeMode : MonoBehaviour {
 			validity.text = "Brackets don't match up";
 		}
 		if (m.isEmpty() == false&&canpop==true)
-			popped = m.pop();
+			popped = popS ();
 	//	if(popped != "(" && popped != "[" && popped != ")" && popped != "]")
 		//	postfix = string.Concat (postfix,  popped + " " );
 	}
@@ -251,32 +257,32 @@ public class PracticeMode : MonoBehaviour {
 
 	public void applyOperation() {
 		if (postfix [curr] == '+') {
-			temp2 = System.Int32.Parse(m.pop ());
-			temp1 = System.Int32.Parse(m.pop ());
+			temp2 = System.Int32.Parse(popS ());
+			temp1 = System.Int32.Parse(popS ());
 			temp3 = temp1 + temp2;
 			m.push (temp3.ToString());
 		}
 		else if (postfix [curr] == '-') {
-			temp2 = System.Int32.Parse(m.pop ());
-			temp1 = System.Int32.Parse(m.pop ());
+			temp2 = System.Int32.Parse(popS ());
+			temp1 = System.Int32.Parse(popS ());
 			temp3 = temp1 - temp2;
 			m.push (temp3.ToString());
 		}
 		else if (postfix [curr] == '*') {
-			temp2 = System.Int32.Parse(m.pop ());
-			temp1 = System.Int32.Parse(m.pop ());
+			temp2 = System.Int32.Parse(popS ());
+			temp1 = System.Int32.Parse(popS ());
 			temp3 = temp1 * temp2;
 			m.push (temp3.ToString());
 		}
 		else if (postfix [curr] == '/') {
-			temp2 = System.Int32.Parse(m.pop ());
-			temp1 = System.Int32.Parse(m.pop ());
+			temp2 = System.Int32.Parse(popS ());
+			temp1 = System.Int32.Parse(popS ());
 			temp3 = temp1 / temp2;
 			m.push (temp3.ToString());
 		}
 		else if (postfix [curr] == '^') {
-			temp2 = System.Int32.Parse(m.pop ());
-			temp1 = System.Int32.Parse(m.pop ());
+			temp2 = System.Int32.Parse(popS ());
+			temp1 = System.Int32.Parse(popS ());
 			temp3 = (int)Math.Pow (temp1,temp2);
 			m.push (temp3.ToString());
 		}
