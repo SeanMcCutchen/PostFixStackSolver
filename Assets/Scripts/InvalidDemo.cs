@@ -51,7 +51,7 @@ public class InvalidDemo: MonoBehaviour {
 		problem4 = "[8-(3+1)]";
 		problem5 = "[ ( 4 - 3 ) * ( 4 + 5 ]";
 		prob3 = problem3.ToCharArray ();
-		txtInval.text = "Infix Expression: " + problem5;
+		exprDisplay.text = "Infix Expression: " + problem5;
 		icp.text = "";
 		isp.text = "";
 		
