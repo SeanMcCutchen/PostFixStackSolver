@@ -5,10 +5,10 @@ using UnityEngine.UI;
 using System;
 using System.Text;
 public class PracticeMode : MonoBehaviour {
-	
+
 	//var expr = new List<Type>();
-	
-	
+
+
 	List<string> expr = new List<string>{"1 + ( 52 - 34 ) ", "[ ( 5 + 7 ) * ( 23 - 5 ) ]", "100 / ( 5 * 4 ) ","[ ( 2 ^ 3 ) - 8 ]"
 		, "5 * 8 - 8 / 4", "( 55 / 5 + 27 ) + 5 ^ 2", "55 / 5 - 10", "[1 + ( 5 * 8 - 10 ) / 6 ] "
 		, "[ ( 5 ^ 3 ^ 2 ) / ( 100 - 19 * 5 ) ]", "( 3 ^ 2 ^ 3 ) ",
@@ -37,7 +37,7 @@ public class PracticeMode : MonoBehaviour {
 	public Text postfixString;
 	public Text currvalue;
 	public Text validity;
-	
+
 	private int probindex =0; 
 	List<Rect> rects = new List<Rect>();
 	//List<string> pops = new List<string> ();
@@ -49,8 +49,7 @@ public class PracticeMode : MonoBehaviour {
 	public Button applyOP;
 	public Button append;
 	public Image table;
-	public Button num0,num1,num2,num3,num4,num5,num6,num7,num8,num9;
-	bool bracket, build, eval,isvalid, numsVisible; 
+	bool bracket, build, eval,isvalid; 
 	int temp1;
 	int temp2;
 	int temp3;
@@ -65,11 +64,10 @@ public class PracticeMode : MonoBehaviour {
 		table.gameObject.SetActive (false);
 		test = expr [probindex].Split (' ');
 		applyOP.gameObject.SetActive(false);
-		numsVisible = false;
 		//check2.gameObject.SetActive(false);
 	}
-	
-	
+
+
 	// Update is called once per frame
 	void Update () {
 		if (check != true) {
@@ -79,19 +77,19 @@ public class PracticeMode : MonoBehaviour {
 		if(isdone!=true && check != true)
 			currvalue.text = "Current Value: " + test [curr];
 		if (isdone == true) {
-			
+
 			check2.gameObject.SetActive(true);
 			check1.gameObject.SetActive(false);
 			append.gameObject.SetActive(false);
-			
-			
+
+
 		}
 		if (curr == test.Length - 1) {
 			theiranswer = postfix;
 			m = new MyStack ();
 			isdone = true;
 		}
-		
+
 		if (rects.Count < m.size () ) {
 			// Update other rectangles
 			for (int i = 0; i < rects.Count; ++i) {
@@ -101,8 +99,8 @@ public class PracticeMode : MonoBehaviour {
 			}
 			rects.Add (new Rect (125, 100, 150, 75));
 			//Debug.Log ("adding rect");
-			
-			
+
+
 		} else if (rects.Count > m.size () ) {
 			for (int i = 0; i < rects.Count; ++i) {
 				Rect temp = rects[i];
@@ -112,7 +110,7 @@ public class PracticeMode : MonoBehaviour {
 			rects.RemoveAt(rects.Count-1);
 			//Debug.Log ("removing rect");
 		}
-		
+
 	}
 	int postcurr = 0;
 	public void pushToStack ()
@@ -126,9 +124,9 @@ public class PracticeMode : MonoBehaviour {
 			m.push (test [curr]);
 			curr++;
 		} 
-		
-		
-		
+
+
+
 	}
 	public void appendToString()
 	{
@@ -139,13 +137,13 @@ public class PracticeMode : MonoBehaviour {
 	}
 	public void checkValid()
 	{
-		
+
 		if (isvalid == true)
 			wrong = -1;
 		else 
 			wrong = 1;
-		
-		
+
+
 	}
 
 	public void popStack()
@@ -155,7 +153,7 @@ public class PracticeMode : MonoBehaviour {
 		if(popped != "(" && popped != "[" && popped != ")" && popped != "]")
 			postfix = string.Concat (postfix,  popped + " " );
 	}
-	
+
 	public void checkpostfix() {
 		Debug.Log (postfix);
 		Debug.Log (postfixes [currFix]);
@@ -170,7 +168,7 @@ public class PracticeMode : MonoBehaviour {
 		}
 		else
 			validity.text = "Incorrect postfix expression";
-		
+
 	}
 	public void toggle() {
 		if (check) {
@@ -182,34 +180,6 @@ public class PracticeMode : MonoBehaviour {
 		}
 	}
 
-	public void toggleNums() {
-		if (numsVisible) {
-			num0.gameObject.SetActive (false);
-			num1.gameObject.SetActive (false);
-			num2.gameObject.SetActive (false);
-			num3.gameObject.SetActive (false);
-			num4.gameObject.SetActive (false);
-			num5.gameObject.SetActive (false);
-			num6.gameObject.SetActive (false);
-			num7.gameObject.SetActive (false);
-			num8.gameObject.SetActive (false);
-			num9.gameObject.SetActive (false);
-			numsVisible = false;
-		} else {
-			num0.gameObject.SetActive (true);
-			num1.gameObject.SetActive (true);
-			num2.gameObject.SetActive (true);
-			num3.gameObject.SetActive (true);
-			num4.gameObject.SetActive (true);
-			num5.gameObject.SetActive (true);
-			num6.gameObject.SetActive (true);
-			num7.gameObject.SetActive (true);
-			num8.gameObject.SetActive (true);
-			num9.gameObject.SetActive (true);
-			numsVisible = true;
-		}
-	}
-	
 	public void applyOperation() {
 		if (postfix [curr] == '+') {
 			temp2 = System.Int32.Parse(m.pop ());
@@ -242,14 +212,14 @@ public class PracticeMode : MonoBehaviour {
 			m.push (temp3.ToString());
 		}
 	}
-	
-	
+
+
 	public void reset() {
 		curr = 0;
 		m = new MyStack ();
 		postfix = "";
 	}
-	
+
 	public void loadnextProb() {
 		curr = 0;
 		probindex++;
@@ -268,8 +238,8 @@ public class PracticeMode : MonoBehaviour {
 				GUI.contentColor = Color.green;
 				GUI.Box (rects [i], m.getAt (i) + "", style);
 			}		
-			
-			
+
+
 		} else if (m.size () > 0) {
 			for (int i = 0; i < rects.Count; ++i) {
 				GUI.contentColor = Color.green;
@@ -277,8 +247,8 @@ public class PracticeMode : MonoBehaviour {
 			}		
 		}
 	}
-	
-	
-	
-	
+
+
+
+
 }
