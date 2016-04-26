@@ -37,7 +37,7 @@ public class PracticeMode : MonoBehaviour {
 	public Text postfixString;
 	public Text currvalue;
 	public Text validity;
-
+	List<string> brackets = new List<string>{ "{","(","[",")","]","}"};
 	private int probindex =0; 
 	List<Rect> rects = new List<Rect>();
 	//List<string> pops = new List<string> ();
@@ -275,24 +275,26 @@ public class PracticeMode : MonoBehaviour {
 	public void popStack()
 	{
 		
-		if (test[curr] != "]"&&)
+		if (test[curr] != "]"&&bracketEval==true)
 		if (m.getAt (m.getTop()) == "[") {
 			canpop = false;
 			validity.text = "Brackets don't match up";
 			hideAllBut (new List<Button>{invalid});
 		}
-		if (test[curr] != ")")
+		if (test[curr] != ")"&&bracketEval==true)
 		if (m.getAt (m.getTop()) == "(") {
 			canpop = false;
 			validity.text = "Brackets don't match up";
 			hideAllBut (new List<Button>{invalid});
 		}
-		if (test[curr]!= "}")
+		if (test[curr]!= "}"&&bracketEval==true)
 		if (m.getAt (m.getTop()) == "{") {
 			canpop = false;
 			validity.text = "Brackets don't match up";
 			hideAllBut (new List<Button>{invalid});
 		}
+		if (switchToPostFix == true && brackets.Contains (test [curr]) == false)
+			appendToString ();
 		if (m.isEmpty() == false&&canpop==true)
 			popped = popS ();
 	//	if(popped != "(" && popped != "[" && popped != ")" && popped != "]")
