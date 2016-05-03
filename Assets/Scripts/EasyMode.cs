@@ -29,6 +29,7 @@ public class EasyMode : MonoBehaviour {
 	public Text helperEasy;
 	public Text postFix;
 	public Button nButton;
+	public Button skipButton;
 	public Text buttonText;
 	public Text isp;
 	public Text icp;
@@ -45,7 +46,7 @@ public class EasyMode : MonoBehaviour {
 	void Start () {
 
 		//table.gameObject.SetActive (false);
-		evaluate = true;
+		evaluate = false;
 		problem1 = "[2*(6/2)+(3^2)]";
 		problem2 = "[(2+4)+3*(4/2)";
 		problem3 = "[1+(2^2^2)/6]";
@@ -190,32 +191,145 @@ public class EasyMode : MonoBehaviour {
 		If ICP < ISP Pop ñ Write Values To Postfix Until Can Push
 		If Scope Closer, Pop till find opener ñ Write values to Postfix ñ Throw out scope opener!
 	*/
+	public void skpButton() {
+		skipButton.gameObject.SetActive (false);
+		x = 21;
+		z = 0;
+	}
+
 	public void easyDemo(){
 		switch (x) {
 		case (0):
+			hint.text = "Our current value is a scope opener";
+			x++;
+			break;
+		case (1):
+			hint.text = "Pushing scope opener, always push scope openers";
+			x++;
+			break;
+		case (2):
+			m.push ("[");
+			hint.text = "Scope opener pushed";
+			x++;
+			break;
+		case (3):
+			hint.text = "Our current value is an operand. While checking for bracket validity we ignore operators and operands";
+			x++;
+			z++;
+			break;
+		case (4):
+			hint.text = "Our current value is an operator. While checking for bracket validity we ignore operators and operands";
+			x++;
+			z++;
+			break;
+		case (5):
+			hint.text = "Our current value is a scope opener";
+			x++;
+			z++;
+			break;
+		case (6):
+			hint.text = "Pushing scope opener, always push scope openers";
+			x++;
+			break;
+		case (7):
+			hint.text = "Scope opener pushed";
+			m.push ("(");
+			x++;
+			break;
+		case (8):
+			hint.text = "Our current value is an operand. While checking for bracket validity we ignore operators and operands";
+			x++;
+			z++;
+			break;
+		case (9):
+			hint.text = "Our current value is an operator. While checking for bracket validity we ignore operators and operands";
+			x++;
+			z++;
+			break;
+		case (10):
+			hint.text = "Our current value is an operand. While checking for bracket validity we ignore operators and operands";
+			x++;
+			z++;
+			break;
+		case (11):
+			hint.text = "Our current value is a scope closer, pushing to stack";
+			x++;
+			break;
+		case (12):
+			m.push (")");
+			hint.text = "Pushed to stack, now let's pop the stack to check for validity";
+			x++;
+			break;
+		case (13):
+			m.pop ();
+			sound.Play ();
+			hint.text = "Popped the stack. _ )";
+			x++; 
+			break;
+		case (14):
+			m.pop ();
+			sound.Play ();
+			hint.text = "Popped the stack. ( ) the brackets match!";
+			x++;
+			break;
+		case (15):
+			hint.text = "Let's now finish the validity checking";
+			x++;
+			break;
+		case (16):
+			hint.text = "Our current value is a scope closer, pushing to stack";
+			x++;
+			z++;
+			break;
+		case (17):
+			hint.text = "Pushed to stack, now let's pop the stack to check for validity";
+			m.push ("]");
+			x++;
+			break;
+		case (18):
+			hint.text = "Popped the stack. _ ]";
+			m.pop ();
+			sound.Play ();
+			x++;
+			break;
+		case (19):
+			hint.text = "Popped the stack. [ ] the brackets match!";
+			m.pop ();
+			sound.Play ();
+			x++;
+			break;
+		case (20):
+			hint.text = "The stack is empty. Valid expression.";
+			skipButton.gameObject.SetActive(false);
+			z = 0;
+			x++;
+			break;
+		case (21):
 			//helperEasy.text = "Notice that In Stack Priority Starts at -1";
+			evaluate = true;
 			hint.text = "If Operand, Write it to the Postfix String" +
 				"\nIf Scope Opener or Operator" +
 				"\n\t\t\tIf the ICP is greater than the ISP Push" +
 				"\n\t\t\tIf ICP < ISP Pop ñ Write Values To Postfix Until Can Push" +
 				"\n\t\t\tIf Scope Closer, Pop till find opener ñ Write values to Postfix " +
 				"ñ Throw out scope opener!";
+
 			x++;
 			break;
-		case (1):
+		case (22):
 			icpnum = 7;
 			helperEasy.text = "Since ICP > ISP - Push scope opener";
 			valueEasy.text = "Current value: [ ";
 			hint.text = "Hint: Always push scope openers";
 			x++;
 			break;
-		case (2):
+		case (23):
 			m.push ("[");	
 			ispnum = 0;
 			helperEasy.text = "Pushed scope opener to stack";
 			x++;
 			break;
-		case (3):
+		case (24):
 			icpnum = 0;
 			ispnum = 0;
 			valueEasy.text = "Current value: 8 ";
@@ -224,12 +338,12 @@ public class EasyMode : MonoBehaviour {
 			x++;
 			z++;
 			break;
-		case (4):
+		case (25):
 			helperEasy.text = "Operand, adding to postfix string: 8";
 			postfixString.text = "Postfix: 8";
 			x++;
 			break;
-		case (5):
+		case (26):
 			icpnum=1;
 			helperEasy.text = "Since ICP > ISP - Push operator";
 			valueEasy.text = "Current value: - ";
@@ -237,14 +351,14 @@ public class EasyMode : MonoBehaviour {
 			x++;
 			z++;
 			break;
-		case (6):
+		case (27):
 			m.push ("-");
 			helperEasy.text = "Operator, pushing to stack";
 			ispnum = 2;
 			hint.text = "";
 			x++;
 			break;
-		case (7):
+		case (28):
 			icpnum = 7;
 			helperEasy.text = "Since ICP > ISP - Push scope opener";
 			valueEasy.text = "Current value: ( ";
@@ -252,13 +366,13 @@ public class EasyMode : MonoBehaviour {
 			x++;
 			z++;
 			break;
-		case (8):
+		case (29):
 			m.push ("(");
 			helperEasy.text = "Pushed scope opener to stack";
 			ispnum = 0;
 			x++;
 			break;
-		case (9):
+		case (30):
 			icpnum = 0;
 			valueEasy.text = "Current value: 3 ";
 			helperEasy.text = "Operand found";
@@ -266,12 +380,12 @@ public class EasyMode : MonoBehaviour {
 			x++;
 			z++;
 			break;
-		case (10):
+		case (31):
 			helperEasy.text = "Operand, appending to postfix string: 3";
 			postfixString.text= "Postfix: 8 3";
 			x++;
 			break;
-		case (11):
+		case (32):
 			icpnum=1;
 			helperEasy.text = "Since ICP > ISP - Push operator";
 			valueEasy.text = "Current value: + ";
@@ -279,38 +393,38 @@ public class EasyMode : MonoBehaviour {
 			x++;
 			z++;
 			break;
-		case (12):
+		case (33):
 			m.push ("+");
 			ispnum = 2;
 			helperEasy.text = "Operator, pushing to stack";
 			hint.text = "";
 			x++;
 			break;
-		case (13):
+		case (34):
 			valueEasy.text = "Current value: 1 ";
 			helperEasy.text = "Operand found";
 			hint.text = "Hint: Always append operands to postfix string";
 			x++;
 			z++;
 			break;
-		case (14):
+		case (35):
 			helperEasy.text = "Operand, adding to postfix string: 1";
 			postfixString.text = "Postfix: 8 3 1";
 			x++;
 			break;
-		case (15):
+		case (36):
 			valueEasy.text = "Current value: ) ";
 			helperEasy.text = "Scope closer found";
 			hint.text = "Hint: Pop till find opener ñ Write values to Postfix ñ Throw out scope opener!";
 			x++;
 			z++;
 			break;
-		case (16):
+		case (37):
 			helperEasy.text = "Operator found - Pop and append  to the string";
 			hint.text = "Hint: Pop till scope opener is found";
 			x++;
 			break;
-		case (17):
+		case (38):
 			m.pop ();
 			sound.Play();
 			helperEasy.text = "Popping Stack | Appending operator";
@@ -318,7 +432,7 @@ public class EasyMode : MonoBehaviour {
 			postfixString.text = "Postfix: 8 3 1 +";
 			x++;
 			break;
-		case (18):
+		case (39):
 			m.pop ();
 			sound.Play();
 			valueEasy.text = "Current value: ] ";
@@ -327,33 +441,33 @@ public class EasyMode : MonoBehaviour {
 			x++;
 			z++;
 			break;
-		case (19):
+		case (40):
 			helperEasy.text = "Popping the stack and appending operator to postfix string.";
 			hint.text = "";
 			x++;
 			break;
-		case (20):
+		case (41):
 			postfixString.text = "Postfix: 8 3 1 + -";
 			m.pop ();
 			sound.Play();
 			x++;
 			break;
-		case (21):
+		case (42):
 			postfixString.text = "Postfix: 8 3 1 + -";
 			hint.text = "Hint: Once postfix expression is built, empty the stack";
 			x++;
 			break;
-		case (22):
+		case (43):
 			helperEasy.text = "Popping stack";
 			m.pop ();
 			sound.Play();
 			x++;
 			break;
-		case (23):
+		case (44):
 			helperEasy.text = "Found opener and closer, valid | This is the postfix expression: 8 3 1 + -";
 			x++;
 			break;
-		case (24):
+		case (45):
 			helperEasy.text = "Postfix string has been formed";
 			break;
 
