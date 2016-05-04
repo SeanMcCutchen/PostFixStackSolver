@@ -300,7 +300,8 @@ public class EasyMode : MonoBehaviour {
 			break;
 		case (20):
 			hint.text = "The stack is empty. Valid expression.";
-			skipButton.gameObject.SetActive(false);
+			skipButton.gameObject.SetActive (false);
+			m = new MyStack ();
 			z = 0;
 			x++;
 			break;
