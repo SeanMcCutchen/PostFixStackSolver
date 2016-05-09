@@ -61,6 +61,7 @@ public class PracticeMode : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		table.gameObject.SetActive (false);
 		test = expr [probindex].Split (' ');
 		theiricp = 0;
 		canpop = true;
@@ -91,14 +92,14 @@ public class PracticeMode : MonoBehaviour {
 			bracketEval = true;
 		if (checkWhenOver == 2) {
 			bracketEval = false;
-			Debug.Log ("hello");
+			table.gameObject.SetActive (true);
 			switchToPostFix = true;
 			hideAllBut(new List<Button>{append,push,pop,invalid,checkPostFix,resetbtn,num1,num3,num6,num7});
 		}
 		if (checkWhenOver == 3) {
 			switchToPostFix = false;
 			switchToEvaluate = true;
-
+			table.gameObject.SetActive (false);
 
 			hideAllBut(new List<Button>{push,pop,applyOP,checkEval,resetbtn});
 		}
