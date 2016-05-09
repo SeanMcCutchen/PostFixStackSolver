@@ -10,7 +10,7 @@ public class postfixsolver : MonoBehaviour {
 				postfix = postfix.Trim();
 				string[] ans = postfix.Split(' ');
                 Stack<int> eval = new Stack<int>();
-	
+
                 for (int x = 0; x < ans.Length; x++)
                 {
                     if ("*+%/-^".Contains(ans[x]))
@@ -23,7 +23,6 @@ public class postfixsolver : MonoBehaviour {
 				case ("^"):
 					temp1 = eval.Pop ();
 					temp2 = eval.Pop ();
-
 					eval.Push ((int)Math.Pow (temp2, temp1));
 								break;
                             case ("*"):

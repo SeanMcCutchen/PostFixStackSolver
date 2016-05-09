@@ -52,15 +52,17 @@ public class PracticeMode : MonoBehaviour {
 	int temp1,temp2,temp3,wrong, isp, theirisp;
 	bool switchToPostFix = false;
 	bool switchToEvaluate = false;
+	bool newprob = false;
 	int checkWhenOver = 0;
 	int curr = 0;
 	int currFix = 0;
 	bool bracketEval = false;
 	String theiranswer = "";
+
 	// Use this for initialization
 	void Start () {
 		test = expr [probindex].Split (' ');
-
+	
 		canpop = true;
 		btnlist.Add (checkPostFix);
 		btnlist.Add (checkEval);
@@ -79,6 +81,7 @@ public class PracticeMode : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		
 		//StringBuilder strBuilder = new StringBuilder(expr[probindex]);
 	//	strBuilder[curr] =string.Format("<color=blue>{0}</color>",test[curr]);
 		if (checkWhenOver == 0)
@@ -94,7 +97,7 @@ public class PracticeMode : MonoBehaviour {
 			switchToEvaluate = true;
 
 
-			hideAllBut(new List<Button>{push,pop,applyOP,checkEval,resetbtn,loadn});
+			hideAllBut(new List<Button>{push,pop,applyOP,checkEval,resetbtn});
 		}
 		if (curr == test.Length) {
 			foreach (Button kk in btnlist) 
@@ -116,16 +119,18 @@ public class PracticeMode : MonoBehaviour {
 		}
 	
 
-
 		//expr[probindex]=strBuilder.ToString();
 		StringBuilder str = new StringBuilder();
-		foreach (String s in test) {
-			if (curr<test.Length&&s == test [curr])
+		for (int t = 0; t < test.Length; t++){
+	
+			if (curr<test.Length&&test[t] == test [curr]&&t==curr)
 				str.Append (string.Format ("<color=yellow>{0}</color>", test [curr]));
 			else
-				str.Append (s);
+				str.Append (test[t]);
 		}
-		if (switchToEvaluate != true) {
+
+			
+		if (switchToEvaluate != true||newprob==true) {
 			postfixString.text = postfix;
 			infixString.text = "Infix String: " + str.ToString();
 		}
@@ -140,11 +145,6 @@ public class PracticeMode : MonoBehaviour {
 		 * 
 		 * 
 		 */
-		if (curr == test.Length - 1) {
-			theiranswer = postfix;
-			//m = new MyStack ();
-			//switchToPostFix = true;
-		}
 
 		if (rects.Count < m.size () ) {
 			// Update other rectangles
@@ -193,18 +193,27 @@ public class PracticeMode : MonoBehaviour {
 	{
 		if (curr < test.Length) {
 			curr++;
-			currvalue.text = test [curr];
+			currvalue.text = "Current value: "+ test [curr];
 		}
 	}
 	public void checkAnswer()
 	{
 		int x = Int32.Parse (m.getAt (m.getTop ()));
-	//	Debug.Log (postfixsolver.solve (expr [probindex]) + "1");
-		Debug.Log (x + "x");
-		if (Int32.Parse (m.getAt (m.getTop ())) == 19)
+
+		//Debug.Log (x + "x");
+		if (Int32.Parse (m.getAt (m.getTop ())) == postfixsolver.solve (postfixes [probindex])) {
 			validity.text = "Correct Answer!";
-		else
-			wrong = 1;
+			System.Threading.Thread.Sleep(100);
+			loadnextProb ();
+
+
+		}
+		else {
+			validity.text = "Wrong, the correct answer is " + postfixsolver.solve (postfixes [probindex]);
+			System.Threading.Thread.Sleep(100);
+			reset ();
+		}
+		
 
 
 	}
@@ -314,7 +323,7 @@ public class PracticeMode : MonoBehaviour {
 	public void checkpostfix() {
 		Debug.Log (postfix);
 		Debug.Log (postfixes [currFix]);
-		if (postfix == postfixes [currFix])
+		if (postfix == postfixes [currFix]&&switchToPostFix==true)
 		{
 			
 			infixString.text = "Postfix String: " + postfix;
@@ -375,7 +384,7 @@ public class PracticeMode : MonoBehaviour {
 
 	public void reset() {
 		curr = 0;
-		currvalue.text = test [curr];
+		currvalue.text = "Current value: " + test [curr];
 		m = new MyStack ();
 		postfix = "";
 		checkWhenOver = 0;
@@ -385,12 +394,19 @@ public class PracticeMode : MonoBehaviour {
 	}
 
 	public void loadnextProb() {
-		curr = 0;
 		probindex++;
 		test = expr [probindex].Split (' ');
-		currvalue.text = test [curr];
+		newprob = true;
+		bracketEval = true;
+		switchToEvaluate = false;
+		switchToPostFix = false;
+		curr = 0;
+		checkWhenOver = 0;
+		currvalue.text = "Current value: " + test [curr];
 		m = new MyStack ();
 		postfix = "";
+		foreach (Button kk in btnlist) 
+			kk.gameObject.SetActive(true);
 		hideAllBut(new List<Button>{discardbtn,push,pop,invalid,resetbtn});
 	}
 	void OnGUI () {
