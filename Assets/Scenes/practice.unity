@@ -634,8 +634,11 @@ MonoBehaviour:
   push: {fileID: 518331137}
   invalid: {fileID: 672103318}
   resetbtn: {fileID: 158945749}
-  loadn: {fileID: 0}
   discardbtn: {fileID: 1515753221}
+  num1: {fileID: 2059125312}
+  num3: {fileID: 1226311013}
+  num6: {fileID: 1698390065}
+  num7: {fileID: 1902144129}
   table: {fileID: 53114128}
   sound: {fileID: 178207947}
 --- !u!4 &350586833
@@ -2228,7 +2231,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 350586832}
-        m_MethodName: discard
+        m_MethodName: setICP3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2956,7 +2959,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 350586832}
-        m_MethodName: discard
+        m_MethodName: setICP6
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3284,7 +3287,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 350586832}
-        m_MethodName: discard
+        m_MethodName: setICP7
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3526,7 +3529,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 350586832}
-        m_MethodName: discard
+        m_MethodName: setICP1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

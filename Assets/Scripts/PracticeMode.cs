@@ -38,18 +38,18 @@ public class PracticeMode : MonoBehaviour {
 	public Text currvalue;
 	public Text validity;
 	List<string> brackets = new List<string>{ "{","(","[",")","]","}"};
-	private int probindex =0; 
+	private int probindex = 0; 
 	List<Rect> rects = new List<Rect>();
 	//List<string> pops = new List<string> ();
 	String postfix;
 	String [] test;
 	String popped;
-	public Button checkPostFix,checkEval,applyOP,append,pop,push,invalid,resetbtn,loadn,discardbtn;
+	public Button checkPostFix,checkEval,applyOP,append,pop,push,invalid,resetbtn,discardbtn,num1,num3,num6,num7;
 	List <Button> btnlist = new List<Button>();
 	public Image table;
 	public AudioSource sound;
 	bool bracket, build, eval,isvalid, canpop; 
-	int temp1,temp2,temp3,wrong, isp, theirisp;
+	int temp1,temp2,temp3,wrong, icp, theiricp;
 	bool switchToPostFix = false;
 	bool switchToEvaluate = false;
 	bool newprob = false;
@@ -57,12 +57,12 @@ public class PracticeMode : MonoBehaviour {
 	int curr = 0;
 	int currFix = 0;
 	bool bracketEval = false;
-	String theiranswer = "";
+
 
 	// Use this for initialization
 	void Start () {
 		test = expr [probindex].Split (' ');
-	
+		theiricp = 0;
 		canpop = true;
 		btnlist.Add (checkPostFix);
 		btnlist.Add (checkEval);
@@ -72,8 +72,11 @@ public class PracticeMode : MonoBehaviour {
 		btnlist.Add (push);
 		btnlist.Add (invalid);
 		btnlist.Add (resetbtn);
-		btnlist.Add (loadn);
 		btnlist.Add (discardbtn);
+		btnlist.Add (num1);
+		btnlist.Add (num3);
+		btnlist.Add (num6);
+		btnlist.Add (num7);
 		hideAllBut(new List<Button>{discardbtn,push,pop,invalid,resetbtn});
 		//checkEval.gameObject.SetActive(false);
 	}
@@ -90,7 +93,7 @@ public class PracticeMode : MonoBehaviour {
 			bracketEval = false;
 			Debug.Log ("hello");
 			switchToPostFix = true;
-			hideAllBut(new List<Button>{append,push,pop,invalid,checkPostFix,resetbtn});
+			hideAllBut(new List<Button>{append,push,pop,invalid,checkPostFix,resetbtn,num1,num3,num6,num7});
 		}
 		if (checkWhenOver == 3) {
 			switchToPostFix = false;
@@ -177,13 +180,22 @@ public class PracticeMode : MonoBehaviour {
 			curr++;
 		}
 		if (switchToPostFix==true&&switchToEvaluate==false) {
-		//	String[] splitit = theiranswer.Split (' ');
-			m.push(test[curr]);
-			curr++;
+			if (checkICP() == true) {
+				validity.text = "";
+				m.push (test [curr]);
+				curr++;
+				theiricp = 0;
+			}
+			else 
+				validity.text = "Wrong ICP";
 		}
 		if (curr < test.Length&&switchToPostFix==false&&switchToEvaluate==false) {
-			m.push (test [curr]);
-			curr++;
+			if ("})]".Contains (test [curr]))
+				m.push (test [curr]);
+			else {
+				m.push (test [curr]);
+				curr++;
+			}
 		} 
 
 
@@ -203,14 +215,14 @@ public class PracticeMode : MonoBehaviour {
 		//Debug.Log (x + "x");
 		if (Int32.Parse (m.getAt (m.getTop ())) == postfixsolver.solve (postfixes [probindex])) {
 			validity.text = "Correct Answer!";
-			System.Threading.Thread.Sleep(100);
+			System.Threading.Thread.Sleep(500);
 			loadnextProb ();
 
 
 		}
 		else {
 			validity.text = "Wrong, the correct answer is " + postfixsolver.solve (postfixes [probindex]);
-			System.Threading.Thread.Sleep(100);
+			System.Threading.Thread.Sleep(500);
 			reset ();
 		}
 		
@@ -222,45 +234,43 @@ public class PracticeMode : MonoBehaviour {
 		sound.Play ();
 		return temp;
 	}
-/*	public void checkISP()
+	public bool checkICP()
 	{
 		switch (test [curr]) {
 		case("+"):
-			isp = 2;
+			icp = 1;
 			break;
 		case("-"):
-			isp = 2;
+			icp = 1;
 			break;
 		case("*"):
-			isp = 4;
+			icp = 3;
 			break;
 		case("/"):
-			isp = 4;
+			icp = 3;
 			break;
 		case("^"):
-			isp = 5;
+			icp = 6;
 			break;
 		case("("):
-			isp = 0;
+			icp = 7;
 			break;
 		case("{"):
-			isp = 0;
+			icp = 7;
 			break;	
 		case("["):
-			isp = 0;
+			icp = 7;
 			break;
 		default:
-			isp = 0;
+			icp = 0;
 			break;
 		}
-		if (theirisp != isp) {
-			wrong = 1;
-			reset ();
-		} else
-			wrong = -1;
+		if (theiricp == icp)
+			return true;
+		else
+			return false;
 
-
-	}*/
+	}
 	public void hideAllBut(List<Button> btn){
 		foreach (Button kk in btnlist) {
 			if(btn.Contains(kk)==false)
@@ -312,10 +322,15 @@ public class PracticeMode : MonoBehaviour {
 		}
 		if (switchToPostFix == true && brackets.Contains (m.getAt(m.getTop())) == false)
 			postfix = string.Concat (postfix, m.getAt(m.getTop()))+" ";
-		if (m.isEmpty () == false && canpop == true) {
+		if (m.isEmpty () == false && canpop == true&&switchToPostFix==false) {
 			popped = popS ();
 			curr++;
 		}
+		if (m.isEmpty () == false && canpop == true) {
+			popped = popS ();
+
+		}
+
 	//	if(popped != "(" && popped != "[" && popped != ")" && popped != "]")
 		//	postfix = string.Concat (postfix,  popped + " " );
 	}
@@ -341,6 +356,23 @@ public class PracticeMode : MonoBehaviour {
 			validity.text = "Incorrect postfix expression";
 
 	}
+	public void setICP1()
+	{
+		theiricp = 1;
+	}
+	public void setICP3()
+	{
+		theiricp = 3;
+	}
+	public void setICP6()
+	{
+		theiricp = 6;
+	}
+	public void setICP7()
+	{
+		theiricp = 7;
+	}
+
 
 
 	public void applyOperation() {
@@ -386,7 +418,7 @@ public class PracticeMode : MonoBehaviour {
 		curr = 0;
 		currvalue.text = "Current value: " + test [curr];
 		m = new MyStack ();
-		postfix = "";
+		postfix = "";	validity.text = "";
 		checkWhenOver = 0;
 		foreach (Button kk in btnlist) 
 			kk.gameObject.SetActive(true);
@@ -395,6 +427,7 @@ public class PracticeMode : MonoBehaviour {
 
 	public void loadnextProb() {
 		probindex++;
+		currFix++;
 		test = expr [probindex].Split (' ');
 		newprob = true;
 		bracketEval = true;
@@ -402,6 +435,7 @@ public class PracticeMode : MonoBehaviour {
 		switchToPostFix = false;
 		curr = 0;
 		checkWhenOver = 0;
+		validity.text = "";
 		currvalue.text = "Current value: " + test [curr];
 		m = new MyStack ();
 		postfix = "";
