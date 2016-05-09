@@ -22,6 +22,7 @@ public class HardMode : MonoBehaviour {
 	int ispnum = -1;
 	int icpnum = 0;
 	bool evaluate;
+	public Text post;
 	public Text txtHard;
 	public Text valueHard;
 	public Text helperHard;
@@ -135,10 +136,14 @@ public class HardMode : MonoBehaviour {
 	}
 
 	public void skip() {
-		if (y < 23)
+		if (y < 23) {
+			hint.text = "Skipped Ahead, click Next Step to continue to forming Postfix String";
 			y = 23;
-		else if (y < 57)
+		}
+		else if (y < 57){
+			hint.text = "Skipped Ahead, click Next Step to continue and evaluate Postfix Expression";
 			y = 57;
+		}
 	}
 
 	public void bracketDemo(){
@@ -528,6 +533,8 @@ public class HardMode : MonoBehaviour {
 			nextButton.text = "Evaluate";
 			helperHard.text = "Let's now evaluate our postfix expression";
 			skipButton.gameObject.SetActive (false);
+			txtHard.gameObject.SetActive (false);
+
 			evaluate = false;
 			m = new MyStack();
 			y++;
@@ -536,6 +543,7 @@ public class HardMode : MonoBehaviour {
 		case (58):
 			nextButton.text = "Next Step";
 			exprDisplay.text = "Postfix Expression: 1 2 3 2 ^ ^ 4 / +";
+			post.text = "Postfix:  1  2  3  2  ^  ^  4  /  +";
 			valueHard.text = "Current value: 1";
 			helperHard.text = "Operand, pushing to stack";
 			hint.text = "When evaluating, always push operands to stack";

@@ -193,6 +193,7 @@ public class EasyMode : MonoBehaviour {
 	*/
 	public void skpButton() {
 		skipButton.gameObject.SetActive (false);
+		helperEasy.text = "Skipped Ahead, click Next Step to continue";
 		x = 21;
 		z = 0;
 	}
@@ -308,6 +309,7 @@ public class EasyMode : MonoBehaviour {
 		case (21):
 			//helperEasy.text = "Notice that In Stack Priority Starts at -1";
 			evaluate = true;
+			helperEasy.text = "";
 			hint.text = "If Operand, Write it to the Postfix String" +
 				"\nIf Scope Opener or Operator" +
 				"\n\t\t\tIf the ICP is greater than the ISP Push" +
@@ -317,6 +319,14 @@ public class EasyMode : MonoBehaviour {
 
 			x++;
 			break;
+			/*
+			If Operand, Write it to the Postfix String
+			If Scope Opener or Operator
+			If the ICP is greater than the ISP Push
+			If ICP < ISP Pop ñ Write Values To Postfix Until Can Push
+			If Scope Closer, Pop till find opener ñ Write values to Postfix
+			Throw out scope opener
+			*/
 		case (22):
 			icpnum = 7;
 			helperEasy.text = "Since ICP > ISP - Push scope opener";

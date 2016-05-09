@@ -37,6 +37,7 @@ public class PracticeMode : MonoBehaviour {
 	public Text postfixString;
 	public Text currvalue;
 	public Text validity;
+	public Text hints;
 	List<string> brackets = new List<string>{ "{","(","[",")","]","}"};
 	private int probindex = 0; 
 	List<Rect> rects = new List<Rect>();
@@ -62,6 +63,7 @@ public class PracticeMode : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		table.gameObject.SetActive (false);
+		hints.gameObject.SetActive (false);
 		test = expr [probindex].Split (' ');
 		theiricp = 0;
 		canpop = true;
@@ -93,6 +95,7 @@ public class PracticeMode : MonoBehaviour {
 		if (checkWhenOver == 2) {
 			bracketEval = false;
 			table.gameObject.SetActive (true);
+			hints.gameObject.SetActive (true);
 			switchToPostFix = true;
 			hideAllBut(new List<Button>{append,push,pop,invalid,checkPostFix,resetbtn,num1,num3,num6,num7});
 		}
@@ -100,6 +103,7 @@ public class PracticeMode : MonoBehaviour {
 			switchToPostFix = false;
 			switchToEvaluate = true;
 			table.gameObject.SetActive (false);
+			hints.gameObject.SetActive (false);
 
 			hideAllBut(new List<Button>{push,pop,applyOP,checkEval,resetbtn});
 		}
@@ -157,7 +161,7 @@ public class PracticeMode : MonoBehaviour {
 				temp.y += 90;
 				rects[i] = temp;
 			}
-			rects.Add (new Rect (145,220, 150, 75));
+			rects.Add (new Rect (155,220, 150, 75));
 			//Debug.Log ("adding rect");
 
 
