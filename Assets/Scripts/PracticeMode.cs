@@ -173,6 +173,9 @@ public class PracticeMode : MonoBehaviour {
 
 	}
 
+	public void help(){
+		
+	}
 
 	public void pushToStack ()
 	{
